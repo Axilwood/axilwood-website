@@ -19,26 +19,14 @@
             font-family: 'Inter', sans-serif;
         }
 
-        /* Styling for the background image with a subtle zoom animation */
+        /* Styling for the background image */
         .bg-container {
-            /* THIS IS THE FIX: The URL now points to our local image file. */
             background-image: url('images/background.jpeg');
-            background-size: cover;
+            /* THIS IS THE FIX: 'contain' ensures the whole image is visible. */
+            background-size: contain;
             background-position: center;
-            animation: zoom 25s infinite;
-        }
-
-        /* Keyframe animation for the background zoom effect */
-        @keyframes zoom {
-            0% {
-                transform: scale(1);
-            }
-            50% {
-                transform: scale(1.1);
-            }
-            100% {
-                transform: scale(1);
-            }
+            background-repeat: no-repeat; /* Prevents the image from tiling */
+            /* The animation is removed as it doesn't look good with 'contain' */
         }
     </style>
 </head>
