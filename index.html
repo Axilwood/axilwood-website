@@ -3,69 +3,68 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Axilwood - Coming Soon</title>
+    <title>Axilwood - The Timber Marketplace</title>
 
-    <!-- Tailwind CSS for styling -->
     <script src="https://cdn.tailwindcss.com"></script>
 
-    <!-- Google Fonts (Inter) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&display=swap" rel="stylesheet">
 
-    <!-- Website icon -->
     <link rel="icon" href="/favicon.ico" sizes="any">
     <link rel="icon" type="image/svg+xml" href="/favicon.svg">
     <link rel="apple-touch-icon" href="/apple-touch-icon.png">
     <link rel="manifest" href="/site.webmanifest">
     
     <style>
-        /* Applying the Inter font to the entire page */
         body {
             font-family: 'Inter', sans-serif;
         }
-
-        /* Styling for the background image with a subtle zoom animation */
         .bg-container {
-            /* THIS IS THE FIX: The URL now points to our local image file. */
             background-image: url('images/background.jpeg');
             background-size: cover;
             background-position: center;
         }
-
     </style>
 </head>
 <body class="bg-gray-900">
 
-    <!-- Main container with the background image -->
     <div class="bg-container h-screen w-screen flex flex-col">
-        <!-- Semi-transparent overlay for better text readability -->
         <div class="h-full w-full bg-black bg-opacity-60 flex flex-col justify-center items-center p-4 text-white text-center">
 
-            <!-- Main Content -->
             <main class="flex-grow flex flex-col justify-center items-center">
-                <!-- Logo/Icon (Simple SVG for a clean look) -->
                 <svg class="w-16 h-16 mb-4 text-green-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" />
                 </svg>
-
-                <!-- Main Heading -->
                 <h1 class="text-5xl md:text-7xl font-extrabold tracking-tight">Axilwood</h1>
-
-                <!-- Subheading 1 -->
                 <p class="mt-4 text-lg md:text-xl text-gray-300 max-w-2xl">
                     Connecting landowners and timber merchants across India.
                 </p>
-
-                <!-- Subheading 2 -->
                 <p class="mt-2 text-md md:text-lg text-gray-400 max-w-2xl">
-                    Our mobile application is under construction and will be available soon on the Google Play Store.
+                    Our mobile application is now available for early access!
                 </p>
             </main>
 
-            <!-- Footer -->
+            <div class="mb-8">
+                <p class="mb-4 text-gray-400 text-sm">
+                    Note: You may need to enable 'Install from unknown sources' on your device.
+                </p>
+                <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+                    <a href="https://github.com/Axilwood/my-express-app/releases/download/v1.0.0/app-release.apk" 
+                       class="bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-6 rounded-lg flex items-center transition duration-300">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 mr-2">
+                          <path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3" />
+                        </svg>
+                        Download for Android
+                    </a>
+
+                    <a href="#" class="block">
+                        <img src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png" alt="Get it on Google Play" class="h-16">
+                    </a>
+                </div>
+            </div>
             <footer class="py-4 text-sm text-gray-500">
-                © 2025 Axilwood | A venture by Arjun Sudharsan | Contact: Arjun@axilwood.com
+                © 2025 Axilwood | A venture by Arjun Sudharsan | Contact: support@axilwood.com
             </footer>
 
         </div>
