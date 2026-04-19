@@ -22,53 +22,98 @@
 
         <div id="dashboard-content" class="hidden">
             <h1 class="text-3xl md:text-4xl font-extrabold text-gray-800 mb-2">Create New Invitation</h1>
-            <p class="text-gray-600 mb-8">Enter the details below. We'll automatically generate your custom URL and design.</p>
+            <p class="text-gray-600 mb-8">Enter the details below to generate your custom, premium invitation.</p>
 
-            <form id="invite-form" class="bg-white p-8 rounded-xl shadow-md space-y-8">
+            <form id="invite-form" class="bg-white p-8 rounded-xl shadow-md space-y-10">
                 
                 <div>
-                    <h3 class="text-xl font-bold text-gray-800 border-b pb-2 mb-4">1. The Couple (Required)</h3>
+                    <h3 class="text-2xl font-bold text-green-700 border-b-2 border-green-100 pb-2 mb-6">1. The Core Details (Required)</h3>
                     <div class="grid md:grid-cols-2 gap-6">
                         <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-1">Groom's First Name *</label>
-                            <input type="text" id="groomName" required class="w-full border border-gray-300 rounded-lg p-3 focus:ring-2 focus:ring-green-500 focus:outline-none">
+                            <label class="block text-sm font-semibold text-gray-700 mb-1">Groom's Full Name *</label>
+                            <input type="text" id="groomName" required placeholder="e.g., Arjun Sudharsan" class="w-full border border-gray-300 rounded-lg p-3 focus:ring-2 focus:ring-green-500 focus:outline-none">
                         </div>
                         <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-1">Bride's First Name *</label>
-                            <input type="text" id="brideName" required class="w-full border border-gray-300 rounded-lg p-3 focus:ring-2 focus:ring-green-500 focus:outline-none">
+                            <label class="block text-sm font-semibold text-gray-700 mb-1">Bride's Full Name *</label>
+                            <input type="text" id="brideName" required placeholder="e.g., Lakshmi Devi" class="w-full border border-gray-300 rounded-lg p-3 focus:ring-2 focus:ring-green-500 focus:outline-none">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-semibold text-gray-700 mb-1">Main Wedding Date & Time *</label>
+                            <input type="datetime-local" id="weddingDate" required class="w-full border border-gray-300 rounded-lg p-3 focus:ring-2 focus:ring-green-500 focus:outline-none">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-semibold text-gray-700 mb-1">Main Venue Name & City *</label>
+                            <input type="text" id="venueName" required placeholder="e.g., Guruvayur Temple, Kerala" class="w-full border border-gray-300 rounded-lg p-3 focus:ring-2 focus:ring-green-500 focus:outline-none">
                         </div>
                         <div class="md:col-span-2">
-                            <label class="block text-sm font-medium text-gray-700 mb-1">Main Wedding Date *</label>
-                            <input type="date" id="weddingDate" required class="w-full border border-gray-300 rounded-lg p-3 focus:ring-2 focus:ring-green-500 focus:outline-none">
+                            <label class="block text-sm font-semibold text-gray-700 mb-1">Welcome Message *</label>
+                            <textarea id="welcomeMessage" required rows="3" placeholder="Join us in celebrating the union of..." class="w-full border border-gray-300 rounded-lg p-3 focus:ring-2 focus:ring-green-500 focus:outline-none"></textarea>
                         </div>
                     </div>
                 </div>
 
                 <div>
-                    <h3 class="text-xl font-bold text-gray-800 border-b pb-2 mb-4">2. Event Details (Optional)</h3>
+                    <h3 class="text-2xl font-bold text-gray-800 border-b-2 border-gray-100 pb-2 mb-6">2. Family & Traditions (Optional)</h3>
                     <div class="grid md:grid-cols-2 gap-6">
-                        <div class="md:col-span-2">
-                            <label class="block text-sm font-medium text-gray-700 mb-1">Main Venue Name</label>
-                            <input type="text" id="venueName" placeholder="e.g., Guruvayur Temple" class="w-full border border-gray-300 rounded-lg p-3 focus:ring-2 focus:ring-green-500 focus:outline-none">
+                        <div>
+                            <label class="block text-sm font-semibold text-gray-700 mb-1">Groom's Parents</label>
+                            <input type="text" id="groomParents" placeholder="Son of..." class="w-full border border-gray-300 rounded-lg p-3 focus:ring-2 focus:ring-green-500 focus:outline-none bg-gray-50">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-semibold text-gray-700 mb-1">Bride's Parents</label>
+                            <input type="text" id="brideParents" placeholder="Daughter of..." class="w-full border border-gray-300 rounded-lg p-3 focus:ring-2 focus:ring-green-500 focus:outline-none bg-gray-50">
                         </div>
                         <div class="md:col-span-2">
-                            <label class="block text-sm font-medium text-gray-700 mb-1">Welcome Message / Quote</label>
-                            <textarea id="welcomeMessage" rows="3" placeholder="A short note from the family..." class="w-full border border-gray-300 rounded-lg p-3 focus:ring-2 focus:ring-green-500 focus:outline-none"></textarea>
+                            <label class="block text-sm font-semibold text-gray-700 mb-1">Religious Invocation / Symbol</label>
+                            <select id="invocation" class="w-full border border-gray-300 rounded-lg p-3 focus:ring-2 focus:ring-green-500 focus:outline-none bg-gray-50">
+                                <option value="none">None / Standard</option>
+                                <option value="ganesh">Shree Ganeshay Namah</option>
+                                <option value="om">Om Symbol</option>
+                                <option value="cross">Holy Cross</option>
+                                <option value="bismillah">Bismillah</option>
+                            </select>
                         </div>
                     </div>
                 </div>
 
-                <div class="pt-4">
-                    <button type="submit" id="submitBtn" class="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-4 rounded-lg text-lg transition-colors">
-                        Generate Invitation Link
+                <div>
+                    <h3 class="text-2xl font-bold text-gray-800 border-b-2 border-gray-100 pb-2 mb-6">3. Logistics & Aesthetics (Optional)</h3>
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-sm font-semibold text-gray-700 mb-1">RSVP Contact Name & Number</label>
+                            <input type="text" id="rsvpDetails" placeholder="e.g., Ramesh: +91 98765..." class="w-full border border-gray-300 rounded-lg p-3 focus:ring-2 focus:ring-green-500 focus:outline-none bg-gray-50">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-semibold text-gray-700 mb-1">Theme Preference</label>
+                            <select id="themePref" class="w-full border border-gray-300 rounded-lg p-3 focus:ring-2 focus:ring-green-500 focus:outline-none bg-gray-50">
+                                <option value="traditional_kerala">Traditional Kerala (Gold & White)</option>
+                                <option value="royal_rajput">Royal Rajasthani (Red & Gold)</option>
+                                <option value="pastel_floral">Pastel Floral (Modern)</option>
+                                <option value="minimalist">Elegant Minimalist</option>
+                            </select>
+                        </div>
+                        <div class="md:col-span-2">
+                            <label class="block text-sm font-semibold text-gray-700 mb-1">Google Maps Location Link</label>
+                            <input type="url" id="mapsLink" placeholder="https://maps.google.com/..." class="w-full border border-gray-300 rounded-lg p-3 focus:ring-2 focus:ring-green-500 focus:outline-none bg-gray-50">
+                        </div>
+                        <div class="md:col-span-2">
+                            <label class="block text-sm font-semibold text-gray-700 mb-1">Gifting Policy</label>
+                            <input type="text" id="giftingPolicy" placeholder="e.g., Blessings only, no gifts please." class="w-full border border-gray-300 rounded-lg p-3 focus:ring-2 focus:ring-green-500 focus:outline-none bg-gray-50">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="pt-6 border-t-2 border-gray-100">
+                    <button type="submit" id="submitBtn" class="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-4 rounded-lg text-lg transition-all shadow-lg hover:shadow-xl">
+                        Generate & Save Invitation
                     </button>
                 </div>
             </form>
 
-            <div id="success-box" class="hidden mt-8 bg-green-50 border border-green-200 text-green-800 p-6 rounded-xl text-center">
-                <h3 class="text-2xl font-bold mb-2">Success!</h3>
-                <p class="mb-4">Your invitation link has been generated:</p>
-                <a href="#" id="generated-link" target="_blank" class="text-xl font-bold text-blue-600 hover:underline bg-white px-4 py-2 rounded border border-green-200 shadow-sm inline-block"></a>
+            <div id="success-box" class="hidden mt-8 bg-green-50 border border-green-200 text-green-800 p-8 rounded-xl text-center shadow-sm">
+                <h3 class="text-3xl font-bold mb-3">Invitation Saved!</h3>
+                <p class="mb-6 text-lg">Your data is secure. Here is your unique link:</p>
+                <a href="#" id="generated-link" target="_blank" class="text-2xl font-bold text-blue-600 hover:text-blue-800 hover:underline bg-white px-6 py-3 rounded-lg border border-green-200 shadow inline-block transition-colors"></a>
             </div>
         </div>
     </main>
@@ -80,47 +125,61 @@
     <script type="module">
         import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm';
 
-        // Initialize Supabase (REPLACE THESE KEYS!)
+        // REPLACE THESE!
         const supabaseUrl = 'https://wqlwurobvkzjixkoivxf.supabase.co';
         const supabaseKey = 'sb_publishable_I4rCqO3kdJLN-U8fgLoskA_AchQwKVr';
         const supabase = createClient(supabaseUrl, supabaseKey);
 
         document.addEventListener("DOMContentLoaded", async function() {
-            // 1. Check if user is logged in
             const { data: { session } } = await supabase.auth.getSession();
             
             if (!session) {
-                // Not logged in: Show warning, hide dashboard
                 document.getElementById('auth-warning').classList.remove('hidden');
             } else {
-                // Logged in: Show dashboard
                 document.getElementById('dashboard-content').classList.remove('hidden');
                 
-                // 2. Handle Form Submission
                 document.getElementById('invite-form').addEventListener('submit', async function(e) {
-                    e.preventDefault(); // Stop page refresh
+                    e.preventDefault(); 
                     
                     const btn = document.getElementById('submitBtn');
-                    btn.innerText = "Generating...";
+                    btn.innerText = "Processing...";
                     btn.disabled = true;
 
-                    // Get values
+                    // 1. Get Required Fields
                     const groom = document.getElementById('groomName').value.trim();
                     const bride = document.getElementById('brideName').value.trim();
                     const date = document.getElementById('weddingDate').value;
+                    const venue = document.getElementById('venueName').value.trim();
+                    const message = document.getElementById('welcomeMessage').value.trim();
                     
-                    // Create unique slug (e.g., arjun-weds-lakshmi-123)
-                    const baseSlug = `${groom.toLowerCase()}-weds-${bride.toLowerCase()}`;
-                    const randomNum = Math.floor(Math.random() * 1000); // Prevents duplicates
-                    const finalSlug = `${baseSlug}-${randomNum}`;
+                    // Create Slug
+                    const baseSlug = `${groom.split(' ')[0].toLowerCase()}-weds-${bride.split(' ')[0].toLowerCase()}`;
+                    const finalSlug = `${baseSlug}-${Math.floor(Math.random() * 1000)}`;
 
-                    // Package the optional JSONB data
+                    // 2. Package Optional JSONB Data
+                    const familyData = {
+                        groomParents: document.getElementById('groomParents').value.trim(),
+                        brideParents: document.getElementById('brideParents').value.trim(),
+                        invocation: document.getElementById('invocation').value
+                    };
+
                     const eventsData = [{
-                        venue: document.getElementById('venueName').value.trim(),
-                        message: document.getElementById('welcomeMessage').value.trim()
+                        eventName: "Main Wedding",
+                        venue: venue,
+                        mapsLink: document.getElementById('mapsLink').value.trim(),
+                        message: message
                     }];
 
-                    // Insert into Database
+                    const logisticsData = {
+                        rsvp: document.getElementById('rsvpDetails').value.trim(),
+                        gifting: document.getElementById('giftingPolicy').value.trim()
+                    };
+
+                    const designData = {
+                        theme: document.getElementById('themePref').value
+                    };
+
+                    // 3. Send to Supabase
                     const { data, error } = await supabase
                         .from('wedding_invites')
                         .insert([
@@ -130,16 +189,19 @@
                                 groom_first_name: groom,
                                 bride_first_name: bride,
                                 main_wedding_date: date,
-                                events: eventsData 
+                                family_details: familyData,
+                                events: eventsData,
+                                logistics: logisticsData,
+                                design_prefs: designData
                             }
                         ]);
 
                     if (error) {
                         alert("Error saving invitation: " + error.message);
-                        btn.innerText = "Try Again";
+                        btn.innerText = "Generate & Save Invitation";
                         btn.disabled = false;
                     } else {
-                        // Success! Show the link
+                        // Success View
                         document.getElementById('invite-form').classList.add('hidden');
                         document.getElementById('success-box').classList.remove('hidden');
                         
