@@ -37,15 +37,43 @@
                             <label class="block text-sm font-semibold text-gray-700 mb-1">Bride's Full Name *</label>
                             <input type="text" id="brideName" required placeholder="e.g., Lakshmi Devi" class="w-full border border-gray-300 rounded-lg p-3 focus:ring-2 focus:ring-green-500 focus:outline-none">
                         </div>
-                        <div>
-                            <label class="block text-sm font-semibold text-gray-700 mb-1">Main Wedding Date & Time *</label>
-                            <input type="datetime-local" id="weddingDate" required class="w-full border border-gray-300 rounded-lg p-3 focus:ring-2 focus:ring-green-500 focus:outline-none">
+                        
+                        <div class="md:col-span-2 bg-gray-50 p-4 rounded-lg border border-gray-200 mt-2">
+                            <h4 class="font-bold text-gray-800 mb-3 border-b pb-2">Main Ceremony (Muhurtham)</h4>
+                            <div class="grid md:grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-sm font-semibold text-gray-700 mb-1">Ceremony Date & Time *</label>
+                                    <input type="datetime-local" id="weddingDate" required class="w-full border border-gray-300 rounded-lg p-3 focus:ring-2 focus:ring-green-500 focus:outline-none bg-white">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-semibold text-gray-700 mb-1">Ceremony Venue Name & City *</label>
+                                    <input type="text" id="venueName" required placeholder="e.g., Guruvayur Temple, Kerala" class="w-full border border-gray-300 rounded-lg p-3 focus:ring-2 focus:ring-green-500 focus:outline-none bg-white">
+                                </div>
+                            </div>
                         </div>
-                        <div>
-                            <label class="block text-sm font-semibold text-gray-700 mb-1">Main Venue Name & City *</label>
-                            <input type="text" id="venueName" required placeholder="e.g., Guruvayur Temple, Kerala" class="w-full border border-gray-300 rounded-lg p-3 focus:ring-2 focus:ring-green-500 focus:outline-none">
+
+                        <div class="md:col-span-2 pt-2">
+                            <label class="flex items-center space-x-3 cursor-pointer">
+                                <input type="checkbox" id="hasReception" class="w-5 h-5 text-green-600 border-gray-300 rounded focus:ring-green-500">
+                                <span class="text-gray-800 font-bold text-lg">We have a separate Reception / Event</span>
+                            </label>
                         </div>
-                        <div class="md:col-span-2">
+
+                        <div id="receptionDetails" class="hidden md:col-span-2 bg-green-50 p-4 rounded-lg border border-green-200 transition-all">
+                            <h4 class="font-bold text-green-800 mb-3 border-b border-green-200 pb-2">Reception Details</h4>
+                            <div class="grid md:grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-sm font-semibold text-gray-700 mb-1">Reception Date & Time *</label>
+                                    <input type="datetime-local" id="receptionDate" class="w-full border border-gray-300 rounded-lg p-3 focus:ring-2 focus:ring-green-500 focus:outline-none bg-white">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-semibold text-gray-700 mb-1">Reception Venue Name & City *</label>
+                                    <input type="text" id="receptionVenue" placeholder="e.g., Taj Hotel Auditorium" class="w-full border border-gray-300 rounded-lg p-3 focus:ring-2 focus:ring-green-500 focus:outline-none bg-white">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="md:col-span-2 mt-4">
                             <label class="block text-sm font-semibold text-gray-700 mb-1">Welcome Message *</label>
                             <textarea id="welcomeMessage" required rows="3" placeholder="Join us in celebrating the union of..." class="w-full border border-gray-300 rounded-lg p-3 focus:ring-2 focus:ring-green-500 focus:outline-none"></textarea>
                         </div>
@@ -93,8 +121,8 @@
                             </select>
                         </div>
                         <div class="md:col-span-2">
-                            <label class="block text-sm font-semibold text-gray-700 mb-1">Google Maps Location Link</label>
-                            <input type="url" id="mapsLink" placeholder="https://maps.google.com/..." class="w-full border border-gray-300 rounded-lg p-3 focus:ring-2 focus:ring-green-500 focus:outline-none bg-gray-50">
+                            <label class="block text-sm font-semibold text-gray-700 mb-1">Google Maps Location Link (Main Venue)</label>
+                            <input type="url" id="mapsLink" placeholder="http://maps.google.com/..." class="w-full border border-gray-300 rounded-lg p-3 focus:ring-2 focus:ring-green-500 focus:outline-none bg-gray-50">
                         </div>
                         <div class="md:col-span-2">
                             <label class="block text-sm font-semibold text-gray-700 mb-1">Gifting Policy</label>
@@ -126,8 +154,8 @@
         import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm';
 
         // REPLACE THESE!
-        const supabaseUrl = 'https://wqlwurobvkzjixkoivxf.supabase.co';
-        const supabaseKey = 'sb_publishable_I4rCqO3kdJLN-U8fgLoskA_AchQwKVr';
+        const supabaseUrl = 'YOUR_PROJECT_URL_HERE';
+        const supabaseKey = 'YOUR_PUBLISHABLE_API_KEY_HERE';
         const supabase = createClient(supabaseUrl, supabaseKey);
 
         document.addEventListener("DOMContentLoaded", async function() {
@@ -137,6 +165,26 @@
                 document.getElementById('auth-warning').classList.remove('hidden');
             } else {
                 document.getElementById('dashboard-content').classList.remove('hidden');
+
+                // Toggle logic for the Reception Details block
+                const receptionToggle = document.getElementById('hasReception');
+                const receptionBlock = document.getElementById('receptionDetails');
+                const recDateInput = document.getElementById('receptionDate');
+                const recVenueInput = document.getElementById('receptionVenue');
+
+                receptionToggle.addEventListener('change', function() {
+                    if(this.checked) {
+                        receptionBlock.classList.remove('hidden');
+                        recDateInput.required = true;
+                        recVenueInput.required = true;
+                    } else {
+                        receptionBlock.classList.add('hidden');
+                        recDateInput.required = false;
+                        recVenueInput.required = false;
+                        recDateInput.value = '';
+                        recVenueInput.value = '';
+                    }
+                });
                 
                 document.getElementById('invite-form').addEventListener('submit', async function(e) {
                     e.preventDefault(); 
@@ -148,27 +196,39 @@
                     // 1. Get Required Fields
                     const groom = document.getElementById('groomName').value.trim();
                     const bride = document.getElementById('brideName').value.trim();
-                    const date = document.getElementById('weddingDate').value;
-                    const venue = document.getElementById('venueName').value.trim();
+                    const mainDate = document.getElementById('weddingDate').value;
+                    const mainVenue = document.getElementById('venueName').value.trim();
                     const message = document.getElementById('welcomeMessage').value.trim();
                     
-                    // Create Slug
                     const baseSlug = `${groom.split(' ')[0].toLowerCase()}-weds-${bride.split(' ')[0].toLowerCase()}`;
                     const finalSlug = `${baseSlug}-${Math.floor(Math.random() * 1000)}`;
 
-                    // 2. Package Optional JSONB Data
                     const familyData = {
                         groomParents: document.getElementById('groomParents').value.trim(),
                         brideParents: document.getElementById('brideParents').value.trim(),
                         invocation: document.getElementById('invocation').value
                     };
 
-                    const eventsData = [{
-                        eventName: "Main Wedding",
-                        venue: venue,
+                    // 2. Package the Events Array (This goes into the JSONB column)
+                    const eventsData = [];
+                    
+                    // Always add the main ceremony
+                    eventsData.push({
+                        eventName: "Ceremony (Muhurtham)",
+                        date: mainDate,
+                        venue: mainVenue,
                         mapsLink: document.getElementById('mapsLink').value.trim(),
                         message: message
-                    }];
+                    });
+
+                    // If reception is checked, push a second event into the array!
+                    if(receptionToggle.checked) {
+                        eventsData.push({
+                            eventName: "Reception / Event",
+                            date: recDateInput.value,
+                            venue: recVenueInput.value.trim()
+                        });
+                    }
 
                     const logisticsData = {
                         rsvp: document.getElementById('rsvpDetails').value.trim(),
@@ -188,7 +248,7 @@
                                 slug: finalSlug,
                                 groom_first_name: groom,
                                 bride_first_name: bride,
-                                main_wedding_date: date,
+                                main_wedding_date: mainDate,
                                 family_details: familyData,
                                 events: eventsData,
                                 logistics: logisticsData,
@@ -201,7 +261,6 @@
                         btn.innerText = "Generate & Save Invitation";
                         btn.disabled = false;
                     } else {
-                        // Success View
                         document.getElementById('invite-form').classList.add('hidden');
                         document.getElementById('success-box').classList.remove('hidden');
                         
