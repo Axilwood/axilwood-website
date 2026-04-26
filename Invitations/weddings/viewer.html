@@ -10,7 +10,6 @@
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 
     <style>
-        /* The new, bolder, elegant typography */
         .font-elegant { font-family: 'Cormorant Garamond', serif; }
         .font-sans { font-family: 'Inter', sans-serif; }
         .bg-pattern { background-image: radial-gradient(#d1d5db 1px, transparent 1px); background-size: 20px 20px; }
@@ -49,30 +48,24 @@
         .delay-4 { animation-delay: 0.8s; }
         .delay-5 { animation-delay: 1.0s; }
 
-        /* ==========================================
-           TUNED DYNAMIC THEMES & LIQUID GLASS
-           ========================================== */
         .glass-base {
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
             transition: all 0.5s ease;
         }
 
-        /* 1. Elegant Minimalist (Apple Liquid Glass) */
         .theme-minimalist {
-            background: rgba(255, 255, 255, 0.15); /* Very sheer to show image */
+            background: rgba(255, 255, 255, 0.15);
             border: 1px solid rgba(255, 255, 255, 0.4);
             box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.1);
             color: #1f2937;
         }
-        /* Completely removed the thin 'Inter' font. Now uses bold Cormorant! */
         .theme-minimalist h1 { color: #111827; text-shadow: 0px 4px 15px rgba(255,255,255,0.6); }
         .theme-minimalist .accent { color: #374151; font-weight: 600; }
         .theme-minimalist .border-divider { border-color: rgba(255, 255, 255, 0.4); }
 
-        /* 2. Traditional Kerala (Warm Gold & Cream) */
         .theme-traditional_kerala {
-            background: rgba(255, 253, 248, 0.55); /* Reduced from 0.85 for transparency */
+            background: rgba(255, 253, 248, 0.55); 
             border: 2px solid rgba(212, 175, 55, 0.8); 
             box-shadow: 0 10px 25px rgba(212, 175, 55, 0.15);
             color: #3e3129; 
@@ -81,9 +74,8 @@
         .theme-traditional_kerala .accent { color: #9c7816; font-weight: 700; }
         .theme-traditional_kerala .border-divider { border-color: rgba(212, 175, 55, 0.4); }
 
-        /* 3. Royal Rajasthani (Dark Mode Glass) */
         .theme-royal_rajput {
-            background: rgba(20, 5, 5, 0.55); /* Reduced from 0.80 for transparency */
+            background: rgba(20, 5, 5, 0.55); 
             border: 1px solid rgba(255, 215, 0, 0.6);
             box-shadow: 0 15px 35px rgba(0, 0, 0, 0.7);
             color: #fdf6e3;
@@ -92,9 +84,8 @@
         .theme-royal_rajput .accent { color: #ffbc42; font-weight: 600; }
         .theme-royal_rajput .border-divider { border-color: rgba(255, 215, 0, 0.3); }
 
-        /* 4. Pastel Floral (Soft Modern) */
         .theme-pastel_floral {
-            background: rgba(255, 245, 247, 0.50); /* Reduced from 0.75 for transparency */
+            background: rgba(255, 245, 247, 0.50); 
             border: 1px solid rgba(255, 182, 193, 0.5);
             border-radius: 40px !important; 
             box-shadow: 0 8px 32px rgba(219, 112, 147, 0.2);
@@ -104,6 +95,14 @@
         .theme-pastel_floral .accent { color: #b84c71; font-weight: 600; }
         .theme-pastel_floral .border-divider { border-color: rgba(219, 112, 147, 0.3); }
 
+        /* Custom Input styling for the name field */
+        .glass-input {
+            background: rgba(255,255,255,0.4);
+            border: 1px solid rgba(255,255,255,0.5);
+            color: #1a1a1a;
+        }
+        .glass-input::placeholder { color: rgba(0,0,0,0.5); }
+        .glass-input:focus { background: rgba(255,255,255,0.7); border-color: #d4af37; outline: none; box-shadow: 0 0 10px rgba(212,175,55,0.3); }
     </style>
 </head>
 <body class="bg-pattern min-h-screen flex items-center justify-center p-4 md:p-8 relative">
@@ -159,11 +158,19 @@
                 </button>
             </div>
 
-            <div id="guest-slider-section" class="hidden mt-6 bg-black/5 p-6 rounded-2xl border border-divider">
-                <label class="block font-sans font-bold text-lg md:text-xl mb-4 text-center">Total number of people attending (including yourself):</label>
-                <div class="flex items-center justify-center gap-6 mb-6">
+            <div id="guest-slider-section" class="hidden mt-6 bg-black/5 p-6 md:p-8 rounded-3xl border border-divider">
+                
+                <div class="mb-6">
+                    <label class="block font-sans font-bold text-sm md:text-base mb-2 text-center uppercase tracking-widest accent">Your Name</label>
+                    <input type="text" id="guest-name" placeholder="e.g. John Doe" class="w-full max-w-[250px] mx-auto block glass-input rounded-xl p-3 text-center font-sans font-semibold transition-all">
+                </div>
+
+                <div class="w-full h-px bg-divider mb-6 opacity-30"></div>
+
+                <label class="block font-sans font-bold text-sm md:text-base mb-4 text-center uppercase tracking-widest accent">Total Guests (Including You)</label>
+                <div class="flex items-center justify-center gap-6 mb-8">
                     <span class="text-2xl font-bold opacity-80">1</span>
-                    <input type="range" id="guest-count" min="1" max="5" value="1" class="w-full max-w-[200px] h-2 bg-gray-300 rounded-lg appearance-none cursor-pointer accent-green-600">
+                    <input type="range" id="guest-count" min="1" max="5" value="1" class="w-full max-w-[200px] h-2 bg-gray-300/50 rounded-lg appearance-none cursor-pointer accent-green-600">
                     <span id="guest-display" class="text-2xl font-bold opacity-80">1</span>
                 </div>
                 <button id="btn-confirm-rsvp" class="bg-amber-600 hover:bg-amber-700 text-white font-sans font-bold py-3 px-8 rounded-full shadow-md transition-transform hover:scale-105 w-full sm:w-auto">
@@ -235,7 +242,6 @@
                 return;
             }
 
-            // SMART HOST LINE LOGIC
             const gParents = data.family_details?.groomParents;
             const bParents = data.family_details?.brideParents;
             const hostLineEl = document.getElementById('host-line');
@@ -249,7 +255,6 @@
                 hostLineEl.innerText = `You are invited to the wedding of`;
             }
 
-            // CORE DETAILS
             document.getElementById('couple-names').innerText = `${data.groom_first_name} & ${data.bride_first_name}`;
             const mainEvent = data.events[0];
             document.getElementById('welcome-msg').innerText = mainEvent.message || "Please join us to celebrate our special day.";
@@ -276,16 +281,18 @@
                 document.getElementById('rec-venue').innerText = recEvent.venue;
             }
 
-            // GIFTING POLICY DISPLAY
             const giftPolicy = data.logistics?.gifting;
             if (giftPolicy) {
                 document.getElementById('gifting-block').classList.remove('hidden');
                 document.getElementById('gifting-text').innerText = giftPolicy;
             }
 
-            // RSVP LOGIC
+            // ==========================================
+            // CONNECTED RSVP LOGIC
+            // ==========================================
             const guestInput = document.getElementById('guest-count');
             const guestDisplay = document.getElementById('guest-display');
+            const guestNameInput = document.getElementById('guest-name');
             
             guestInput.addEventListener('input', (e) => {
                 const val = e.target.value;
@@ -297,26 +304,68 @@
                 document.getElementById('guest-slider-section').classList.remove('hidden');
             });
 
-            document.getElementById('btn-decline').addEventListener('click', () => {
+            // 1. Handling the DECLINE
+            document.getElementById('btn-decline').addEventListener('click', async () => {
                 document.getElementById('rsvp-buttons').classList.add('hidden');
                 const thankYou = document.getElementById('rsvp-thank-you');
-                thankYou.innerText = "We will miss you! Thank you for letting us know.";
+                thankYou.innerText = "Saving your response...";
                 thankYou.classList.remove('hidden');
+
+                // Fetch current RSVPs array, append decline, and update
+                const currentRsvps = data.rsvps || [];
+                currentRsvps.push({
+                    name: "Guest (Declined)",
+                    guests: 0,
+                    status: "declined",
+                    timestamp: new Date().toISOString()
+                });
+
+                await supabase
+                    .from('wedding_invites')
+                    .update({ rsvps: currentRsvps })
+                    .eq('slug', slug);
+
+                thankYou.innerText = "We will miss you! Thank you for letting us know.";
             });
 
-            document.getElementById('btn-confirm-rsvp').addEventListener('click', () => {
+            // 2. Handling the ACCEPT (Confirm Attendance)
+            document.getElementById('btn-confirm-rsvp').addEventListener('click', async () => {
                 const count = guestInput.value;
                 const displayCount = count === "5" ? "5+" : count;
+                const rsvpName = guestNameInput.value.trim() || "Anonymous Guest";
                 
                 document.getElementById('guest-slider-section').classList.add('hidden');
                 
                 const thankYou = document.getElementById('rsvp-thank-you');
+                thankYou.innerText = "Saving your RSVP...";
+                thankYou.classList.remove('hidden');
+
+                // Fetch current RSVPs array, append accept, and update
+                const currentRsvps = data.rsvps || [];
+                currentRsvps.push({
+                    name: rsvpName,
+                    guests: parseInt(count),
+                    status: "attending",
+                    timestamp: new Date().toISOString()
+                });
+
+                const { error: updateError } = await supabase
+                    .from('wedding_invites')
+                    .update({ rsvps: currentRsvps })
+                    .eq('slug', slug);
+
+                if (updateError) {
+                    console.error("RSVP Save Error:", updateError);
+                    thankYou.innerText = "Oops! Something went wrong. Please try again.";
+                    return;
+                }
+
+                // Success Message & Confetti
                 if (count == 1) {
                     thankYou.innerText = "We can't wait to celebrate with you!";
                 } else {
                     thankYou.innerText = `We can't wait to celebrate with all ${displayCount} of you!`;
                 }
-                thankYou.classList.remove('hidden');
 
                 confetti({
                     particleCount: 150,
@@ -326,8 +375,8 @@
                     zIndex: 100 
                 });
             });
+            // ==========================================
 
-            // PRELOADER & THEME
             const userInvocation = data.family_details?.invocation || "none";
             const userTheme = data.design_prefs?.theme || "minimalist";
             const selectedImageUrl = getDynamicBackground(userInvocation, userTheme);
