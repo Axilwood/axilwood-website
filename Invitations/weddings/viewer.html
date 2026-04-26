@@ -14,7 +14,6 @@
         .font-sans { font-family: 'Inter', sans-serif; }
         .bg-pattern { background-image: radial-gradient(#d1d5db 1px, transparent 1px); background-size: 20px 20px; }
 
-        /* The Magic Mobile-First Background Container */
         #dynamic-background {
             position: fixed;
             top: 0;
@@ -25,7 +24,6 @@
             background-color: #1a1a1a; 
         }
         
-        /* The Smart Crop & Watermark Fix */
         #dynamic-background img {
             width: 100%;
             height: 100%;
@@ -53,8 +51,9 @@
 
         /* DYNAMIC THEMES & LIQUID GLASS */
         .glass-base {
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
+            /* Lowered blur slightly so backgrounds shine through better */
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
             transition: all 0.5s ease;
         }
 
@@ -69,35 +68,38 @@
         .theme-minimalist .border-divider { border-color: rgba(255, 255, 255, 0.3); }
 
         .theme-traditional_kerala {
-            background: rgba(255, 253, 248, 0.85); 
+            /* Lowered opacity from 0.85 to 0.65 to reveal background */
+            background: rgba(255, 253, 248, 0.65); 
             border: 2px solid #d4af37; 
             box-shadow: 0 10px 25px rgba(212, 175, 55, 0.15);
-            color: #4a3b32; 
+            color: #3e3129; 
         }
-        .theme-traditional_kerala h1 { color: #b8860b; }
-        .theme-traditional_kerala .accent { color: #d4af37; }
-        .theme-traditional_kerala .border-divider { border-color: rgba(212, 175, 55, 0.3); }
+        .theme-traditional_kerala h1 { color: #9c7104; }
+        .theme-traditional_kerala .accent { color: #b08d23; }
+        .theme-traditional_kerala .border-divider { border-color: rgba(212, 175, 55, 0.4); }
 
         .theme-royal_rajput {
-            background: rgba(26, 9, 9, 0.80);
+            /* Lowered opacity from 0.80 to 0.65 to reveal background */
+            background: rgba(26, 9, 9, 0.65);
             border: 1px solid #ffd700;
             box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6);
             color: #fdf6e3;
         }
         .theme-royal_rajput h1 { color: #ffd700; text-shadow: 2px 2px 8px rgba(0,0,0,0.6); }
         .theme-royal_rajput .accent { color: #ffae42; }
-        .theme-royal_rajput .border-divider { border-color: rgba(255, 215, 0, 0.2); }
+        .theme-royal_rajput .border-divider { border-color: rgba(255, 215, 0, 0.3); }
 
         .theme-pastel_floral {
-            background: rgba(255, 245, 247, 0.75); 
+            /* Lowered opacity to 0.65 */
+            background: rgba(255, 245, 247, 0.65); 
             border: 1px solid rgba(255, 182, 193, 0.6);
             border-radius: 40px !important; 
             box-shadow: 0 8px 32px rgba(219, 112, 147, 0.15);
             color: #4a4a4a;
         }
-        .theme-pastel_floral h1 { font-style: italic; color: #d87093; }
-        .theme-pastel_floral .accent { color: #db7093; }
-        .theme-pastel_floral .border-divider { border-color: rgba(219, 112, 147, 0.2); }
+        .theme-pastel_floral h1 { font-style: italic; color: #c45b7e; }
+        .theme-pastel_floral .accent { color: #c45b7e; }
+        .theme-pastel_floral .border-divider { border-color: rgba(219, 112, 147, 0.3); }
 
     </style>
 </head>
@@ -139,31 +141,31 @@
         </div>
 
         <div id="rsvp-block" class="mt-8 pt-4 animate-stagger delay-5">
-            <h3 class="text-2xl font-bold font-sans mb-6 uppercase tracking-wider accent">RSVP</h3>
+            <h3 class="text-2xl font-bold font-sans mb-6 uppercase tracking-wider accent">Will you be joining us?</h3>
             
             <div id="rsvp-buttons" class="flex flex-col sm:flex-row justify-center gap-4">
                 <button id="btn-accept" class="bg-green-600 hover:bg-green-700 text-white font-sans font-bold py-3 px-8 rounded-full shadow-lg transition-transform hover:scale-105">
-                    Joyfully Accept
+                    Yes, I will join
                 </button>
                 <button id="btn-decline" class="bg-gray-400 hover:bg-gray-500 text-white font-sans font-bold py-3 px-8 rounded-full shadow-lg transition-transform hover:scale-105">
-                    Regretfully Decline
+                    Unfortunately, I can't join
                 </button>
             </div>
 
             <div id="guest-slider-section" class="hidden mt-6 bg-black/5 p-6 rounded-2xl border border-divider">
-                <label class="block font-sans font-bold text-lg mb-4">How many guests are attending?</label>
+                <label class="block font-sans font-bold text-lg mb-4 text-center">Total number of people attending (including yourself):</label>
                 <div class="flex items-center justify-center gap-6 mb-6">
                     <span class="text-2xl font-bold opacity-80">1</span>
                     <input type="range" id="guest-count" min="1" max="5" value="1" class="w-full max-w-[200px] h-2 bg-gray-300 rounded-lg appearance-none cursor-pointer accent-green-600">
                     <span id="guest-display" class="text-2xl font-bold opacity-80">1</span>
                 </div>
                 <button id="btn-confirm-rsvp" class="bg-amber-600 hover:bg-amber-700 text-white font-sans font-bold py-3 px-8 rounded-full shadow-md transition-transform hover:scale-105 w-full sm:w-auto">
-                    Confirm RSVP
+                    Confirm Attendance
                 </button>
             </div>
 
             <div id="rsvp-thank-you" class="hidden mt-6 text-2xl font-elegant italic font-bold accent">
-                </div>
+            </div>
         </div>
 
     </div>
@@ -176,45 +178,53 @@
     <script type="module">
         import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm';
 
-        // Keys Preserved
         const supabaseUrl = 'https://wqlwurobvkzjixkoivxf.supabase.co';
         const supabaseKey = 'sb_publishable_I4rCqO3kdJLN-U8fgLoskA_AchQwKVr';
         const supabase = createClient(supabaseUrl, supabaseKey);
 
+        // ==========================================
+        // THE STRICT, BUG-FREE IMAGE ENGINE
+        // ==========================================
         const imageLibrary = [];
         const supabaseBaseUrl = "https://wqlwurobvkzjixkoivxf.supabase.co/storage/v1/object/public/invitation-backgrounds/";
 
-        const hinduImages = [1, 4, 10, 54, 69, 80, 83, 84, 85];
-        const muslimImages = [15, 32, 60, 62, 65, 70];
-        const christianImages = [2, 29, 71, 72, 81];
+        // Strict categorization based on your PDF analysis. 
+        const hinduImages = [1, 3, 4, 10, 54, 69, 80, 83, 84, 85]; 
+        const muslimImages = [11, 12, 13, 14, 15, 30, 31, 32, 60, 61, 62, 64, 65, 70]; // 60 is the Dia
+        const christianImages = [17, 29, 71, 72, 81];
+        const minimalistNeutral = [2, 9, 82]; // 82 is gold rings
         const floralNeutral = [5, 7, 25, 33, 40, 55];
         const royalNeutral = [6, 8, 16, 24, 28, 38, 39, 47, 50, 52, 63, 66];
         
         for (let i = 1; i <= 85; i++) {
-            let tags = ["neutral", "minimalist", "none"]; 
-            
-            if (hinduImages.includes(i)) tags = ["ganesh", "om", "traditional_kerala", "royal_rajput"];
-            else if (muslimImages.includes(i)) tags = ["bismillah", "royal_rajput"];
-            else if (christianImages.includes(i)) tags = ["cross", "pastel_floral", "minimalist"];
-            else if (floralNeutral.includes(i)) tags = ["neutral", "pastel_floral", "none"];
-            else if (royalNeutral.includes(i)) tags = ["neutral", "royal_rajput", "traditional_kerala", "none"];
-
-            imageLibrary.push({
-                url: `${supabaseBaseUrl}${i}.webp`, 
-                tags: tags
-            });
+            // Only push to library if we are absolutely sure of its category
+            if (hinduImages.includes(i)) {
+                imageLibrary.push({ url: `${supabaseBaseUrl}${i}.webp`, tags: ["ganesh", "om", "traditional_kerala", "royal_rajput"] });
+            } else if (muslimImages.includes(i)) {
+                imageLibrary.push({ url: `${supabaseBaseUrl}${i}.webp`, tags: ["bismillah", "royal_rajput"] });
+            } else if (christianImages.includes(i)) {
+                imageLibrary.push({ url: `${supabaseBaseUrl}${i}.webp`, tags: ["cross", "pastel_floral", "minimalist"] });
+            } else if (minimalistNeutral.includes(i)) {
+                imageLibrary.push({ url: `${supabaseBaseUrl}${i}.webp`, tags: ["none", "minimalist"] });
+            } else if (floralNeutral.includes(i)) {
+                imageLibrary.push({ url: `${supabaseBaseUrl}${i}.webp`, tags: ["neutral", "pastel_floral", "none"] });
+            } else if (royalNeutral.includes(i)) {
+                imageLibrary.push({ url: `${supabaseBaseUrl}${i}.webp`, tags: ["neutral", "royal_rajput", "traditional_kerala", "none"] });
+            }
+            // If it's not in these arrays, it's ignored. No more leaks!
         }
 
         function getDynamicBackground(invocation, theme) {
             let matches = imageLibrary.filter(img => img.tags.includes(invocation) && img.tags.includes(theme));
             if (matches.length === 0) matches = imageLibrary.filter(img => img.tags.includes("neutral") && img.tags.includes(theme));
-            if (matches.length === 0) matches = imageLibrary.filter(img => img.tags.includes("neutral"));
+            if (matches.length === 0) matches = imageLibrary.filter(img => img.tags.includes("none") && img.tags.includes(theme)); // Safer fallback
             if (matches.length > 0) {
                 const randomIndex = Math.floor(Math.random() * matches.length);
                 return matches[randomIndex].url;
             }
             return ""; 
         }
+        // ==========================================
 
         document.addEventListener("DOMContentLoaded", async function() {
             const pathParts = window.location.pathname.split('/');
@@ -232,7 +242,6 @@
                 return;
             }
 
-            // Populate UI Elements
             document.getElementById('couple-names').innerText = `${data.groom_first_name} & ${data.bride_first_name}`;
             const mainEvent = data.events[0];
             document.getElementById('welcome-msg').innerText = mainEvent.message || "Please join us to celebrate our special day.";
@@ -249,7 +258,7 @@
                 const mapBtn = document.getElementById('map-btn');
                 mapBtn.href = mainEvent.mapsLink;
                 mapBtn.classList.remove('hidden');
-                mapBtn.classList.add('flex'); // Switch to flex to align the SVG properly
+                mapBtn.classList.add('flex'); 
             }
 
             if (data.events.length > 1) {
@@ -259,23 +268,20 @@
                 document.getElementById('rec-venue').innerText = recEvent.venue;
             }
 
-            // PHASE 3: RSVP Interactive Logic ===========================
+            // NEW ATTENDANCE LOGIC
             const guestInput = document.getElementById('guest-count');
             const guestDisplay = document.getElementById('guest-display');
             
-            // Slider value update
             guestInput.addEventListener('input', (e) => {
                 const val = e.target.value;
                 guestDisplay.innerText = val === "5" ? "5+" : val;
             });
 
-            // "Joyfully Accept" Click
             document.getElementById('btn-accept').addEventListener('click', () => {
                 document.getElementById('rsvp-buttons').classList.add('hidden');
                 document.getElementById('guest-slider-section').classList.remove('hidden');
             });
 
-            // "Regretfully Decline" Click
             document.getElementById('btn-decline').addEventListener('click', () => {
                 document.getElementById('rsvp-buttons').classList.add('hidden');
                 const thankYou = document.getElementById('rsvp-thank-you');
@@ -283,7 +289,6 @@
                 thankYou.classList.remove('hidden');
             });
 
-            // "Confirm RSVP" Click
             document.getElementById('btn-confirm-rsvp').addEventListener('click', () => {
                 const count = guestInput.value;
                 const displayCount = count === "5" ? "5+" : count;
@@ -294,23 +299,20 @@
                 if (count == 1) {
                     thankYou.innerText = "We can't wait to celebrate with you!";
                 } else {
-                    thankYou.innerText = `We can't wait to celebrate with you and your ${displayCount} guests!`;
+                    thankYou.innerText = `We can't wait to celebrate with all ${displayCount} of you!`;
                 }
                 thankYou.classList.remove('hidden');
 
-                // Trigger the Confetti Burst!
                 confetti({
                     particleCount: 150,
                     spread: 70,
                     origin: { y: 0.6 },
                     colors: ['#d4af37', '#EA4335', '#4285F4', '#34A853', '#FBBC05'],
-                    zIndex: 100 // Ensure it stays on top of the glass
+                    zIndex: 100 
                 });
-
-                // Phase 4 Note: This is where we will eventually add the Supabase update function!
             });
-            // =========================================================
 
+            // PRELOADER & THEME INJECTION
             const userInvocation = data.family_details?.invocation || "none";
             const userTheme = data.design_prefs?.theme || "minimalist";
             const selectedImageUrl = getDynamicBackground(userInvocation, userTheme);
