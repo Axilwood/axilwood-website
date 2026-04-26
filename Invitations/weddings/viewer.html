@@ -307,6 +307,10 @@
             // 1. Handling the DECLINE
             document.getElementById('btn-decline').addEventListener('click', async () => {
                 document.getElementById('rsvp-buttons').classList.add('hidden');
+                
+                // NEW: Hides the question
+                document.querySelector('#rsvp-block h3').classList.add('hidden'); 
+
                 const thankYou = document.getElementById('rsvp-thank-you');
                 thankYou.innerText = "Saving your response...";
                 thankYou.classList.remove('hidden');
@@ -336,6 +340,9 @@
                 
                 document.getElementById('guest-slider-section').classList.add('hidden');
                 
+                // NEW: Hides the question
+                document.querySelector('#rsvp-block h3').classList.add('hidden');
+
                 const thankYou = document.getElementById('rsvp-thank-you');
                 thankYou.innerText = "Saving your RSVP...";
                 thankYou.classList.remove('hidden');

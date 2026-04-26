@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Invitation | Axilwood</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style> 
+        body { font-family: 'Inter', sans-serif; } 
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #0f172a; }
+        ::-webkit-scrollbar-thumb { background: #334155; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #475569; }
+    </style>
+</head>
+<body class="bg-gray-950 text-gray-100 min-h-screen relative overflow-x-hidden selection:bg-amber-500/30">
+
+    <div class="fixed top-[-20%] left-[-10%] w-[50%] h-[50%] bg-amber-600/10 blur-[120px] rounded-full pointer-events-none z-0"></div>
+    <div class="fixed bottom-[-20%] right-[-10%] w-[50%] h-[50%] bg-blue-600/10 blur-[120px] rounded-full pointer-events-none z-0"></div>
+
+    <main class="container mx-auto px-6 py-12 max-w-4xl min-h-screen relative z-10">
+        
+        <div id="auth-warning" class="hidden text-center py-20 bg-white/5 backdrop-blur-lg border border-white/10 rounded-2xl shadow-2xl mt-10">
+            <h2 class="text-3xl font-bold text-white">Please Sign In</h2>
+            <p class="mt-4 text-gray-400">You must be logged in to edit invitations.</p>
+            <a href="/Invitations" class="mt-8 inline-block bg-gradient-to-r from-amber-500 to-yellow-600 hover:from-amber-600 hover:to-yellow-700 text-white font-bold py-3 px-8 rounded-xl shadow-lg transition-transform active:scale-95">Go to Login</a>
+        </div>
+
+        <div id="loading-state" class="text-center py-20">
+            <svg class="animate-spin h-10 w-10 mx-auto text-amber-500 mb-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
+            <p class="text-gray-400">Loading your invitation details...</p>
+        </div>
+
+        <div id="dashboard-content" class="hidden">
+            
+            <div id="form-header" class="mb-8 flex flex-col md:flex-row md:justify-between md:items-end gap-4">
+                <div>
+                    <h1 class="text-4xl md:text-5xl font-extrabold text-white mb-2 tracking-tight">Edit Invitation</h1>
+                    <p class="text-gray-400 font-light text-lg">Update the details below and save your changes.</p>
+                </div>
+                <a href="/Invitations/weddings/dashboard" class="inline-flex items-center justify-center bg-white/10 hover:bg-white/20 border border-white/20 text-white px-5 py-2.5 rounded-xl backdrop-blur-md transition-all active:scale-95 text-sm font-semibold shadow-[0_0_15px_rgba(255,255,255,0.05)]">
+                    <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
+                    Back to Dashboard
+                </a>
+            </div>
+
+            <form id="invite-form" class="bg-white/5 backdrop-blur-xl border border-white/10 p-8 md:p-10 rounded-3xl shadow-[0_0_40px_rgba(0,0,0,0.5)] space-y-12 relative overflow-hidden">
+                <div class="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-amber-500/50 to-transparent"></div>
+
+                <div>
+                    <h3 class="text-2xl font-bold text-amber-500 border-b border-white/10 pb-3 mb-6 tracking-wide">1. The Core Details</h3>
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-300 mb-2">Groom's Full Name *</label>
+                            <input type="text" id="groomName" required class="w-full bg-black/40 border border-white/10 rounded-xl p-3.5 text-white placeholder-gray-600 focus:ring-2 focus:ring-amber-500 focus:outline-none transition-all">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-300 mb-2">Bride's Full Name *</label>
+                            <input type="text" id="brideName" required class="w-full bg-black/40 border border-white/10 rounded-xl p-3.5 text-white placeholder-gray-600 focus:ring-2 focus:ring-amber-500 focus:outline-none transition-all">
+                        </div>
+                        
+                        <div class="md:col-span-2 bg-black/20 p-5 rounded-2xl border border-white/5 mt-2">
+                            <h4 class="font-semibold text-gray-200 mb-4 flex items-center"><span class="w-2 h-2 rounded-full bg-amber-500 mr-2"></span>Main Ceremony (Muhurtham)</h4>
+                            <div class="grid md:grid-cols-2 gap-5">
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-400 mb-2">Date & Time *</label>
+                                    <input type="datetime-local" id="weddingDate" required class="w-full bg-black/40 border border-white/10 rounded-xl p-3.5 text-white focus:ring-2 focus:ring-amber-500 focus:outline-none transition-all [color-scheme:dark]">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-400 mb-2">Venue Name & City *</label>
+                                    <input type="text" id="venueName" required class="w-full bg-black/40 border border-white/10 rounded-xl p-3.5 text-white placeholder-gray-600 focus:ring-2 focus:ring-amber-500 focus:outline-none transition-all">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="md:col-span-2 pt-2">
+                            <label class="flex items-center space-x-3 cursor-pointer group">
+                                <input type="checkbox" id="hasReception" class="w-5 h-5 text-amber-500 bg-black/40 border-white/20 rounded focus:ring-amber-500 focus:ring-offset-gray-900">
+                                <span class="text-gray-300 font-medium text-lg group-hover:text-white transition-colors">We have a separate Reception / Event</span>
+                            </label>
+                        </div>
+
+                        <div id="receptionDetails" class="hidden md:col-span-2 bg-amber-500/5 p-5 rounded-2xl border border-amber-500/20 transition-all">
+                            <h4 class="font-semibold text-amber-400 mb-4 flex items-center"><span class="w-2 h-2 rounded-full bg-amber-400 mr-2"></span>Reception Details</h4>
+                            <div class="grid md:grid-cols-2 gap-5">
+                                <div>
+                                    <label class="block text-sm font-medium text-amber-200/70 mb-2">Date & Time *</label>
+                                    <input type="datetime-local" id="receptionDate" class="w-full bg-black/40 border border-amber-500/20 rounded-xl p-3.5 text-white focus:ring-2 focus:ring-amber-500 focus:outline-none transition-all [color-scheme:dark]">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-amber-200/70 mb-2">Venue Name & City *</label>
+                                    <input type="text" id="receptionVenue" class="w-full bg-black/40 border border-amber-500/20 rounded-xl p-3.5 text-white placeholder-gray-600 focus:ring-2 focus:ring-amber-500 focus:outline-none transition-all">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="md:col-span-2 mt-4 bg-white/5 p-5 rounded-2xl border border-white/5">
+                            <label class="block text-sm font-medium text-gray-200 mb-3">Welcome Message *</label>
+                            <textarea id="welcomeMessage" required rows="3" class="w-full bg-black/40 border border-white/10 rounded-xl p-3.5 text-white placeholder-gray-600 focus:ring-2 focus:ring-amber-500 focus:outline-none transition-all resize-none"></textarea>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <h3 class="text-2xl font-bold text-gray-100 border-b border-white/10 pb-3 mb-6 tracking-wide">2. Family & Traditions</h3>
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-400 mb-2">Groom's Parents</label>
+                            <input type="text" id="groomParents" class="w-full bg-black/30 border border-white/5 rounded-xl p-3.5 text-white placeholder-gray-600 focus:ring-2 focus:ring-gray-400 focus:outline-none transition-all">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-400 mb-2">Bride's Parents</label>
+                            <input type="text" id="brideParents" class="w-full bg-black/30 border border-white/5 rounded-xl p-3.5 text-white placeholder-gray-600 focus:ring-2 focus:ring-gray-400 focus:outline-none transition-all">
+                        </div>
+                        <div class="md:col-span-2">
+                            <label class="block text-sm font-medium text-gray-400 mb-2">Religious Invocation / Symbol</label>
+                            <select id="invocation" class="w-full bg-black/30 border border-white/5 rounded-xl p-3.5 text-white focus:ring-2 focus:ring-gray-400 focus:outline-none transition-all cursor-pointer">
+                                <option value="none">None / Standard (Neutral)</option>
+                                <option value="ganesh">Shree Ganeshay Namah (Hindu)</option>
+                                <option value="om">Om Symbol (Hindu)</option>
+                                <option value="cross">Holy Cross (Christian)</option>
+                                <option value="bismillah">Bismillah (Muslim)</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <h3 class="text-2xl font-bold text-gray-100 border-b border-white/10 pb-3 mb-6 tracking-wide">3. Logistics & Aesthetics</h3>
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-400 mb-2">Organiser Name</label>
+                            <input type="text" id="organiserName" class="w-full bg-black/30 border border-white/5 rounded-xl p-3.5 text-white placeholder-gray-600 focus:ring-2 focus:ring-gray-400 focus:outline-none transition-all">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-400 mb-2">Organiser Contact Number</label>
+                            <input type="text" id="organiserContact" class="w-full bg-black/30 border border-white/5 rounded-xl p-3.5 text-white placeholder-gray-600 focus:ring-2 focus:ring-gray-400 focus:outline-none transition-all">
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-medium text-gray-400 mb-2">Theme Preference</label>
+                            <select id="themePref" class="w-full bg-black/30 border border-white/5 rounded-xl p-3.5 text-white focus:ring-2 focus:ring-gray-400 focus:outline-none transition-all cursor-pointer">
+                                <option value="traditional_kerala">Traditional Kerala (Gold & Cream)</option>
+                                <option value="royal_rajput">Royal Rajasthani (Dark & Gold)</option>
+                                <option value="pastel_floral">Pastel Floral (Soft Modern)</option>
+                                <option value="minimalist">Elegant Minimalist (Apple Glass)</option>
+                            </select>
+                        </div>
+                        
+                        <div class="md:col-span-2">
+                            <label class="block text-sm font-medium text-gray-400 mb-2">Google Maps Location Link (Main Venue)</label>
+                            <input type="url" id="mapsLink" class="w-full bg-black/30 border border-white/5 rounded-xl p-3.5 text-white placeholder-gray-600 focus:ring-2 focus:ring-gray-400 focus:outline-none transition-all">
+                        </div>
+                        
+                        <div class="md:col-span-2 bg-white/5 p-5 rounded-2xl border border-white/5 mt-2">
+                            <label class="block text-sm font-medium text-gray-200 mb-3">Gifting Policy</label>
+                            <input type="text" id="giftingPolicy" class="w-full bg-black/40 border border-white/10 rounded-xl p-3.5 text-white placeholder-gray-600 focus:ring-2 focus:ring-amber-500 focus:outline-none transition-all">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="pt-8 border-t border-white/10">
+                    <button type="submit" id="submitBtn" class="w-full bg-gradient-to-r from-amber-500 to-yellow-600 hover:from-amber-600 hover:to-yellow-700 text-white font-extrabold tracking-wide py-4.5 rounded-xl text-lg transition-all active:scale-95 shadow-[0_0_20px_rgba(245,158,11,0.3)] p-4">
+                        Save Changes
+                    </button>
+                </div>
+            </form>
+
+            <div id="success-box" class="hidden mt-4 bg-green-900/40 backdrop-blur-md border border-green-500/50 text-white p-10 rounded-3xl text-center shadow-[0_0_40px_rgba(34,197,94,0.2)]">
+                <div class="w-16 h-16 bg-green-500 rounded-full flex items-center justify-center mx-auto mb-4 shadow-[0_0_15px_rgba(34,197,94,0.5)]">
+                    <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+                </div>
+                <h3 class="text-3xl font-extrabold mb-3">Changes Saved!</h3>
+                <p class="mb-8 text-green-200">Your invitation has been successfully updated.</p>
+                
+                <div class="flex flex-col md:flex-row justify-center gap-4 mt-6">
+                    <a href="/Invitations/weddings/dashboard" class="inline-block border border-gray-400 text-white font-medium rounded-xl px-8 py-3 hover:bg-white/10 transition-colors">Back to Dashboard</a>
+                    <a href="#" id="view-live-btn" target="_blank" class="inline-block bg-amber-600 hover:bg-amber-700 text-white font-bold py-3 px-8 rounded-xl shadow-lg transition-colors">View Live Invitation</a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script type="module">
+        import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm';
+
+        const supabaseUrl = 'https://wqlwurobvkzjixkoivxf.supabase.co';
+        const supabaseKey = 'sb_publishable_I4rCqO3kdJLN-U8fgLoskA_AchQwKVr';
+        const supabase = createClient(supabaseUrl, supabaseKey);
+
+        document.addEventListener("DOMContentLoaded", async function() {
+            const { data: { session } } = await supabase.auth.getSession();
+            
+            if (!session) {
+                document.getElementById('loading-state').classList.add('hidden');
+                document.getElementById('auth-warning').classList.remove('hidden');
+                return;
+            }
+
+            // Grab the slug from the URL: ?slug=amal-weds-aparna-561
+            const urlParams = new URLSearchParams(window.location.search);
+            const targetSlug = urlParams.get('slug');
+
+            if (!targetSlug) {
+                alert("No invitation specified to edit.");
+                window.location.href = '/Invitations/weddings/dashboard';
+                return;
+            }
+
+            // Fetch the specific invitation data
+            const { data: invite, error: fetchError } = await supabase
+                .from('wedding_invites')
+                .select('*')
+                .eq('slug', targetSlug)
+                .eq('user_id', session.user.id) // Security check!
+                .single();
+
+            document.getElementById('loading-state').classList.add('hidden');
+
+            if (fetchError || !invite) {
+                alert("Invitation not found or you don't have access.");
+                window.location.href = '/Invitations/weddings/dashboard';
+                return;
+            }
+
+            document.getElementById('dashboard-content').classList.remove('hidden');
+
+            // PRE-FILL THE FORM FIELDS
+            document.getElementById('groomName').value = invite.groom_first_name || '';
+            document.getElementById('brideName').value = invite.bride_first_name || '';
+            document.getElementById('weddingDate').value = invite.main_wedding_date || '';
+            
+            if (invite.events && invite.events.length > 0) {
+                document.getElementById('venueName').value = invite.events[0].venue || '';
+                document.getElementById('welcomeMessage').value = invite.events[0].message || '';
+                document.getElementById('mapsLink').value = invite.events[0].mapsLink || '';
+                
+                // If there's a second event, pre-fill Reception
+                if (invite.events.length > 1) {
+                    const recToggle = document.getElementById('hasReception');
+                    recToggle.checked = true;
+                    document.getElementById('receptionDetails').classList.remove('hidden');
+                    document.getElementById('receptionDate').required = true;
+                    document.getElementById('receptionVenue').required = true;
+                    
+                    document.getElementById('receptionDate').value = invite.events[1].date || '';
+                    document.getElementById('receptionVenue').value = invite.events[1].venue || '';
+                }
+            }
+
+            if (invite.family_details) {
+                document.getElementById('groomParents').value = invite.family_details.groomParents || '';
+                document.getElementById('brideParents').value = invite.family_details.brideParents || '';
+                document.getElementById('invocation').value = invite.family_details.invocation || 'none';
+            }
+
+            if (invite.logistics) {
+                document.getElementById('organiserName').value = invite.logistics.organiserName || '';
+                document.getElementById('organiserContact').value = invite.logistics.organiserContact || '';
+                document.getElementById('giftingPolicy').value = invite.logistics.gifting || '';
+            }
+
+            if (invite.design_prefs) {
+                document.getElementById('themePref').value = invite.design_prefs.theme || 'minimalist';
+            }
+
+            // TOGGLE RECEPTION LOGIC
+            const receptionToggle = document.getElementById('hasReception');
+            const receptionBlock = document.getElementById('receptionDetails');
+            const recDateInput = document.getElementById('receptionDate');
+            const recVenueInput = document.getElementById('receptionVenue');
+
+            receptionToggle.addEventListener('change', function() {
+                if(this.checked) {
+                    receptionBlock.classList.remove('hidden');
+                    recDateInput.required = true;
+                    recVenueInput.required = true;
+                } else {
+                    receptionBlock.classList.add('hidden');
+                    recDateInput.required = false;
+                    recVenueInput.required = false;
+                    recDateInput.value = '';
+                    recVenueInput.value = '';
+                }
+            });
+            
+            // SAVE UPDATES TO SUPABASE
+            document.getElementById('invite-form').addEventListener('submit', async function(e) {
+                e.preventDefault(); 
+                
+                const btn = document.getElementById('submitBtn');
+                btn.innerHTML = `Saving... <svg class="animate-spin h-5 w-5 ml-2 inline" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>`;
+                btn.disabled = true;
+
+                const groom = document.getElementById('groomName').value.trim();
+                const bride = document.getElementById('brideName').value.trim();
+                const mainDate = document.getElementById('weddingDate').value;
+                const mainVenue = document.getElementById('venueName').value.trim();
+                const message = document.getElementById('welcomeMessage').value.trim();
+
+                const familyData = {
+                    groomParents: document.getElementById('groomParents').value.trim(),
+                    brideParents: document.getElementById('brideParents').value.trim(),
+                    invocation: document.getElementById('invocation').value
+                };
+
+                const eventsData = [];
+                eventsData.push({
+                    eventName: "Ceremony (Muhurtham)",
+                    date: mainDate,
+                    venue: mainVenue,
+                    mapsLink: document.getElementById('mapsLink').value.trim(),
+                    message: message
+                });
+
+                if(receptionToggle.checked) {
+                    eventsData.push({
+                        eventName: "Reception / Event",
+                        date: recDateInput.value,
+                        venue: recVenueInput.value.trim()
+                    });
+                }
+
+                const logisticsData = {
+                    organiserName: document.getElementById('organiserName').value.trim(),
+                    organiserContact: document.getElementById('organiserContact').value.trim(),
+                    gifting: document.getElementById('giftingPolicy').value.trim()
+                };
+
+                const designData = {
+                    theme: document.getElementById('themePref').value
+                };
+
+                // PUSH UPDATE TO EXISTING ROW
+                const { error: updateError } = await supabase
+                    .from('wedding_invites')
+                    .update({ 
+                        groom_first_name: groom,
+                        bride_first_name: bride,
+                        main_wedding_date: mainDate,
+                        family_details: familyData,
+                        events: eventsData,
+                        logistics: logisticsData,
+                        design_prefs: designData
+                    })
+                    .eq('slug', targetSlug);
+
+                if (updateError) {
+                    alert("Error saving updates: " + updateError.message);
+                    btn.innerText = "Save Changes";
+                    btn.disabled = false;
+                } else {
+                    document.getElementById('invite-form').classList.add('hidden');
+                    document.getElementById('form-header').classList.add('hidden');
+                    document.getElementById('success-box').classList.remove('hidden');
+                    
+                    document.getElementById('view-live-btn').href = window.location.origin + '/Invitations/weddings/' + targetSlug;
+                }
+            });
+        });
+    </script>
+</body>
+</html>
