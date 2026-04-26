@@ -51,7 +51,6 @@
 
         /* DYNAMIC THEMES & LIQUID GLASS */
         .glass-base {
-            /* Lowered blur slightly so backgrounds shine through better */
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
             transition: all 0.5s ease;
@@ -68,7 +67,6 @@
         .theme-minimalist .border-divider { border-color: rgba(255, 255, 255, 0.3); }
 
         .theme-traditional_kerala {
-            /* Lowered opacity from 0.85 to 0.65 to reveal background */
             background: rgba(255, 253, 248, 0.65); 
             border: 2px solid #d4af37; 
             box-shadow: 0 10px 25px rgba(212, 175, 55, 0.15);
@@ -79,7 +77,6 @@
         .theme-traditional_kerala .border-divider { border-color: rgba(212, 175, 55, 0.4); }
 
         .theme-royal_rajput {
-            /* Lowered opacity from 0.80 to 0.65 to reveal background */
             background: rgba(26, 9, 9, 0.65);
             border: 1px solid #ffd700;
             box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6);
@@ -90,7 +87,6 @@
         .theme-royal_rajput .border-divider { border-color: rgba(255, 215, 0, 0.3); }
 
         .theme-pastel_floral {
-            /* Lowered opacity to 0.65 */
             background: rgba(255, 245, 247, 0.65); 
             border: 1px solid rgba(255, 182, 193, 0.6);
             border-radius: 40px !important; 
@@ -115,7 +111,7 @@
 
     <div id="invite-card" class="hidden max-w-2xl w-full glass-base p-8 md:p-16 rounded-3xl text-center relative overflow-hidden">
         
-        <div class="tracking-widest uppercase text-sm md:text-base font-bold font-sans mb-6 accent animate-stagger delay-1">
+        <div id="host-line" class="tracking-widest uppercase text-sm md:text-base font-bold font-sans mb-6 accent animate-stagger delay-1">
             You are invited to the wedding of
         </div>
         
@@ -138,6 +134,10 @@
             <h3 class="text-2xl font-bold font-sans mb-4 uppercase tracking-wider accent">Reception</h3>
             <p id="rec-date" class="font-sans text-lg font-medium"></p>
             <p id="rec-venue" class="font-sans font-bold text-xl mt-2"></p>
+        </div>
+
+        <div id="gifting-block" class="hidden py-4 mb-4 animate-stagger delay-5">
+            <p id="gifting-text" class="italic font-elegant text-lg opacity-90"></p>
         </div>
 
         <div id="rsvp-block" class="mt-8 pt-4 animate-stagger delay-5">
@@ -182,49 +182,35 @@
         const supabaseKey = 'sb_publishable_I4rCqO3kdJLN-U8fgLoskA_AchQwKVr';
         const supabase = createClient(supabaseUrl, supabaseKey);
 
-        // ==========================================
-        // THE STRICT, BUG-FREE IMAGE ENGINE
-        // ==========================================
         const imageLibrary = [];
         const supabaseBaseUrl = "https://wqlwurobvkzjixkoivxf.supabase.co/storage/v1/object/public/invitation-backgrounds/";
 
-        // Strict categorization based on your PDF analysis. 
         const hinduImages = [1, 3, 4, 10, 54, 69, 80, 83, 84, 85]; 
-        const muslimImages = [11, 12, 13, 14, 15, 30, 31, 32, 60, 61, 62, 64, 65, 70]; // 60 is the Dia
+        const muslimImages = [11, 12, 13, 14, 15, 30, 31, 32, 60, 61, 62, 64, 65, 70]; 
         const christianImages = [17, 29, 71, 72, 81];
-        const minimalistNeutral = [2, 9, 82]; // 82 is gold rings
+        const minimalistNeutral = [2, 9, 82]; 
         const floralNeutral = [5, 7, 25, 33, 40, 55];
         const royalNeutral = [6, 8, 16, 24, 28, 38, 39, 47, 50, 52, 63, 66];
         
         for (let i = 1; i <= 85; i++) {
-            // Only push to library if we are absolutely sure of its category
-            if (hinduImages.includes(i)) {
-                imageLibrary.push({ url: `${supabaseBaseUrl}${i}.webp`, tags: ["ganesh", "om", "traditional_kerala", "royal_rajput"] });
-            } else if (muslimImages.includes(i)) {
-                imageLibrary.push({ url: `${supabaseBaseUrl}${i}.webp`, tags: ["bismillah", "royal_rajput"] });
-            } else if (christianImages.includes(i)) {
-                imageLibrary.push({ url: `${supabaseBaseUrl}${i}.webp`, tags: ["cross", "pastel_floral", "minimalist"] });
-            } else if (minimalistNeutral.includes(i)) {
-                imageLibrary.push({ url: `${supabaseBaseUrl}${i}.webp`, tags: ["none", "minimalist"] });
-            } else if (floralNeutral.includes(i)) {
-                imageLibrary.push({ url: `${supabaseBaseUrl}${i}.webp`, tags: ["neutral", "pastel_floral", "none"] });
-            } else if (royalNeutral.includes(i)) {
-                imageLibrary.push({ url: `${supabaseBaseUrl}${i}.webp`, tags: ["neutral", "royal_rajput", "traditional_kerala", "none"] });
-            }
-            // If it's not in these arrays, it's ignored. No more leaks!
+            if (hinduImages.includes(i)) imageLibrary.push({ url: `${supabaseBaseUrl}${i}.webp`, tags: ["ganesh", "om", "traditional_kerala", "royal_rajput"] });
+            else if (muslimImages.includes(i)) imageLibrary.push({ url: `${supabaseBaseUrl}${i}.webp`, tags: ["bismillah", "royal_rajput"] });
+            else if (christianImages.includes(i)) imageLibrary.push({ url: `${supabaseBaseUrl}${i}.webp`, tags: ["cross", "pastel_floral", "minimalist"] });
+            else if (minimalistNeutral.includes(i)) imageLibrary.push({ url: `${supabaseBaseUrl}${i}.webp`, tags: ["none", "minimalist"] });
+            else if (floralNeutral.includes(i)) imageLibrary.push({ url: `${supabaseBaseUrl}${i}.webp`, tags: ["neutral", "pastel_floral", "none"] });
+            else if (royalNeutral.includes(i)) imageLibrary.push({ url: `${supabaseBaseUrl}${i}.webp`, tags: ["neutral", "royal_rajput", "traditional_kerala", "none"] });
         }
 
         function getDynamicBackground(invocation, theme) {
             let matches = imageLibrary.filter(img => img.tags.includes(invocation) && img.tags.includes(theme));
             if (matches.length === 0) matches = imageLibrary.filter(img => img.tags.includes("neutral") && img.tags.includes(theme));
-            if (matches.length === 0) matches = imageLibrary.filter(img => img.tags.includes("none") && img.tags.includes(theme)); // Safer fallback
+            if (matches.length === 0) matches = imageLibrary.filter(img => img.tags.includes("none") && img.tags.includes(theme)); 
             if (matches.length > 0) {
                 const randomIndex = Math.floor(Math.random() * matches.length);
                 return matches[randomIndex].url;
             }
             return ""; 
         }
-        // ==========================================
 
         document.addEventListener("DOMContentLoaded", async function() {
             const pathParts = window.location.pathname.split('/');
@@ -242,6 +228,21 @@
                 return;
             }
 
+            // SMART HOST LINE LOGIC
+            const gParents = data.family_details?.groomParents;
+            const bParents = data.family_details?.brideParents;
+            const hostLineEl = document.getElementById('host-line');
+
+            if (gParents && bParents) {
+                hostLineEl.innerText = `Together with their families, ${gParents} & ${bParents} warmly invite you to the wedding of`;
+            } else if (gParents || bParents) {
+                const oneParent = gParents || bParents;
+                hostLineEl.innerText = `Together with their families, ${oneParent} warmly invites you to the wedding of`;
+            } else {
+                hostLineEl.innerText = `You are invited to the wedding of`;
+            }
+
+            // CORE DETAILS
             document.getElementById('couple-names').innerText = `${data.groom_first_name} & ${data.bride_first_name}`;
             const mainEvent = data.events[0];
             document.getElementById('welcome-msg').innerText = mainEvent.message || "Please join us to celebrate our special day.";
@@ -268,7 +269,14 @@
                 document.getElementById('rec-venue').innerText = recEvent.venue;
             }
 
-            // NEW ATTENDANCE LOGIC
+            // GIFTING POLICY DISPLAY
+            const giftPolicy = data.logistics?.gifting;
+            if (giftPolicy) {
+                document.getElementById('gifting-block').classList.remove('hidden');
+                document.getElementById('gifting-text').innerText = giftPolicy;
+            }
+
+            // RSVP LOGIC
             const guestInput = document.getElementById('guest-count');
             const guestDisplay = document.getElementById('guest-display');
             
@@ -312,7 +320,7 @@
                 });
             });
 
-            // PRELOADER & THEME INJECTION
+            // PRELOADER & THEME
             const userInvocation = data.family_details?.invocation || "none";
             const userTheme = data.design_prefs?.theme || "minimalist";
             const selectedImageUrl = getDynamicBackground(userInvocation, userTheme);
