@@ -10,63 +10,153 @@
         .font-elegant { font-family: 'Playfair Display', serif; }
         .font-sans { font-family: 'Inter', sans-serif; }
         .bg-pattern { background-image: radial-gradient(#d1d5db 1px, transparent 1px); background-size: 20px 20px; }
+
+        /* The Magic Mobile-First Background Container */
+        #dynamic-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: -10; 
+            background-color: #fef3c7; 
+        }
+        
+        /* The Smart Crop & Watermark Fix */
+        #dynamic-background img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; 
+            object-position: center;
+            opacity: 0; 
+            transition: opacity 1.5s ease-in-out;
+            transform: scale(1.08); /* Pushes the Grok watermark completely off the screen! */
+        }
+
+        /* Glass-morphism to make text readable over ANY image */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.90);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+        }
     </style>
 </head>
-<body class="bg-amber-50 bg-pattern min-h-screen flex items-center justify-center p-4 md:p-8">
+<body class="bg-pattern min-h-screen flex items-center justify-center p-4 md:p-8 relative">
 
-    <div id="loading" class="text-xl text-gray-500 font-sans animate-pulse">Loading invitation...</div>
+    <div id="dynamic-background">
+        <img id="bg-img" src="" alt="Background pattern">
+    </div>
 
-    <div id="invite-card" class="hidden max-w-2xl w-full bg-white p-8 md:p-16 rounded-2xl shadow-2xl text-center border-4 border-amber-100 relative overflow-hidden">
+    <div id="loading" class="text-xl text-gray-500 font-sans animate-pulse glass-card px-8 py-4 rounded-full shadow-lg border border-gray-200">Loading invitation...</div>
+
+    <div id="invite-card" class="hidden max-w-2xl w-full glass-card p-8 md:p-16 rounded-2xl shadow-2xl text-center border-4 border-amber-100 relative overflow-hidden">
         
         <div class="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-amber-200 via-amber-400 to-amber-200"></div>
 
         <div class="text-amber-600 tracking-widest uppercase text-sm md:text-base font-bold font-sans mb-6">You are invited to the wedding of</div>
         
-        <h1 id="couple-names" class="text-5xl md:text-7xl font-elegant font-bold text-gray-800 mb-8 mt-2"></h1>
+        <h1 id="couple-names" class="text-5xl md:text-7xl font-elegant font-bold text-gray-800 mb-8 mt-2 drop-shadow-sm"></h1>
         
-        <p id="welcome-msg" class="text-gray-600 italic font-elegant text-xl mb-10 px-4"></p>
+        <p id="welcome-msg" class="text-gray-700 italic font-elegant text-xl mb-10 px-4 leading-relaxed"></p>
         
         <div class="border-t border-b border-amber-200 py-8 my-8">
             <h3 class="text-2xl font-bold text-gray-800 font-sans mb-4 uppercase tracking-wider text-amber-800">Main Ceremony</h3>
-            <p id="main-date" class="text-gray-700 font-sans text-lg"></p>
+            <p id="main-date" class="text-gray-700 font-sans text-lg font-medium"></p>
             <p id="main-venue" class="text-gray-800 font-sans font-bold text-xl mt-2"></p>
         </div>
 
-        <div id="reception-block" class="hidden py-4 my-4">
+        <div id="reception-block" class="hidden py-4 my-4 border-b border-amber-200 pb-8">
             <h3 class="text-2xl font-bold text-gray-800 font-sans mb-4 uppercase tracking-wider text-amber-800">Reception</h3>
-            <p id="rec-date" class="text-gray-700 font-sans text-lg"></p>
+            <p id="rec-date" class="text-gray-700 font-sans text-lg font-medium"></p>
             <p id="rec-venue" class="text-gray-800 font-sans font-bold text-xl mt-2"></p>
         </div>
+
+        <a href="#" id="map-btn" target="_blank" class="hidden mt-6 inline-block bg-amber-700 hover:bg-amber-800 text-white font-sans font-bold py-3 px-8 rounded-full shadow-md transition-transform hover:scale-105">
+            View on Map
+        </a>
     </div>
 
-    <div id="error-card" class="hidden text-center bg-white p-12 rounded-xl shadow-lg border border-red-100">
+    <div id="error-card" class="hidden text-center glass-card p-12 rounded-xl shadow-lg border border-red-100">
         <h2 class="text-3xl font-bold text-red-600 mb-2">Invitation Not Found</h2>
-        <p class="text-gray-600">Please check the link and try again.</p>
+        <p class="text-gray-700 font-medium">Please check the link and try again.</p>
     </div>
 
     <script type="module">
         import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm';
 
-        // REPLACE THESE!
+        // Your exact keys preserved
         const supabaseUrl = 'https://wqlwurobvkzjixkoivxf.supabase.co';
         const supabaseKey = 'sb_publishable_I4rCqO3kdJLN-U8fgLoskA_AchQwKVr';
         const supabase = createClient(supabaseUrl, supabaseKey);
 
+        // ==========================================
+        // THE AUTOMATED IMAGE LIBRARY ENGINE
+        // ==========================================
+        const imageLibrary = [];
+        const supabaseBaseUrl = "https://wqlwurobvkzjixkoivxf.supabase.co/storage/v1/object/public/invitation-backgrounds/";
+
+        // We categorize the 85 images based on the visual layout of your PDF
+        const hinduImages = [1, 4, 10, 54, 69, 80, 83, 84, 85];
+        const muslimImages = [15, 32, 60, 62, 65, 70];
+        const christianImages = [2, 29, 71, 72, 81];
+        const floralNeutral = [5, 7, 25, 33, 40, 55];
+        const royalNeutral = [6, 8, 16, 24, 28, 38, 39, 47, 50, 52, 63, 66];
+        
+        // Loop through 1 to 85 and build the array automatically
+        for (let i = 1; i <= 85; i++) {
+            let tags = ["neutral", "minimalist", "none"]; // Default fallback
+            
+            if (hinduImages.includes(i)) tags = ["ganesh", "om", "traditional_kerala", "royal_rajput"];
+            else if (muslimImages.includes(i)) tags = ["bismillah", "royal_rajput"];
+            else if (christianImages.includes(i)) tags = ["cross", "pastel_floral", "minimalist"];
+            else if (floralNeutral.includes(i)) tags = ["neutral", "pastel_floral", "none"];
+            else if (royalNeutral.includes(i)) tags = ["neutral", "royal_rajput", "traditional_kerala", "none"];
+
+            imageLibrary.push({
+                url: `${supabaseBaseUrl}${i}.png`,
+                tags: tags
+            });
+        }
+
+        function getDynamicBackground(invocation, theme) {
+            // Step A: Perfect Match (Religion + Theme)
+            let matches = imageLibrary.filter(img => img.tags.includes(invocation) && img.tags.includes(theme));
+
+            // Step B: Fallback to Neutral + Theme
+            if (matches.length === 0) {
+                matches = imageLibrary.filter(img => img.tags.includes("neutral") && img.tags.includes(theme));
+            }
+
+            // Step C: Absolute Safety Net (Any Neutral)
+            if (matches.length === 0) {
+                matches = imageLibrary.filter(img => img.tags.includes("neutral"));
+            }
+
+            // Step D: The Randomizer
+            if (matches.length > 0) {
+                const randomIndex = Math.floor(Math.random() * matches.length);
+                return matches[randomIndex].url;
+            }
+            return ""; 
+        }
+        // ==========================================
+
+
         document.addEventListener("DOMContentLoaded", async function() {
             // 1. Extract the slug from the URL
             const pathParts = window.location.pathname.split('/');
-            const slug = pathParts[pathParts.length - 1]; // Grabs the very last part of the URL
+            const slug = pathParts[pathParts.length - 1]; 
 
             // 2. Fetch the data from Supabase!
             const { data, error } = await supabase
                 .from('wedding_invites')
                 .select('*')
                 .eq('slug', slug)
-                .single(); // Tells Supabase we only expect one exact match
+                .single(); 
 
             document.getElementById('loading').classList.add('hidden');
 
-            // 3. Handle Errors (If link is broken or deleted)
+            // 3. Handle Errors
             if (error || !data) {
                 document.getElementById('error-card').classList.remove('hidden');
                 console.error(error);
@@ -92,12 +182,35 @@
             document.getElementById('main-date').innerText = formatDate(data.main_wedding_date);
             document.getElementById('main-venue').innerText = mainEvent.venue;
 
-            // Check if there is a 2nd event in the JSON container (The Reception!)
+            // Map Button Logic
+            if (mainEvent.mapsLink) {
+                const mapBtn = document.getElementById('map-btn');
+                mapBtn.href = mainEvent.mapsLink;
+                mapBtn.classList.remove('hidden');
+            }
+
+            // Check if there is a Reception
             if (data.events.length > 1) {
                 const recEvent = data.events[1];
                 document.getElementById('reception-block').classList.remove('hidden');
                 document.getElementById('rec-date').innerText = formatDate(recEvent.date);
                 document.getElementById('rec-venue').innerText = recEvent.venue;
+            }
+
+            // 5. TRIGGER BACKGROUND MAGIC
+            const userInvocation = data.family_details?.invocation || "none";
+            const userTheme = data.design_prefs?.theme || "neutral";
+            
+            const selectedImageUrl = getDynamicBackground(userInvocation, userTheme);
+            
+            if (selectedImageUrl) {
+                const bgImageEl = document.getElementById('bg-img');
+                bgImageEl.src = selectedImageUrl;
+                
+                // Smooth fade-in once the image fully loads
+                bgImageEl.onload = () => {
+                    bgImageEl.style.opacity = "1";
+                };
             }
         });
     </script>
