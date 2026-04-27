@@ -157,6 +157,14 @@
                             <label class="block text-sm font-medium text-gray-200 mb-3">Gifting Policy</label>
                             <input type="text" id="giftingPolicy" class="w-full bg-black/40 border border-white/10 rounded-xl p-3.5 text-white placeholder-gray-600 focus:ring-2 focus:ring-amber-500 focus:outline-none transition-all">
                         </div>
+
+                        <div class="md:col-span-2 pt-2 border-t border-white/10 mt-2">
+                            <label class="flex items-center space-x-3 cursor-pointer group">
+                                <input type="checkbox" id="enableRsvp" checked class="w-5 h-5 text-amber-500 bg-black/40 border-white/20 rounded focus:ring-amber-500 focus:ring-offset-gray-900">
+                                <span class="text-gray-300 font-medium group-hover:text-white transition-colors">Enable RSVP (Guest Attendance Tracker)</span>
+                            </label>
+                            <p class="text-xs text-gray-500 mt-1 ml-8">Uncheck this if you only want to announce the wedding without collecting guest counts.</p>
+                        </div>
                     </div>
                 </div>
 
@@ -172,7 +180,19 @@
                     <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
                 </div>
                 <h3 class="text-3xl font-extrabold mb-3">Changes Saved!</h3>
-                <p class="mb-8 text-green-200">Your invitation has been successfully updated.</p>
+                <p class="mb-8 text-green-200">Your invitation has been successfully updated. Share your link(s) below:</p>
+                
+                <div class="space-y-4 max-w-2xl mx-auto mb-8">
+                    <div class="bg-black/40 p-5 rounded-xl border border-amber-500/30">
+                        <p class="text-sm text-gray-400 mb-2 uppercase tracking-widest font-bold">Full Invitation Link</p>
+                        <a href="#" id="generated-link" target="_blank" class="text-lg font-bold text-amber-400 hover:text-amber-300 hover:underline break-all block"></a>
+                    </div>
+                    
+                    <div id="stealth-link-block" class="hidden bg-black/40 p-5 rounded-xl border border-amber-500/30">
+                        <p class="text-sm text-gray-400 mb-2 uppercase tracking-widest font-bold">Ceremony-Only Link (Hides Reception Info)</p>
+                        <a href="#" id="stealth-link" target="_blank" class="text-lg font-bold text-amber-400 hover:text-amber-300 hover:underline break-all block"></a>
+                    </div>
+                </div>
                 
                 <div class="flex flex-col md:flex-row justify-center gap-4 mt-6">
                     <a href="/Invitations/weddings/dashboard" class="inline-block border border-gray-400 text-white font-medium rounded-xl px-8 py-3 hover:bg-white/10 transition-colors">Back to Dashboard</a>
@@ -259,6 +279,11 @@
                 document.getElementById('organiserName').value = invite.logistics.organiserName || '';
                 document.getElementById('organiserContact').value = invite.logistics.organiserContact || '';
                 document.getElementById('giftingPolicy').value = invite.logistics.gifting || '';
+                
+                // PRE-FILL RSVP TOGGLE
+                if (invite.logistics.enable_rsvp !== undefined) {
+                    document.getElementById('enableRsvp').checked = invite.logistics.enable_rsvp;
+                }
             }
 
             if (invite.design_prefs) {
@@ -322,10 +347,13 @@
                     });
                 }
 
+                const enableRsvp = document.getElementById('enableRsvp').checked;
+
                 const logisticsData = {
                     organiserName: document.getElementById('organiserName').value.trim(),
                     organiserContact: document.getElementById('organiserContact').value.trim(),
-                    gifting: document.getElementById('giftingPolicy').value.trim()
+                    gifting: document.getElementById('giftingPolicy').value.trim(),
+                    enable_rsvp: enableRsvp // INJECTED TOGGLE VALUE
                 };
 
                 const designData = {
@@ -355,7 +383,24 @@
                     document.getElementById('form-header').classList.add('hidden');
                     document.getElementById('success-box').classList.remove('hidden');
                     
-                    document.getElementById('view-live-btn').href = window.location.origin + '/Invitations/weddings/' + targetSlug;
+                    const fullUrl = window.location.origin + '/Invitations/weddings/' + targetSlug;
+                    
+                    const linkEl = document.getElementById('generated-link');
+                    linkEl.href = fullUrl;
+                    linkEl.innerText = fullUrl;
+                    
+                    document.getElementById('view-live-btn').href = fullUrl;
+
+                    // SHOW STEALTH LINK IF RECEPTION IS ACTIVE
+                    if (receptionToggle.checked) {
+                        const stealthUrl = fullUrl + '?v=1';
+                        const stealthBlock = document.getElementById('stealth-link-block');
+                        const stealthLinkEl = document.getElementById('stealth-link');
+                        
+                        stealthBlock.classList.remove('hidden');
+                        stealthLinkEl.href = stealthUrl;
+                        stealthLinkEl.innerText = stealthUrl;
+                    }
                 }
             });
         });

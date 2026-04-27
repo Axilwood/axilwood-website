@@ -174,11 +174,19 @@
                             </div>
                             <input type="text" id="giftingPolicy" placeholder="Your gifting policy text..." class="w-full bg-black/40 border border-white/10 rounded-xl p-3.5 text-white placeholder-gray-600 focus:ring-2 focus:ring-amber-500 focus:outline-none transition-all">
                         </div>
+
+                        <div class="md:col-span-2 pt-2 border-t border-white/10 mt-2">
+                            <label class="flex items-center space-x-3 cursor-pointer group">
+                                <input type="checkbox" id="enableRsvp" checked class="w-5 h-5 text-amber-500 bg-black/40 border-white/20 rounded focus:ring-amber-500 focus:ring-offset-gray-900">
+                                <span class="text-gray-300 font-medium group-hover:text-white transition-colors">Enable RSVP (Guest Attendance Tracker)</span>
+                            </label>
+                            <p class="text-xs text-gray-500 mt-1 ml-8">Uncheck this if you only want to announce the wedding without collecting guest counts.</p>
+                        </div>
                     </div>
                 </div>
 
                 <div class="pt-8 border-t border-white/10">
-                    <button type="submit" id="submitBtn" class="w-full bg-gradient-to-r from-amber-500 to-yellow-600 hover:from-amber-600 hover:to-yellow-700 text-white font-extrabold tracking-wide py-4.5 rounded-xl text-lg transition-all active:scale-95 shadow-[0_0_20px_rgba(245,158,11,0.3)]">
+                    <button type="submit" id="submitBtn" class="w-full bg-gradient-to-r from-amber-500 to-yellow-600 hover:from-amber-600 hover:to-yellow-700 text-white font-extrabold tracking-wide py-4.5 rounded-xl text-lg transition-all active:scale-95 shadow-[0_0_20px_rgba(245,158,11,0.3)] p-4">
                         Generate Premium Invitation
                     </button>
                 </div>
@@ -189,11 +197,22 @@
                     <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
                 </div>
                 <h3 class="text-3xl font-extrabold mb-3">Invitation Saved!</h3>
-                <p class="mb-8 text-green-200">Your data is secure. Here is your unique dynamic link:</p>
-                <a href="#" id="generated-link" target="_blank" class="text-xl md:text-2xl font-bold text-amber-400 hover:text-amber-300 hover:underline bg-black/40 px-6 py-4 rounded-xl border border-amber-500/30 shadow-inner inline-block transition-colors break-all"></a>
+                <p class="mb-8 text-green-200">Your data is secure. Share your link(s) below:</p>
+                
+                <div class="space-y-4 max-w-2xl mx-auto">
+                    <div class="bg-black/40 p-5 rounded-xl border border-amber-500/30">
+                        <p class="text-sm text-gray-400 mb-2 uppercase tracking-widest font-bold">Full Invitation Link</p>
+                        <a href="#" id="generated-link" target="_blank" class="text-lg font-bold text-amber-400 hover:text-amber-300 hover:underline break-all block"></a>
+                    </div>
+                    
+                    <div id="stealth-link-block" class="hidden bg-black/40 p-5 rounded-xl border border-amber-500/30">
+                        <p class="text-sm text-gray-400 mb-2 uppercase tracking-widest font-bold">Ceremony-Only Link (Hides Reception Info)</p>
+                        <a href="#" id="stealth-link" target="_blank" class="text-lg font-bold text-amber-400 hover:text-amber-300 hover:underline break-all block"></a>
+                    </div>
+                </div>
                 
                 <div class="mt-10">
-                    <a href="/Invitations/weddings/dashboard" class="inline-block text-gray-300 hover:text-white font-medium border border-gray-600 hover:border-gray-400 rounded-lg px-6 py-3 transition-colors">Go to My Invitations Dashboard</a>
+                    <a href="/Invitations/weddings/dashboard" class="inline-block text-gray-300 hover:text-white font-medium border border-gray-600 hover:border-gray-400 rounded-lg px-8 py-3 transition-colors">Go to My Invitations Dashboard</a>
                 </div>
             </div>
         </div>
@@ -210,7 +229,6 @@
         const supabaseKey = 'sb_publishable_I4rCqO3kdJLN-U8fgLoskA_AchQwKVr';
         const supabase = createClient(supabaseUrl, supabaseKey);
 
-        // ================= TEMPLATE LOGIC =================
         const welcomeTexts = {
             "classic": "It is with hearts full of joy and a deep appreciation for the love that surrounds us that we announce our wedding. We warmly invite you to witness our vows, share in our happiness, and celebrate the beginning of our lifelong journey together.",
             "modern": "Some moments in life are simply meant to be shared with the people who matter most. Join us for a day of love, laughter, and unforgettable memories as we officially begin our next great chapter.",
@@ -228,11 +246,9 @@
             "custom": ""
         };
 
-        // Initialize defaults
         document.getElementById('welcomeMessage').value = welcomeTexts["classic"];
         document.getElementById('giftingPolicy').value = giftTexts["blessings"];
 
-        // Handle dropdown changes
         document.getElementById('welcomeTemplate').addEventListener('change', function(e) {
             const txt = welcomeTexts[e.target.value];
             const msgBox = document.getElementById('welcomeMessage');
@@ -246,7 +262,6 @@
             giftBox.value = txt;
             if(e.target.value === "custom") giftBox.focus();
         });
-        // =================================================
 
         document.addEventListener("DOMContentLoaded", async function() {
             const { data: { session } } = await supabase.auth.getSession();
@@ -314,10 +329,14 @@
                         });
                     }
 
+                    // NEW: Grab the RSVP Toggle state
+                    const enableRsvp = document.getElementById('enableRsvp').checked;
+
                     const logisticsData = {
                         organiserName: document.getElementById('organiserName').value.trim(),
                         organiserContact: document.getElementById('organiserContact').value.trim(),
-                        gifting: document.getElementById('giftingPolicy').value.trim()
+                        gifting: document.getElementById('giftingPolicy').value.trim(),
+                        enable_rsvp: enableRsvp // Injected into database here
                     };
 
                     const designData = {
@@ -345,17 +364,25 @@
                         btn.innerText = "Generate Premium Invitation";
                         btn.disabled = false;
                     } else {
-                        // HIDE FORM AND HEADER
                         document.getElementById('invite-form').classList.add('hidden');
                         document.getElementById('form-header').classList.add('hidden');
-                        
-                        // SHOW SUCCESS
                         document.getElementById('success-box').classList.remove('hidden');
                         
-                        const linkEl = document.getElementById('generated-link');
                         const fullUrl = window.location.origin + '/Invitations/weddings/' + finalSlug;
+                        const linkEl = document.getElementById('generated-link');
                         linkEl.href = fullUrl;
                         linkEl.innerText = fullUrl;
+
+                        // NEW: Show Stealth Link ONLY if Reception is checked
+                        if (receptionToggle.checked) {
+                            const stealthUrl = fullUrl + '?v=1';
+                            const stealthBlock = document.getElementById('stealth-link-block');
+                            const stealthLinkEl = document.getElementById('stealth-link');
+                            
+                            stealthBlock.classList.remove('hidden');
+                            stealthLinkEl.href = stealthUrl;
+                            stealthLinkEl.innerText = stealthUrl;
+                        }
                     }
                 });
             }

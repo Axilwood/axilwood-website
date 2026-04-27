@@ -146,7 +146,7 @@
             <p id="gifting-text" class="italic font-elegant font-medium text-lg md:text-xl opacity-90"></p>
         </div>
 
-        <div id="rsvp-block" class="mt-8 pt-4 animate-stagger delay-5">
+        <div id="rsvp-block" class="hidden mt-8 pt-4 animate-stagger delay-5">
             <h3 class="text-xl md:text-2xl font-bold font-sans mb-6 uppercase tracking-wider accent">Will you be joining us?</h3>
             
             <div id="rsvp-buttons" class="flex flex-col sm:flex-row justify-center gap-4">
@@ -227,6 +227,11 @@
         }
 
         document.addEventListener("DOMContentLoaded", async function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            
+            // Check for the stealth parameter '?v=1'
+            const isCeremonyOnly = urlParams.get('v') === '1';
+
             const pathParts = window.location.pathname.split('/');
             const slug = pathParts[pathParts.length - 1]; 
 
@@ -274,7 +279,8 @@
                 mapBtn.classList.add('flex'); 
             }
 
-            if (data.events.length > 1) {
+            // Only show reception if it exists AND '?v=1' is NOT in the URL
+            if (data.events.length > 1 && !isCeremonyOnly) {
                 const recEvent = data.events[1];
                 document.getElementById('reception-block').classList.remove('hidden');
                 document.getElementById('rec-date').innerText = formatDate(recEvent.date);
@@ -288,8 +294,15 @@
             }
 
             // ==========================================
-            // CONNECTED RSVP LOGIC
+            // RSVP TOGGLE LOGIC
             // ==========================================
+            // Check if RSVP is enabled (default is true if not set)
+            const enableRsvp = data.logistics?.enable_rsvp !== false;
+            
+            if (enableRsvp) {
+                document.getElementById('rsvp-block').classList.remove('hidden');
+            }
+
             const guestInput = document.getElementById('guest-count');
             const guestDisplay = document.getElementById('guest-display');
             const guestNameInput = document.getElementById('guest-name');
@@ -308,14 +321,12 @@
             document.getElementById('btn-decline').addEventListener('click', async () => {
                 document.getElementById('rsvp-buttons').classList.add('hidden');
                 
-                // NEW: Hides the question
                 document.querySelector('#rsvp-block h3').classList.add('hidden'); 
 
                 const thankYou = document.getElementById('rsvp-thank-you');
                 thankYou.innerText = "Saving your response...";
                 thankYou.classList.remove('hidden');
 
-                // Fetch current RSVPs array, append decline, and update
                 const currentRsvps = data.rsvps || [];
                 currentRsvps.push({
                     name: "Guest (Declined)",
@@ -340,14 +351,12 @@
                 
                 document.getElementById('guest-slider-section').classList.add('hidden');
                 
-                // NEW: Hides the question
                 document.querySelector('#rsvp-block h3').classList.add('hidden');
 
                 const thankYou = document.getElementById('rsvp-thank-you');
                 thankYou.innerText = "Saving your RSVP...";
                 thankYou.classList.remove('hidden');
 
-                // Fetch current RSVPs array, append accept, and update
                 const currentRsvps = data.rsvps || [];
                 currentRsvps.push({
                     name: rsvpName,
@@ -367,7 +376,6 @@
                     return;
                 }
 
-                // Success Message & Confetti
                 if (count == 1) {
                     thankYou.innerText = "We can't wait to celebrate with you!";
                 } else {
@@ -382,8 +390,8 @@
                     zIndex: 100 
                 });
             });
-            // ==========================================
 
+            // PRELOADER & THEME
             const userInvocation = data.family_details?.invocation || "none";
             const userTheme = data.design_prefs?.theme || "minimalist";
             const selectedImageUrl = getDynamicBackground(userInvocation, userTheme);
