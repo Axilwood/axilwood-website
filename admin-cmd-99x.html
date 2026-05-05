@@ -18,11 +18,23 @@
 </head>
 <body class="min-h-screen flex selection:bg-indigo-500/30 overflow-hidden hidden" id="app-body">
     
-    <!-- Security Override Overlay -->
+    <!-- Security Lockout Overlay -->
     <div id="security-lockout" class="fixed inset-0 bg-black z-[100] flex flex-col items-center justify-center hidden">
         <svg class="w-24 h-24 text-red-600 mb-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
         <h1 class="text-4xl font-bold text-white tracking-widest uppercase">Access Denied</h1>
         <p class="text-gray-500 mt-4 text-lg">Unauthorized identity detected. Session terminated.</p>
+    </div>
+
+    <!-- App Database Sync Overlay -->
+    <div id="app-auth-overlay" class="fixed inset-0 bg-black/90 backdrop-blur-md z-[90] flex flex-col items-center justify-center hidden">
+        <div class="glass-panel p-8 rounded-3xl max-w-md w-full border border-indigo-500/30 shadow-[0_0_50px_rgba(79,70,229,0.15)] text-center">
+            <svg class="w-16 h-16 text-indigo-500 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"></path></svg>
+            <h2 class="text-2xl font-bold text-white mb-2">Sync App Database</h2>
+            <p class="text-sm text-gray-400 mb-6">To securely load Timber App metrics, please verify your admin credentials for the App database.</p>
+            <input type="password" id="app-db-password" placeholder="Admin Password" class="w-full bg-black/60 border border-white/10 rounded-xl p-4 text-white focus:ring-2 focus:ring-indigo-500 focus:outline-none transition-all mb-4 text-center">
+            <button onclick="window.syncAppDatabase()" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 rounded-xl transition-all active:scale-95 shadow-[0_0_15px_rgba(79,70,229,0.4)]">Connect & Unlock</button>
+            <p id="app-auth-error" class="text-red-400 text-xs mt-3 hidden"></p>
+        </div>
     </div>
 
     <!-- SIDEBAR -->
@@ -78,7 +90,7 @@
                         <p class="text-sm font-semibold text-gray-400 uppercase tracking-widest mb-1">Total Verified Users</p>
                         <p class="text-4xl font-black text-white" id="stat-users">--</p>
                         <p class="text-xs text-emerald-400 mt-2 flex items-center">
-                            <svg class="w-3 h-3 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"></path></svg> Live from Supabase
+                            <svg class="w-3 h-3 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"></path></svg> App Database
                         </p>
                     </div>
                     <div class="glass-panel p-6 rounded-2xl stat-card border-emerald-500/20">
@@ -178,45 +190,88 @@
 
         // --- CONSTANTS ---
         const ADMIN_EMAIL = "axilwoodpvtltd@gmail.com";
-        const SUPABASE_URL = 'https://wqlwurobvkzjixkoivxf.supabase.co';
-        const SUPABASE_KEY = 'sb_publishable_I4rCqO3kdJLN-U8fgLoskA_AchQwKVr'; 
         
-        // WIRED TO LIVE FIREBASE CLOUD FUNCTION
+        // 1. WEDDING SAAS SUPABASE
+        const WEDDING_URL = 'https://wqlwurobvkzjixkoivxf.supabase.co';
+        const WEDDING_KEY = 'sb_publishable_I4rCqO3kdJLN-U8fgLoskA_AchQwKVr'; 
+        
+        // 2. TIMBER APP SUPABASE
+        const APP_URL = 'https://fjxxupbblzhqwgiqutug.supabase.co';
+        const APP_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZqeHh1cGJibHpocXdnaXF1dHVnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTEyMTc5NDgsImV4cCI6MjA2Njc5Mzk0OH0.1DwvnPDVoqnTm168EhkNDB8FfZqD_IwxuVb0gh9MsVs';
+
+        // 3. FIREBASE BROADCAST
         const FIREBASE_FUNCTION_URL = "https://asia-south1-axilwoodapp-v2.cloudfunctions.net/godModeBroadcast"; 
         const GOD_MODE_SECRET = "axilwood_admin_secure_2026"; 
 
-        const supabase = createClient(SUPABASE_URL, SUPABASE_KEY);
+        // Initialize Both Clients
+        const supabaseWedding = createClient(WEDDING_URL, WEDDING_KEY);
+        const supabaseApp = createClient(APP_URL, APP_KEY);
+
+        // Make App Client globally available for inline functions
+        window.supabaseApp = supabaseApp;
+        window.supabaseWedding = supabaseWedding;
 
         // --- CORE SECURITY GATE ---
         async function authenticateAdmin() {
-            const { data: { session } } = await supabase.auth.getSession();
-            
-            if (!session || session.user.email !== ADMIN_EMAIL) {
+            // 1. Check Wedding Session (Primary Gatekeeper)
+            const { data: wedData } = await supabaseWedding.auth.getSession();
+            if (!wedData.session || wedData.session.user.email !== ADMIN_EMAIL) {
                 document.getElementById('security-lockout').classList.remove('hidden');
-                // Optional: Force logout if they are an unauthorized user snooping
-                if(session) await supabase.auth.signOut();
                 return false;
             }
             
-            document.getElementById('admin-email-display').innerText = session.user.email;
+            document.getElementById('admin-email-display').innerText = wedData.session.user.email;
             document.getElementById('app-body').classList.remove('hidden');
+
+            // 2. Check App Database Session (To unlock Timber metrics)
+            const { data: appData } = await supabaseApp.auth.getSession();
+            if (!appData.session || appData.session.user.email !== ADMIN_EMAIL) {
+                document.getElementById('app-auth-overlay').classList.remove('hidden');
+                return false; // Wait for manual sync
+            }
+
             return true;
         }
 
-        // --- DATA FETCHING ---
-        async function loadDashboardData() {
+        // --- MANUAL APP DB SYNC ---
+        window.syncAppDatabase = async () => {
+            const password = document.getElementById('app-db-password').value;
+            const errorText = document.getElementById('app-auth-error');
+            
+            if(!password) {
+                errorText.innerText = "Please enter your password.";
+                errorText.classList.remove('hidden');
+                return;
+            }
+
+            const { data, error } = await supabaseApp.auth.signInWithPassword({
+                email: ADMIN_EMAIL,
+                password: password
+            });
+
+            if (error) {
+                errorText.innerText = "Error: " + error.message;
+                errorText.classList.remove('hidden');
+            } else {
+                document.getElementById('app-auth-overlay').classList.add('hidden');
+                loadDashboardData(); // Successfully synced, load data!
+            }
+        };
+
+        // --- DATA FETCHING (DUAL ENGINE) ---
+        window.loadDashboardData = async function() {
             try {
-                // 1. Overview Stats
-                const { count: userCount } = await supabase.from('users').select('*', { count: 'exact', head: true });
-                const { count: activeAds } = await supabase.from('ads').select('*', { count: 'exact', head: true }).eq('status', 'active');
-                const { count: totalWeddings } = await supabase.from('wedding_invites').select('*', { count: 'exact', head: true });
+                // 1. Overview Stats (Pulled from BOTH databases)
+                const { count: userCount } = await supabaseApp.from('users').select('*', { count: 'exact', head: true });
+                const { count: activeAds } = await supabaseApp.from('ads').select('*', { count: 'exact', head: true }).eq('status', 'active');
+                const { count: totalWeddings } = await supabaseWedding.from('wedding_invites').select('*', { count: 'exact', head: true });
 
                 document.getElementById('stat-users').innerText = userCount || 0;
                 document.getElementById('stat-ads').innerText = activeAds || 0;
                 document.getElementById('stat-weddings').innerText = totalWeddings || 0;
 
-                // 2. Recent Transactions (Timber)
-                const { data: transactions } = await supabase.from('transactions').select('*').order('created_at', { ascending: false }).limit(5);
+                // 2. Recent Transactions (Timber App DB)
+                const { data: transactions } = await supabaseApp.from('transactions').select('*').order('created_at', { ascending: false }).limit(5);
                 const tbody = document.getElementById('transactions-table-body');
                 tbody.innerHTML = '';
                 if(transactions && transactions.length > 0) {
@@ -237,8 +292,8 @@
                     tbody.innerHTML = '<tr><td colspan="5" class="p-4 text-center text-gray-500">No transactions found.</td></tr>';
                 }
 
-                // 3. Pending Timber Moderation
-                const { data: pendingAds } = await supabase.from('ads').select('*').eq('moderation_status', 'pending').order('created_at', { ascending: false }).limit(10);
+                // 3. Pending Timber Moderation (Timber App DB)
+                const { data: pendingAds } = await supabaseApp.from('ads').select('*').eq('moderation_status', 'pending').order('created_at', { ascending: false }).limit(10);
                 const timberGrid = document.getElementById('timber-ads-grid');
                 timberGrid.innerHTML = '';
                 if(pendingAds && pendingAds.length > 0) {
@@ -262,8 +317,8 @@
                     timberGrid.innerHTML = '<p class="text-gray-500">No pending ads to moderate.</p>';
                 }
 
-                // 4. Wedding SaaS Feed
-                const { data: invites } = await supabase.from('wedding_invites').select('*').order('created_at', { ascending: false }).limit(12);
+                // 4. Wedding SaaS Feed (Wedding App DB)
+                const { data: invites } = await supabaseWedding.from('wedding_invites').select('*').order('created_at', { ascending: false }).limit(12);
                 const wedGrid = document.getElementById('weddings-grid');
                 wedGrid.innerHTML = '';
                 if(invites && invites.length > 0) {
@@ -340,14 +395,14 @@
         // --- INLINE ACTIONS ---
         window.moderateAd = async (adId, status) => {
             if(!confirm(`Are you sure you want to mark this ad as ${status}?`)) return;
-            await supabase.from('ads').update({ moderation_status: status }).eq('id', adId);
-            loadDashboardData(); // Refresh UI
+            await window.supabaseApp.from('ads').update({ moderation_status: status }).eq('id', adId);
+            window.loadDashboardData(); // Refresh UI
         };
 
         window.deleteWedding = async (id) => {
             if(!confirm("DELETE this invitation permanently?")) return;
-            await supabase.from('wedding_invites').delete().eq('id', id);
-            loadDashboardData(); // Refresh UI
+            await window.supabaseWedding.from('wedding_invites').delete().eq('id', id);
+            window.loadDashboardData(); // Refresh UI
         };
 
         // --- TAB SWITCHER ---
@@ -370,7 +425,7 @@
 
         // --- INITIALIZE ---
         authenticateAdmin().then(isAuthorized => {
-            if(isAuthorized) loadDashboardData();
+            if(isAuthorized) window.loadDashboardData();
         });
 
     </script>
