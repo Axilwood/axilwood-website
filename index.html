@@ -26,10 +26,8 @@
 
     <header class="glass-nav sticky top-0 z-50 w-full transition-all duration-300">
         <nav class="container mx-auto px-6 py-4 flex justify-between items-center relative z-10">
-            <a href="/" class="text-2xl font-extrabold tracking-tight text-white flex items-center gap-2 group">
-                <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-gray-700 to-gray-900 border border-gray-600 flex items-center justify-center shadow-lg group-hover:border-gray-400 transition-colors">
-                    <span class="text-white text-lg leading-none">A</span>
-                </div>
+            <a href="/" class="text-2xl font-extrabold tracking-tight text-white flex items-center gap-3 group">
+                <img src="/web-app-manifest-192x192.png" alt="Axilwood Logo" class="w-8 h-8 drop-shadow-[0_0_8px_rgba(255,255,255,0.2)] transition-transform group-hover:scale-105">
                 Axilwood
             </a>
             
@@ -45,7 +43,7 @@
                     <span class="w-2 h-2 rounded-full bg-indigo-500 mr-2 animate-pulse"></span> Command Center
                 </a>
                 <button id="auth-btn" class="flex items-center text-sm font-semibold text-gray-300 hover:text-white transition-colors bg-white/5 hover:bg-white/10 border border-white/10 px-5 py-2 rounded-xl backdrop-blur-md">
-                    <svg class="w-4 h-4 mr-2" viewBox="0 0 48 48"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.7 17.74 9.5 24 9.5z"></path><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"></path><path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"></path><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"></path></svg> 
+                    <svg class="w-4 h-4 mr-2" viewBox="0 0 48 48" id="google-icon"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.7 17.74 9.5 24 9.5z"></path><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"></path><path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"></path><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"></path></svg> 
                     <span id="auth-btn-text">Sign In</span>
                 </button>
             </div>
@@ -55,15 +53,15 @@
             </button>
         </nav>
 
-        <div id="mobile-menu" class="hidden md:hidden glass-panel border-t border-white/5 absolute top-full left-0 w-full shadow-2xl">
-            <div class="flex flex-col px-6 py-6 space-y-4">
-                <a href="/how-it-works.html" class="text-base font-medium text-gray-300 hover:text-white">How It Works</a>
-                <a href="/features.html" class="text-base font-medium text-gray-300 hover:text-white">Features</a>
-                <a href="/about.html" class="text-base font-medium text-gray-300 hover:text-white">About</a>
-                <a href="/support.html" class="text-base font-medium text-gray-300 hover:text-white">Support</a>
-                <hr class="border-white/10 my-2">
+        <div id="mobile-menu" class="hidden md:hidden bg-zinc-950/95 backdrop-blur-3xl border-t border-white/10 absolute top-full left-0 w-full shadow-[0_20px_50px_rgba(0,0,0,0.5)]">
+            <div class="flex flex-col px-6 py-8 space-y-5">
+                <a href="/how-it-works.html" class="text-lg font-medium text-gray-300 hover:text-white">How It Works</a>
+                <a href="/features.html" class="text-lg font-medium text-gray-300 hover:text-white">Features</a>
+                <a href="/about.html" class="text-lg font-medium text-gray-300 hover:text-white">About</a>
+                <a href="/support.html" class="text-lg font-medium text-gray-300 hover:text-white">Support</a>
+                <hr class="border-white/10 my-4">
                 <a href="/admin-cmd-99x.html" id="mobile-god-mode" class="hidden text-sm font-bold uppercase tracking-widest text-indigo-400 py-2">Command Center</a>
-                <button id="mobile-auth-btn" class="text-left text-base font-semibold text-white bg-white/10 border border-white/10 py-3 px-4 rounded-xl flex items-center justify-center mt-2">
+                <button id="mobile-auth-btn" class="text-left text-base font-semibold text-white bg-white/10 border border-white/10 py-4 px-4 rounded-xl flex items-center justify-center mt-2 shadow-lg">
                     <span id="mobile-auth-text">Sign In with Google</span>
                 </button>
             </div>
@@ -75,7 +73,7 @@
         <section class="container mx-auto px-6 pt-24 pb-16 text-center">
             <div class="inline-block mb-6 px-4 py-1.5 rounded-full glass-panel border-white/10 shadow-xl">
                 <span class="text-xs md:text-sm font-semibold tracking-widest uppercase bg-clip-text text-transparent bg-gradient-to-r from-gray-300 to-white">
-                    Next-Generation SaaS & Marketplaces
+                    Next-Generation Software Solutions
                 </span>
             </div>
             <h1 class="text-5xl md:text-7xl font-extrabold text-white leading-tight tracking-tight drop-shadow-2xl">
@@ -95,7 +93,7 @@
                     
                     <div class="flex justify-between items-start mb-12">
                         <div>
-                            <span class="text-xs font-bold text-emerald-400 uppercase tracking-widest mb-2 block">Marketplace</span>
+                            <span class="text-xs font-bold text-emerald-400 uppercase tracking-widest mb-2 block">For Landowners & Traders</span>
                             <h2 class="text-3xl md:text-4xl font-extrabold text-white">Axilwood <br> Timber App</h2>
                         </div>
                         <div class="w-12 h-12 rounded-xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center">
@@ -119,7 +117,7 @@
                     
                     <div class="flex justify-between items-start mb-12">
                         <div>
-                            <span class="text-xs font-bold text-amber-400 uppercase tracking-widest mb-2 block">SaaS Platform</span>
+                            <span class="text-xs font-bold text-amber-400 uppercase tracking-widest mb-2 block">For Couples & Planners</span>
                             <h2 class="text-4xl md:text-5xl font-elegant font-bold text-white tracking-tight">Axilwood <br> Invitations</h2>
                         </div>
                         <div class="w-12 h-12 rounded-xl bg-indigo-500/10 border border-indigo-500/20 flex items-center justify-center">
@@ -132,7 +130,7 @@
                     </p>
                     
                     <div class="mt-auto">
-                        <a href="/Invitations/weddings/index.html" class="inline-flex items-center justify-center h-14 px-8 bg-gradient-to-r from-amber-600 to-indigo-600 hover:from-amber-500 hover:to-indigo-500 text-white font-bold rounded-xl shadow-[0_0_20px_rgba(79,70,229,0.3)] transition-all hover:shadow-[0_0_30px_rgba(79,70,229,0.5)] hover:-translate-y-1">
+                        <a href="/Invitations" class="inline-flex items-center justify-center h-14 px-8 bg-gradient-to-r from-amber-600 to-indigo-600 hover:from-amber-500 hover:to-indigo-500 text-white font-bold rounded-xl shadow-[0_0_20px_rgba(79,70,229,0.3)] transition-all hover:shadow-[0_0_30px_rgba(79,70,229,0.5)] hover:-translate-y-1">
                             Create Free Invitation
                         </a>
                     </div>
@@ -148,9 +146,7 @@
             <div class="md:flex md:justify-between md:items-center">
                 <div class="mb-6 md:mb-0">
                     <a href="/" class="text-2xl font-extrabold tracking-tight text-white flex items-center gap-2 opacity-80 hover:opacity-100 transition-opacity">
-                        <div class="w-6 h-6 rounded-md bg-gray-800 border border-gray-600 flex items-center justify-center">
-                            <span class="text-white text-xs leading-none">A</span>
-                        </div>
+                        <img src="/web-app-manifest-192x192.png" alt="Axilwood Logo" class="w-6 h-6 grayscale contrast-200 brightness-200">
                         Axilwood
                     </a>
                     <p class="mt-2 text-sm text-gray-500 font-light max-w-xs">Elevating industries through intelligent digital architecture.</p>
@@ -187,6 +183,7 @@
         const mobileGodModeBtn = document.getElementById('mobile-god-mode');
         const mobileMenuBtn = document.getElementById('mobile-menu-btn');
         const mobileMenu = document.getElementById('mobile-menu');
+        const googleIcon = document.getElementById('google-icon');
 
         // 1. Mobile Menu Toggle Logic
         mobileMenuBtn.addEventListener('click', () => {
@@ -198,28 +195,37 @@
             const { data: { session } } = await supabase.auth.getSession();
 
             if (session) {
-                // User is logged in
-                authBtnText.innerText = 'Dashboard';
-                mobileAuthText.innerText = 'Go to Dashboard';
-                
-                // Clicking Dashboard takes them to their user area
-                const gotoDashboard = () => window.location.href = '/Invitations/dashboard.html';
-                authBtn.onclick = gotoDashboard;
-                mobileAuthBtn.onclick = gotoDashboard;
+                // Remove Google Icon if logged in
+                if(googleIcon) googleIcon.style.display = 'none';
 
-                // God Mode Check
+                // God Mode Check (Admin)
                 if(session.user.email === ADMIN_EMAIL) {
                     godModeBtn.classList.remove('hidden');
                     godModeBtn.classList.add('flex');
                     mobileGodModeBtn.classList.remove('hidden');
                     mobileGodModeBtn.classList.add('block');
+                    
+                    // Admin clicks main button -> goes to God Mode
+                    authBtnText.innerText = 'Command Center';
+                    mobileAuthText.innerText = 'Go to Command Center';
+                    const gotoAdmin = () => window.location.href = '/admin-cmd-99x.html';
+                    authBtn.onclick = gotoAdmin;
+                    mobileAuthBtn.onclick = gotoAdmin;
+                } else {
+                    // Normal User
+                    authBtnText.innerText = 'Dashboard';
+                    mobileAuthText.innerText = 'Go to Dashboard';
+                    const gotoDashboard = () => window.location.href = '/Invitations';
+                    authBtn.onclick = gotoDashboard;
+                    mobileAuthBtn.onclick = gotoDashboard;
                 }
             } else {
                 // User is logged out -> Setup Google Login
                 const loginAction = async () => {
                     await supabase.auth.signInWithOAuth({
                         provider: 'google',
-                        options: { redirectTo: window.location.origin + '/Invitations/dashboard.html' }
+                        // Fixed Redirect URL to prevent 404
+                        options: { redirectTo: window.location.origin + '/Invitations' }
                     });
                 };
                 authBtn.onclick = loginAction;
