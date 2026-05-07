@@ -146,7 +146,7 @@
             <div class="md:flex md:justify-between md:items-center">
                 <div class="mb-6 md:mb-0">
                     <a href="/" class="text-2xl font-extrabold tracking-tight text-white flex items-center gap-2 opacity-80 hover:opacity-100 transition-opacity">
-                        <img src="/favicon.ico" alt="Axilwood Logo" class="w-6 h-6 grayscale contrast-200 brightness-200">
+                        <img src="/favicon.ico" alt="Axilwood Logo" class="w-6 h-6 drop-shadow-md">
                         Axilwood
                     </a>
                     <p class="mt-2 text-sm text-gray-500 font-light max-w-xs">Elevating industries through intelligent digital architecture.</p>
@@ -206,11 +206,15 @@
                     mobileGodModeBtn.classList.add('block');
                     
                     // Admin clicks main button -> goes to God Mode
-                    authBtnText.innerText = 'Command Center';
-                    mobileAuthText.innerText = 'Go to Command Center';
-                    const gotoAdmin = () => window.location.href = '/admin-cmd-99x.html';
-                    authBtn.onclick = gotoAdmin;
-                    mobileAuthBtn.onclick = gotoAdmin;
+                    // Turn the second button into a Log Out button for the Admin
+                    authBtnText.innerText = 'Log Out';
+                    mobileAuthText.innerText = 'Log Out';
+                    const logoutAction = async () => {
+                        await supabase.auth.signOut();
+                        window.location.reload();
+                    };
+                    authBtn.onclick = logoutAction;
+                    mobileAuthBtn.onclick = logoutAction;
                 } else {
                     // Normal User
                     authBtnText.innerText = 'Dashboard';
@@ -225,7 +229,7 @@
                     await supabase.auth.signInWithOAuth({
                         provider: 'google',
                         // Fixed Redirect URL to prevent 404
-                        options: { redirectTo: window.location.origin + '/Invitations' }
+                        options: { redirectTo: window.location.origin + '/' }
                     });
                 };
                 authBtn.onclick = loginAction;
