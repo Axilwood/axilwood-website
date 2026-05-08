@@ -3,211 +3,261 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Privacy Policy & Terms - Axilwood</title>
+    <title>Privacy Policy & Terms | Axilwood</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="icon" href="/favicon.ico" sizes="any">
     <style> 
-        body { font-family: 'Inter', sans-serif; } 
-        .policy-content h2 { font-size: 1.875rem; font-weight: bold; margin-top: 2rem; margin-bottom: 1rem; border-bottom: 1px solid #e5e7eb; padding-bottom: 0.5rem; }
-        .policy-content h3 { font-size: 1.5rem; font-weight: bold; margin-top: 1.5rem; margin-bottom: 0.75rem; }
-        .policy-content p, .policy-content li { margin-bottom: 1rem; line-height: 1.7; color: #4b5563; }
-        .policy-content ul { list-style-type: disc; padding-left: 1.5rem; }
+        body { font-family: 'Inter', sans-serif; background-color: #09090b; color: #e4e4e7; overflow-x: hidden;} 
+        .font-elegant { font-family: 'Cormorant Garamond', serif; }
+        .glass-panel { background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px); border: 1px solid rgba(255, 255, 255, 0.05); }
+        .glass-nav { background: rgba(9, 9, 11, 0.7); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border-bottom: 1px solid rgba(255, 255, 255, 0.05); }
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #09090b; }
+        ::-webkit-scrollbar-thumb { background: #27272a; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #3f3f46; }
+
+        /* Specially tuned typography for dark mode legal text */
+        .policy-content h2 { font-size: 1.875rem; font-weight: 700; color: #ffffff; margin-top: 3rem; margin-bottom: 1rem; border-bottom: 1px solid rgba(255, 255, 255, 0.1); padding-bottom: 0.75rem; }
+        .policy-content h3 { font-size: 1.25rem; font-weight: 600; color: #e4e4e7; margin-top: 2rem; margin-bottom: 0.75rem; }
+        .policy-content p, .policy-content li { margin-bottom: 1rem; line-height: 1.8; color: #a1a1aa; font-weight: 300; }
+        .policy-content ul { list-style-type: disc; padding-left: 1.5rem; margin-bottom: 1rem; color: #a1a1aa; font-weight: 300; }
+        .policy-content strong { color: #d4d4d8; font-weight: 600; }
     </style>
 </head>
-<body class="bg-gray-50">
+<body class="antialiased selection:bg-indigo-500/30 relative flex flex-col min-h-screen">
 
-    <div id="header-placeholder"></div>
+    <div class="fixed top-[-10%] left-[-10%] w-[40%] h-[50%] bg-emerald-600/5 blur-[120px] rounded-full pointer-events-none z-0"></div>
+    <div class="fixed bottom-[-10%] right-[-10%] w-[40%] h-[50%] bg-indigo-600/5 blur-[120px] rounded-full pointer-events-none z-0"></div>
 
-    <main class="container mx-auto px-6 py-16">
-        <div class="max-w-4xl mx-auto bg-white p-8 md:p-12 rounded-lg shadow-md">
-            <h1 class="text-3xl font-extrabold text-gray-800">Privacy Policy & Terms of Service for Axilwood</h1>
-            <p class="text-gray-500"><strong>Last updated: October 01, 2025</strong></p>
+    <header class="glass-nav sticky top-0 z-50 w-full transition-all duration-300">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center relative z-10">
+            <a href="/" class="text-2xl font-extrabold tracking-tight text-white flex items-center gap-3 group">
+                <img src="/web-app-manifest-192x192.png" alt="Axilwood Logo" class="w-8 h-8 drop-shadow-[0_0_8px_rgba(255,255,255,0.2)] transition-transform group-hover:scale-105">
+                Axilwood
+            </a>
             
-            <div class="policy-content mt-8">
-                <p>This document contains both the Privacy Policy and the Terms of Service for the Axilwood mobile application. Please read them carefully before using Our Service.</p>
-                <hr class="my-8">
-                <h2>Privacy Policy</h2>
-                <p>This Privacy Policy describes Our policies and procedures on the collection, use, and disclosure of Your information...</p>
-                <h3>1. Interpretation and Definitions</h3>
-                <p>Definitions
-                    For the purposes of this Privacy Policy:
+            <div class="hidden md:flex space-x-8 items-center">
+                <a href="/how-it-works.html" class="text-sm font-medium text-gray-400 hover:text-white transition-colors">How It Works</a>
+                <a href="/features.html" class="text-sm font-medium text-gray-400 hover:text-white transition-colors">Features</a>
+                <a href="/about.html" class="text-sm font-medium text-gray-400 hover:text-white transition-colors">About</a>
+                <a href="/support.html" class="text-sm font-medium text-gray-400 hover:text-white transition-colors">Support</a>
+            </div>
 
-                    "Account" means a unique account created for You to access our Service.
+            <div class="hidden md:flex space-x-4 items-center">
+                <a href="/admin-cmd-99x.html" id="god-mode-btn" class="hidden items-center text-xs font-bold uppercase tracking-widest text-indigo-400 bg-indigo-500/10 border border-indigo-500/30 px-4 py-2 rounded-lg hover:bg-indigo-500/20 transition-all">
+                    <span class="w-2 h-2 rounded-full bg-indigo-500 mr-2 animate-pulse"></span> Command Center
+                </a>
+                <button id="auth-btn" class="flex items-center text-sm font-semibold text-gray-300 hover:text-white transition-colors bg-white/5 hover:bg-white/10 border border-white/10 px-5 py-2 rounded-xl backdrop-blur-md">
+                    <svg class="w-4 h-4 mr-2" viewBox="0 0 48 48" id="google-icon"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.7 17.74 9.5 24 9.5z"></path><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"></path><path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"></path><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"></path></svg> 
+                    <span id="auth-btn-text">Sign In</span>
+                </button>
+            </div>
 
-                    "We", "Us", or "Our" in this Agreement refers to Arjun Sudharsan (operating as 'Axilwood').
+            <button id="mobile-menu-btn" class="md:hidden text-gray-300 hover:text-white focus:outline-none p-2">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+            </button>
+        </nav>
 
-                    "Device" means any device that can access the Service such as a mobile phone or a digital tablet.
-
-                    "Personal Data" is any information that relates to an identified or identifiable individual.
-
-                    "Service" refers to the Axilwood mobile application.
-
-                    "User", "You" means the individual accessing or using the Service, including Sellers, Buyers, and Guests.
-                </p>
-                <h3>2. Collecting and Using Your Personal Data</h3>
-                <p>
-                    Types of Data Collected
-                    (a) Personal Data
-                    While using Our Service, We may ask You to provide Us with certain personally identifiable information that can be used to contact or identify You. This may include, but is not limited to:
-
-                    Contact Information: Phone Number, and optionally, Email address.
-
-                    Identity Information: Full Name.
-
-                    User-Generated Content: Information and content you post in your ads, including descriptions, tree details, and any notes.
-
-                    Photographs: Images you upload for your ads, which may contain metadata.
-
-                    Transaction Data: We collect information about transactions you make on the Service, such as subscription purchases or ad boosts. Payment information is processed by our third-party payment gateway, Razorpay, and we do not store your full card or bank account details. We receive a transaction ID and confirmation of payment status.
-
-                    (b) Location Data
-                    We collect precise location data (Latitude and Longitude) from Your Device when you grant us permission.
-
-                    Purpose: This data is used to display ads relevant to a user's geographical area, filter search results, and show the location of timber listings to eligible Buyers.
-
-                    Control: You can enable or disable location services at any time through Your Device settings. However, disabling location services may limit the functionality of certain features.
-
-                    (c) Usage Data
-                    Usage Data is collected automatically when using the Service. This may include information such as Your Device's IP address, device type, operating system, the pages of our Service that You visit, the time and date of Your visit, the time spent on those pages, and other diagnostic data.
-
-                    Use of Your Personal Data
-                    We may use Personal Data for the following purposes:
-
-                    To provide and maintain our Service: including to monitor the usage of our Service.
-
-                    To manage Your Account: to manage Your registration as a user of the Service.
-
-                    To facilitate communication: to enable user-to-user chat between Buyers and Sellers.
-
-                    To process transactions: to manage Your subscriptions and payments for ad promotions.
-
-                    To contact You: To contact You by email, telephone calls, SMS, or other equivalent forms of electronic communication regarding updates or informative communications related to the functionalities, products, or contracted services.
-
-                    For content moderation: to review ads and user content to ensure compliance with our policies.
-
-                    Storage and Retention of Your Personal Data
-                    We will retain Your Personal Data only for as long as is necessary for the purposes set out in this Privacy Policy and to comply with our legal obligations. Your data is stored securely on cloud servers provided by Supabase and Firebase.
-                </p>
-                <h3>3. Disclosure of Your Personal Data</h3>
-                <p>
-                    Your information may be shared in the following situations:
-
-                    With other users: When you post an ad, information such as your name, tree details, approximate location (City/District), and photos will be visible to other users. Your contact details (via the chat function) will only be made available to subscribed Buyers who wish to contact you about your ad.
-
-                    With Service Providers: We may share Your information with third-party service providers like Razorpay (for payments) and Firebase (for authentication and notifications) to facilitate our Service.
-
-                    For Legal Requirements: We may disclose Your Personal Data in the good faith belief that such action is necessary to comply with a legal obligation, protect and defend Our rights or property, or protect the personal safety of users of the Service or the public.
-                </p>
-                <h3>4. Security of Your Personal Data</h3>
-                <p>
-                    The security of Your Personal Data is important to Us, but remember that no method of transmission over the Internet or method of electronic storage is 100% secure. While We strive to use commercially acceptable means to protect Your Personal Data, We cannot guarantee its absolute security.
-                </p>
-                <h3>5. Your Rights Under Indian Law</h3>
-                <p>
-                    As a user in India, you have certain rights with respect to your data:
-
-                    Right to Access and Correction: You can access and update most of your information through your Profile page in the app.
-
-                    Right to Data Portability: You have the right to request a copy of your data in a machine-readable format. You can do so via the "Request My Data" option in the app's settings.
-
-                    Right to Withdraw Consent: You can withdraw your consent to this policy at any time through the app's settings. Withdrawing consent will result in the termination of your account and access to the Service.
-
-                    Right to Erasure (Account Deletion): You have the right to delete your account and all associated personal data. This can be done via the "Delete Account" button in the "Edit Profile" section of the app. This action is irreversible.
-                </p>
-                <h3>6. Grievance Redressal</h3>
-                <p>
-                    In accordance with the Information Technology (Intermediary Guidelines and Digital Media Ethics Code) Rules, 2021, the name and contact details of the Grievance Officer are provided below:
-
-                    Name: Arjun Sudharsan
-
-                    Designation: Grievance Officer
-
-                    Email: support@axilwood.com
-
-                    Phone: +91 7907493964
-
-                    If you have any grievances about the Service, its content, or its compliance with the law, please contact the Grievance Officer.
-                </p>
-                <h3>7. Changes to this Privacy Policy</h3>
-                <p>
-                    We may update Our Privacy Policy from time to time. We will notify You of any changes by posting the new Privacy Policy on this page and, if the changes are significant, through an in-app notification.
-
-                    You are advised to review this Privacy Policy periodically for any changes.
-                </p>
-                <h3>8. Contact Us</h3>
-                <p>If you have any questions about this Privacy Policy, You can contact us by email: support@axilwood.com</p>
-                
-                <hr class="my-8">
-                <h2>Terms of Service</h2>
-                <p>Please read these Terms of Service ("Terms", "Terms of Service") carefully before using the Axilwood mobile application...</p>
-                <h3>1. Accounts</h3>
-                <p>When You create an account with Us, You must provide Us with information that is accurate, complete, and current at all times. Failure to do so constitutes a breach of the Terms, which may result in immediate termination of Your account on Our Service.
-
-                    You are responsible for safeguarding the OTP-based access to your account and for any activities or actions under Your account.</p>
-                <h3>2. The Service</h3>
-                <p>
-                    Axilwood provides a marketplace platform for landowners ("Sellers") to list timber for sale and for timber merchants ("Buyers") to find and connect with Sellers. We are a classifieds platform and do not participate in the transaction, felling, transportation, or sale of the timber itself. We are not a party to any agreement entered into between Buyers and Sellers.
-                </p>
-                <h3>3. User Obligations and Content</h3>
-                <p>
-                    (a) Posting Ads (Sellers):
-                    As a Seller, you agree that you are the legal owner of the land and the trees you are listing, or you have explicit legal authority to sell them. You are responsible for the accuracy of all information in your ads, including tree type, dimensions, location, and photos.
-
-                    You agree not to list any timber species that are protected, banned, or illegal to trade under Indian law (e.g., Sandalwood, Red Sanders). We reserve the right to remove any ad and terminate the account of any user found listing prohibited items.
-
-                    (b) User-Generated Content:
-                    You are solely responsible for the content you post, including text and images ("User Content"). You grant Us a non-exclusive, worldwide, royalty-free license to use, display, and distribute Your User Content in connection with the Service.
-
-                    We have the right, but not the obligation, to monitor and edit all User Content. We may remove any content that we determine, in our sole discretion, to be unlawful, offensive, or in violation of these Terms.
-                </p>
-                <h3>4. Payments, Subscriptions, and Promotions</h3>
-                <p>
-                    Buyer Membership ("Axilwood Pro"):
-                    Buyers may purchase a recurring monthly subscription to access premium features, such as the ability to initiate chats with Sellers and view precise ad locations.
-
-                    Billing: Subscriptions are billed on a monthly basis through our third-party payment processor, Razorpay. They will automatically renew each month unless canceled by you.
-
-                    Cancellations: You may cancel your subscription at any time. The cancellation will take effect at the end of the current billing cycle.
-                </p>
-                <h3>5. Prohibited Activities</h3>
-                <p>
-                    You agree not to use the Service for any unlawful purpose or to solicit others to perform or participate in any unlawful acts. You are prohibited from using the site or its content:
-
-                    To harass, abuse, insult, harm, defame, or discriminate.
-
-                    To submit false or misleading information.
-
-                    To upload or transmit viruses or any other type of malicious code.
-
-                    To circumvent the security features of the Service.
-                </p>
-                <h3>6. Termination</h3>
-                <p>
-                    We may terminate or suspend Your account immediately, without prior notice or liability, for any reason whatsoever, including without limitation if You breach the Terms. Upon termination, Your right to use the Service will immediately cease.
-                </p>
-                <h3>7. Limitation of Liability</h3>
-                <p>
-                    In no event shall Arjun Sudharsan (operating as 'Axilwood'), nor its directors, employees, partners, agents, suppliers, or affiliates, be liable for any indirect, incidental, special, consequential or punitive damages, including without limitation, loss of profits, data, use, goodwill, or other intangible losses, resulting from (i) your access to or use of or inability to access or use the Service; (ii) any conduct or content of any third party on the Service; (iii) any content obtained from the Service; and (iv) unauthorized access, use or alteration of your transmissions or content.
-                </p>
-                <h3>8. Disclaimer</h3>
-                <p>
-                    Your use of the Service is at Your sole risk. The Service is provided on an "AS IS" and "AS AVAILABLE" basis. We do not warrant that the results of using the Service will meet your requirements. We are not responsible for any disputes, damages, or losses arising from transactions or interactions between Buyers and Sellers.
-                </p>
-                <h3>9. Governing Law</h3>
-                <p>
-                    These Terms shall be governed and construed in accordance with the laws of India, without regard to its conflict of law provisions. Any disputes arising from these Terms or the use of the Service shall be subject to the exclusive jurisdiction of the courts located in Ernakulam, Kerala, India.
-                </p>
-                <h3>10. Changes to These Terms</h3>
-                <p>
-                    We reserve the right, at Our sole discretion, to modify or replace these Terms at any time. If a revision is material, We will try to provide at least 30 days' notice prior to any new terms taking effect.
-                </p>
-                <h3>11. Contact Us</h3>
-                <p>If you have any questions about these Terms, please contact us by email: support@axilwood.com</p>
+        <div id="mobile-menu" class="hidden md:hidden bg-zinc-950/95 backdrop-blur-3xl border-t border-white/10 absolute top-full left-0 w-full shadow-[0_20px_50px_rgba(0,0,0,0.5)]">
+            <div class="flex flex-col px-6 py-8 space-y-5">
+                <a href="/how-it-works.html" class="text-lg font-medium text-gray-300 hover:text-white">How It Works</a>
+                <a href="/features.html" class="text-lg font-medium text-gray-300 hover:text-white">Features</a>
+                <a href="/about.html" class="text-lg font-medium text-gray-300 hover:text-white">About</a>
+                <a href="/support.html" class="text-lg font-medium text-gray-300 hover:text-white">Support</a>
+                <hr class="border-white/10 my-4">
+                <a href="/admin-cmd-99x.html" id="mobile-god-mode" class="hidden text-sm font-bold uppercase tracking-widest text-indigo-400 py-2">Command Center</a>
+                <button id="mobile-auth-btn" class="text-left text-base font-semibold text-white bg-white/10 border border-white/10 py-4 px-4 rounded-xl flex items-center justify-center mt-2 shadow-lg">
+                    <span id="mobile-auth-text">Sign In with Google</span>
+                </button>
             </div>
         </div>
+    </header>
+
+    <main class="relative z-10 flex-1 w-full max-w-4xl mx-auto px-6 py-16">
+        
+        <div class="glass-panel p-8 md:p-12 rounded-[2rem] border border-white/5 relative overflow-hidden">
+            <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-gray-500 to-gray-700"></div>
+            
+            <h1 class="text-3xl md:text-4xl font-extrabold text-white mb-2">Privacy Policy & Terms of Service</h1>
+            <p class="text-sm font-medium tracking-widest uppercase text-gray-500 mb-8">Last updated: October 01, 2025</p>
+            
+            <div class="policy-content">
+                <p>This document contains both the Privacy Policy and the Terms of Service for the Axilwood platform. Please read them carefully before using Our Service.</p>
+                
+                <h2>Privacy Policy</h2>
+                <p>This Privacy Policy describes Our policies and procedures on the collection, use, and disclosure of Your information.</p>
+                
+                <h3>1. Interpretation and Definitions</h3>
+                <p>For the purposes of this Privacy Policy:</p>
+                <ul>
+                    <li><strong>Account</strong> means a unique account created for You to access our Service.</li>
+                    <li><strong>We, Us, or Our</strong> in this Agreement refers to Arjun Sudharsan (operating as 'Axilwood').</li>
+                    <li><strong>Device</strong> means any device that can access the Service such as a mobile phone or a digital tablet.</li>
+                    <li><strong>Personal Data</strong> is any information that relates to an identified or identifiable individual.</li>
+                    <li><strong>Service</strong> refers to the Axilwood platform (Mobile Application & Web Platform).</li>
+                    <li><strong>User, You</strong> means the individual accessing or using the Service.</li>
+                </ul>
+
+                <h3>2. Collecting and Using Your Personal Data</h3>
+                <p><strong>Types of Data Collected</strong><br>
+                (a) Personal Data<br>
+                While using Our Service, We may ask You to provide Us with certain personally identifiable information that can be used to contact or identify You. This may include, but is not limited to:</p>
+                <ul>
+                    <li>Contact Information: Phone Number, and optionally, Email address.</li>
+                    <li>Identity Information: Full Name.</li>
+                    <li>User-Generated Content: Information and content you post in your ads, invitations, including descriptions, event details, and any notes.</li>
+                    <li>Photographs: Images you upload, which may contain metadata.</li>
+                    <li>Transaction Data: We collect information about transactions you make on the Service. Payment information is processed by our third-party payment gateway, Razorpay, and we do not store your full card or bank account details. We receive a transaction ID and confirmation of payment status.</li>
+                </ul>
+
+                <p>(b) Location Data<br>
+                We collect precise location data (Latitude and Longitude) from Your Device when you grant us permission. This data is used to display ads relevant to a user's geographical area, filter search results, and integrate map routing for event venues.</p>
+
+                <p>(c) Usage Data<br>
+                Usage Data is collected automatically when using the Service. This may include information such as Your Device's IP address, device type, operating system, the pages of our Service that You visit, the time and date of Your visit, the time spent on those pages, and other diagnostic data.</p>
+
+                <p><strong>Use of Your Personal Data</strong><br>
+                We may use Personal Data to provide and maintain our Service, to manage Your Account, to facilitate user-to-user communication, to process transactions, to contact You regarding updates, and for content moderation to ensure compliance with our policies.</p>
+
+                <p><strong>Storage and Retention</strong><br>
+                We will retain Your Personal Data only for as long as is necessary for the purposes set out in this Privacy Policy. Your data is stored securely on cloud servers provided by Supabase and Google Firebase.</p>
+
+                <h3>3. Disclosure of Your Personal Data</h3>
+                <p>Your information may be shared with other users when you post public content (like marketplace ads or shared digital invitations). We may share Your information with third-party service providers (like Razorpay and Firebase) to facilitate our Service. We may also disclose Your Personal Data if required by Legal Requirements.</p>
+
+                <h3>4. Security of Your Personal Data</h3>
+                <p>The security of Your Personal Data is important to Us, but remember that no method of transmission over the Internet or method of electronic storage is 100% secure. While We strive to use commercially acceptable means to protect Your Personal Data, We cannot guarantee its absolute security.</p>
+
+                <h3>5. Your Rights Under Indian Law</h3>
+                <p>As a user in India, you have the Right to Access and Correction, the Right to Data Portability, the Right to Withdraw Consent, and the Right to Erasure (Account Deletion). You can delete your account and all associated personal data via the app settings.</p>
+
+                <h3>6. Grievance Redressal</h3>
+                <p>In accordance with the Information Technology Rules, 2021, the contact details of the Grievance Officer are:<br>
+                Name: Arjun Sudharsan<br>
+                Email: support@axilwood.com<br>
+                Phone: +91 7907493964</p>
+
+                <h2>Terms of Service</h2>
+                <p>Please read these Terms of Service carefully before using the Axilwood platform.</p>
+
+                <h3>1. Accounts</h3>
+                <p>When You create an account with Us, You must provide Us with information that is accurate, complete, and current at all times. Failure to do so constitutes a breach of the Terms. You are responsible for safeguarding your login credentials.</p>
+
+                <h3>2. The Service</h3>
+                <p>Axilwood provides digital infrastructure for agricultural marketplaces and digital event management. For the marketplace, we are a classifieds platform and do not participate in the physical transaction or transportation of goods. We are not a party to any agreement entered into between Buyers and Sellers.</p>
+
+                <h3>3. User Obligations and Content</h3>
+                <p>You are solely responsible for the content you post. You agree that you have the legal right to share the information, images, or assets you list on our platform. You agree not to list any items that are protected, banned, or illegal to trade under Indian law. We reserve the right to remove any unlawful or offensive content without notice.</p>
+
+                <h3>4. Payments and Subscriptions</h3>
+                <p>Users may purchase subscriptions or digital services (such as Axilwood Pro or Premium Invitations). Subscriptions are billed automatically through our payment processor unless canceled by you prior to the renewal date.</p>
+
+                <h3>5. Prohibited Activities</h3>
+                <p>You agree not to use the Service for any unlawful purpose, to submit false information, to transmit malicious code, or to circumvent the security features of the Service.</p>
+
+                <h3>6. Termination</h3>
+                <p>We may terminate or suspend Your account immediately, without prior notice or liability, for any reason whatsoever, including without limitation if You breach the Terms.</p>
+
+                <h3>7. Limitation of Liability</h3>
+                <p>In no event shall Arjun Sudharsan or Axilwood be liable for any indirect, incidental, special, consequential, or punitive damages resulting from your use of the Service.</p>
+
+                <h3>8. Governing Law</h3>
+                <p>These Terms shall be governed and construed in accordance with the laws of India. Any disputes shall be subject to the exclusive jurisdiction of the courts located in Ernakulam, Kerala, India.</p>
+
+                <h3>9. Contact Us</h3>
+                <p>If you have any questions about these Terms, please contact us at support@axilwood.com.</p>
+            </div>
+        </div>
+
     </main>
 
-    <div id="footer-placeholder"></div>
-    <script type="module" src="/scripts.js"></script>
+    <footer class="border-t border-white/5 bg-black/50 backdrop-blur-md relative z-10 mt-auto">
+        <div class="container mx-auto px-6 py-10">
+            <div class="md:flex md:justify-between md:items-center">
+                <div class="mb-6 md:mb-0">
+                    <a href="/" class="text-2xl font-extrabold tracking-tight text-white flex items-center gap-2 opacity-80 hover:opacity-100 transition-opacity">
+                        <img src="/web-app-manifest-192x192.png" alt="Axilwood Logo" class="w-6 h-6 drop-shadow-md">
+                        Axilwood
+                    </a>
+                    <p class="mt-2 text-sm text-gray-500 font-light max-w-xs">Elevating industries through intelligent digital architecture.</p>
+                </div>
+                <div class="flex flex-wrap gap-6 text-sm font-medium">
+                    <a href="/about.html" class="text-gray-500 hover:text-white transition-colors">About Us</a>
+                    <a href="/privacy.html" class="text-white transition-colors">Privacy & Terms</a>
+                    <a href="/support.html" class="text-gray-500 hover:text-white transition-colors">Support</a>
+                </div>
+            </div>
+            <hr class="border-white/5 my-8">
+            <div class="text-center text-sm text-gray-600 font-light">
+                © 2026 Axilwood | A venture by Arjun Sudharsan
+            </div>
+        </div>
+    </footer>
+
+    <script type="module">
+        import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm';
+
+        const supabaseUrl = 'https://wqlwurobvkzjixkoivxf.supabase.co'; 
+        const supabaseKey = 'sb_publishable_I4rCqO3kdJLN-U8fgLoskA_AchQwKVr'; 
+        const supabase = createClient(supabaseUrl, supabaseKey);
+
+        const ADMIN_EMAIL = "axilwoodpvtltd@gmail.com";
+
+        const authBtn = document.getElementById('auth-btn');
+        const authBtnText = document.getElementById('auth-btn-text');
+        const mobileAuthBtn = document.getElementById('mobile-auth-btn');
+        const mobileAuthText = document.getElementById('mobile-auth-text');
+        const godModeBtn = document.getElementById('god-mode-btn');
+        const mobileGodModeBtn = document.getElementById('mobile-god-mode');
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const googleIcon = document.getElementById('google-icon');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        async function setupAuth() {
+            const { data: { session } } = await supabase.auth.getSession();
+
+            if (session) {
+                if(googleIcon) googleIcon.style.display = 'none';
+
+                if(session.user.email === ADMIN_EMAIL) {
+                    godModeBtn.classList.remove('hidden');
+                    godModeBtn.classList.add('flex');
+                    mobileGodModeBtn.classList.remove('hidden');
+                    mobileGodModeBtn.classList.add('block');
+                    
+                    authBtnText.innerText = 'Log Out';
+                    mobileAuthText.innerText = 'Log Out';
+                    const logoutAction = async () => {
+                        await supabase.auth.signOut();
+                        window.location.reload();
+                    };
+                    authBtn.onclick = logoutAction;
+                    mobileAuthBtn.onclick = logoutAction;
+                } else {
+                    authBtnText.innerText = 'Dashboard';
+                    mobileAuthText.innerText = 'Go to Dashboard';
+                    const gotoDashboard = () => window.location.href = '/Invitations';
+                    authBtn.onclick = gotoDashboard;
+                    mobileAuthBtn.onclick = gotoDashboard;
+                }
+            } else {
+                const loginAction = async () => {
+                    await supabase.auth.signInWithOAuth({
+                        provider: 'google',
+                        options: { redirectTo: window.location.origin + '/' }
+                    });
+                };
+                authBtn.onclick = loginAction;
+                mobileAuthBtn.onclick = loginAction;
+            }
+        }
+
+        setupAuth();
+    </script>
 </body>
 </html>
