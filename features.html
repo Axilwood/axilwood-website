@@ -3,61 +3,298 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Features - Axilwood</title>
+    <title>Features | Axilwood</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&display=swap" rel="stylesheet">
-    <style> body { font-family: 'Inter', sans-serif; } </style>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="icon" href="/favicon.ico" sizes="any">
+    <style> 
+        body { font-family: 'Inter', sans-serif; background-color: #09090b; color: #e4e4e7; overflow-x: hidden;} 
+        .font-elegant { font-family: 'Cormorant Garamond', serif; }
+        .glass-panel { background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px); border: 1px solid rgba(255, 255, 255, 0.05); }
+        .glass-nav { background: rgba(9, 9, 11, 0.7); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border-bottom: 1px solid rgba(255, 255, 255, 0.05); }
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #09090b; }
+        ::-webkit-scrollbar-thumb { background: #27272a; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #3f3f46; }
+    </style>
 </head>
-<body class="bg-gray-50">
+<body class="antialiased selection:bg-indigo-500/30 relative flex flex-col min-h-screen">
 
-    <div id="header-placeholder"></div>
+    <div class="fixed top-[-10%] left-[-10%] w-[40%] h-[50%] bg-emerald-600/10 blur-[120px] rounded-full pointer-events-none z-0"></div>
+    <div class="fixed bottom-[-10%] right-[-10%] w-[40%] h-[50%] bg-indigo-600/10 blur-[120px] rounded-full pointer-events-none z-0"></div>
 
-    <main class="container mx-auto px-6 py-16">
-        <div class="text-center">
-            <h1 class="text-4xl md:text-5xl font-extrabold text-gray-800">Powerful Tools for the Modern Timber Trade</h1>
-            <p class="mt-4 text-lg text-gray-600 max-w-3xl mx-auto">Axilwood is packed with features designed to make buying and selling timber simpler, faster, and more profitable for everyone.</p>
-        </div>
-
-        <div class="mt-20">
-            <h2 class="text-3xl font-bold text-center text-gray-800">Core Features</h2>
-            <div class="mt-10 grid md:grid-cols-2 gap-8">
-                <div class="bg-white p-8 rounded-lg shadow-lg">
-                    <h3 class="text-xl font-bold">Intuitive Ad Posting</h3>
-                    <p class="text-gray-600 mt-2">A simple, guided process to list your timber for sale in minutes. Add photos, dimensions, location, and logistics details with ease.</p>
-                </div>
-                <div class="bg-white p-8 rounded-lg shadow-lg">
-                    <h3 class="text-xl font-bold">Location-Based Discovery</h3>
-                    <p class="text-gray-600 mt-2">Our home screen automatically shows you relevant ads sorted by their distance from you, so you can find local opportunities first.</p>
-                </div>
+    <header class="glass-nav sticky top-0 z-50 w-full transition-all duration-300">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center relative z-10">
+            <a href="/" class="text-2xl font-extrabold tracking-tight text-white flex items-center gap-3 group">
+                <img src="/web-app-manifest-192x192.png" alt="Axilwood Logo" class="w-8 h-8 drop-shadow-[0_0_8px_rgba(255,255,255,0.2)] transition-transform group-hover:scale-105">
+                Axilwood
+            </a>
+            
+            <div class="hidden md:flex space-x-8 items-center">
+                <a href="/how-it-works.html" class="text-sm font-medium text-gray-400 hover:text-white transition-colors">How It Works</a>
+                <a href="/features.html" class="text-sm font-medium text-white transition-colors">Features</a>
+                <a href="/about.html" class="text-sm font-medium text-gray-400 hover:text-white transition-colors">About</a>
+                <a href="/support.html" class="text-sm font-medium text-gray-400 hover:text-white transition-colors">Support</a>
             </div>
-        </div>
 
-        <div class="mt-20 bg-green-700 text-white rounded-lg p-12">
-            <h2 class="text-3xl font-bold text-center">Unlock Axilwood Pro</h2>
-            <p class="mt-4 text-lg text-green-200 text-center max-w-3xl mx-auto">For serious traders, Axilwood Pro provides the ultimate toolkit to maximize your reach and efficiency.</p>
-            <div class="mt-10 grid md:grid-cols-3 gap-8">
-                <div class="text-center">
-                    <h3 class="text-xl font-bold">Direct In-App Chat</h3>
-                    <p class="text-green-200 mt-2">Connect instantly and securely with sellers or buyers to negotiate terms and finalize deals without leaving the app.</p>
-                </div>
-                <div class="text-center">
-                    <h3 class="text-xl font-bold">Advanced Search & Filters</h3>
-                    <p class="text-green-200 mt-2">Zero in on the perfect listing. Filter by tree type, girth, height, count, and truck accessibility to find exactly what you need.</p>
-                </div>
-                <div class="text-center">
-                    <h3 class="text-xl font-bold">Boost Your Ads</h3>
-                    <p class="text-green-200 mt-2">Get your listings noticed. Pro members receive monthly ad boosts to promote their ads to the top of search results in their area.</p>
-                </div>
-            </div>
-             <div class="mt-10 text-center">
-                <a href="https://play.google.com/store/apps/details?id=com.axilwood.axilwood_app" class="bg-white text-green-700 font-bold py-3 px-6 rounded-lg hover:bg-gray-200 transition">
-                    Upgrade to Pro in the App
+            <div class="hidden md:flex space-x-4 items-center">
+                <a href="/admin-cmd-99x.html" id="god-mode-btn" class="hidden items-center text-xs font-bold uppercase tracking-widest text-indigo-400 bg-indigo-500/10 border border-indigo-500/30 px-4 py-2 rounded-lg hover:bg-indigo-500/20 transition-all">
+                    <span class="w-2 h-2 rounded-full bg-indigo-500 mr-2 animate-pulse"></span> Command Center
                 </a>
+                <button id="auth-btn" class="flex items-center text-sm font-semibold text-gray-300 hover:text-white transition-colors bg-white/5 hover:bg-white/10 border border-white/10 px-5 py-2 rounded-xl backdrop-blur-md">
+                    <svg class="w-4 h-4 mr-2" viewBox="0 0 48 48" id="google-icon"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.7 17.74 9.5 24 9.5z"></path><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"></path><path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"></path><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"></path></svg> 
+                    <span id="auth-btn-text">Sign In</span>
+                </button>
+            </div>
+
+            <button id="mobile-menu-btn" class="md:hidden text-gray-300 hover:text-white focus:outline-none p-2">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+            </button>
+        </nav>
+
+        <div id="mobile-menu" class="hidden md:hidden bg-zinc-950/95 backdrop-blur-3xl border-t border-white/10 absolute top-full left-0 w-full shadow-[0_20px_50px_rgba(0,0,0,0.5)]">
+            <div class="flex flex-col px-6 py-8 space-y-5">
+                <a href="/how-it-works.html" class="text-lg font-medium text-gray-300 hover:text-white">How It Works</a>
+                <a href="/features.html" class="text-lg font-medium text-white">Features</a>
+                <a href="/about.html" class="text-lg font-medium text-gray-300 hover:text-white">About</a>
+                <a href="/support.html" class="text-lg font-medium text-gray-300 hover:text-white">Support</a>
+                <hr class="border-white/10 my-4">
+                <a href="/admin-cmd-99x.html" id="mobile-god-mode" class="hidden text-sm font-bold uppercase tracking-widest text-indigo-400 py-2">Command Center</a>
+                <button id="mobile-auth-btn" class="text-left text-base font-semibold text-white bg-white/10 border border-white/10 py-4 px-4 rounded-xl flex items-center justify-center mt-2 shadow-lg">
+                    <span id="mobile-auth-text">Sign In with Google</span>
+                </button>
             </div>
         </div>
+    </header>
+
+    <main class="relative z-10 flex-1 w-full max-w-6xl mx-auto px-6 py-16">
+        
+        <div class="text-center mb-12">
+            <h1 class="text-4xl md:text-6xl font-extrabold text-white tracking-tight leading-tight mb-4">
+                The Feature Ecosystem
+            </h1>
+            <p class="text-lg text-gray-400 max-w-2xl mx-auto font-light">
+                Explore the powerful tools engineered to simplify complex industries and elevate life's biggest moments.
+            </p>
+        </div>
+
+        <div class="flex justify-center mb-16">
+            <div class="glass-panel p-1.5 rounded-2xl inline-flex space-x-2">
+                <button onclick="window.switchFeatureTab('timber')" id="btn-tab-timber" class="px-6 py-3 rounded-xl text-sm font-bold tracking-wide transition-all bg-emerald-500/20 text-emerald-400 border border-emerald-500/50 shadow-[0_0_15px_rgba(16,185,129,0.2)]">
+                    Timber App
+                </button>
+                <button onclick="window.switchFeatureTab('wedding')" id="btn-tab-wedding" class="px-6 py-3 rounded-xl text-sm font-bold tracking-wide transition-all bg-white/5 text-gray-400 border border-white/10 hover:text-white">
+                    Wedding SaaS
+                </button>
+            </div>
+        </div>
+
+        <div id="timber-features" class="block animate-[fadeIn_0.5s_ease-out]">
+            <div class="grid md:grid-cols-2 gap-8 mb-12">
+                <div class="glass-panel p-8 rounded-[2rem] border border-white/5 hover:border-emerald-500/30 transition-colors">
+                    <div class="w-12 h-12 rounded-xl bg-emerald-500/10 flex items-center justify-center mb-6 border border-emerald-500/20">
+                        <svg class="w-6 h-6 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path></svg>
+                    </div>
+                    <h3 class="text-2xl font-bold text-white mb-3">Intuitive Ad Posting</h3>
+                    <p class="text-gray-400 font-light leading-relaxed">List your timber for sale in minutes. Our guided UI makes it effortless to add high-res photos, exact dimensions, logistics details, and pricing expectations directly from your phone.</p>
+                </div>
+                <div class="glass-panel p-8 rounded-[2rem] border border-white/5 hover:border-emerald-500/30 transition-colors">
+                    <div class="w-12 h-12 rounded-xl bg-emerald-500/10 flex items-center justify-center mb-6 border border-emerald-500/20">
+                        <svg class="w-6 h-6 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                    </div>
+                    <h3 class="text-2xl font-bold text-white mb-3">Location-Based Discovery</h3>
+                    <p class="text-gray-400 font-light leading-relaxed">Our advanced home screen algorithm automatically sorts relevant timber ads by distance. Buyers can instantly discover local opportunities, minimizing logistics and transportation costs.</p>
+                </div>
+            </div>
+
+            <div class="relative glass-panel rounded-[2rem] p-8 md:p-12 overflow-hidden border border-emerald-500/30 shadow-[0_0_40px_rgba(16,185,129,0.1)]">
+                <div class="absolute top-0 right-0 w-full h-1 bg-gradient-to-r from-emerald-600 to-transparent"></div>
+                <div class="absolute -bottom-24 -right-24 w-64 h-64 bg-emerald-600/20 rounded-full blur-[80px]"></div>
+
+                <div class="text-center mb-10 relative z-10">
+                    <span class="bg-emerald-500/20 text-emerald-400 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider border border-emerald-500/30 mb-4 inline-block">Premium Tier</span>
+                    <h2 class="text-3xl font-bold text-white">Unlock Axilwood Pro</h2>
+                    <p class="mt-4 text-gray-400 max-w-2xl mx-auto font-light">The ultimate toolkit for serious traders and mill owners looking to scale their supply chain and maximize market reach.</p>
+                </div>
+
+                <div class="grid md:grid-cols-3 gap-8 relative z-10">
+                    <div>
+                        <h3 class="text-lg font-bold text-white mb-2">Direct In-App Chat</h3>
+                        <p class="text-gray-400 text-sm font-light">Bypass the middlemen completely. Connect securely with verified sellers to negotiate terms and finalize deals directly inside the app.</p>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-bold text-white mb-2">Advanced Filtering</h3>
+                        <p class="text-gray-400 text-sm font-light">Zero in on the perfect listing. Filter out the noise by specifying exact tree types, minimum girth, height, count, and truck accessibility.</p>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-bold text-white mb-2">Algorithm Boosting</h3>
+                        <p class="text-gray-400 text-sm font-light">Get your listings noticed first. Pro members receive monthly ad boosts, pushing their timber to the top of search results in their geographical area.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="wedding-features" class="hidden animate-[fadeIn_0.5s_ease-out]">
+            <div class="grid md:grid-cols-2 gap-8 mb-12">
+                <div class="glass-panel p-8 rounded-[2rem] border border-white/5 hover:border-indigo-500/30 transition-colors">
+                    <div class="w-12 h-12 rounded-xl bg-indigo-500/10 flex items-center justify-center mb-6 border border-indigo-500/20">
+                        <svg class="w-6 h-6 text-indigo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+                    </div>
+                    <h3 class="text-2xl font-elegant font-bold text-white mb-3">Breathtaking Aesthetics</h3>
+                    <p class="text-gray-400 font-light leading-relaxed">Choose from premium, modern templates. Your invitation is generated as a stunning, mobile-first web experience featuring high-end typography, subtle animations, and your personalized love story.</p>
+                </div>
+                <div class="glass-panel p-8 rounded-[2rem] border border-white/5 hover:border-indigo-500/30 transition-colors">
+                    <div class="w-12 h-12 rounded-xl bg-indigo-500/10 flex items-center justify-center mb-6 border border-indigo-500/20">
+                        <svg class="w-6 h-6 text-indigo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                    </div>
+                    <h3 class="text-2xl font-elegant font-bold text-white mb-3">Live RSVP Engine</h3>
+                    <p class="text-gray-400 font-light leading-relaxed">Throw away the spreadsheets. Guests can RSVP directly through your invitation link. Your dashboard updates instantly, tracking headcounts, plus-ones, and contact details in real-time.</p>
+                </div>
+            </div>
+
+            <div class="relative glass-panel rounded-[2rem] p-8 md:p-12 overflow-hidden border border-amber-500/30 shadow-[0_0_40px_rgba(245,158,11,0.1)]">
+                <div class="absolute top-0 right-0 w-full h-1 bg-gradient-to-r from-amber-500 to-indigo-500"></div>
+                <div class="absolute -bottom-24 -right-24 w-64 h-64 bg-amber-600/20 rounded-full blur-[80px]"></div>
+
+                <div class="text-center mb-10 relative z-10">
+                    <h2 class="text-3xl font-elegant font-bold text-white">Intelligent Event Logistics</h2>
+                    <p class="mt-4 text-gray-400 max-w-2xl mx-auto font-light">We handle the technical heavy lifting so you can focus on the celebration.</p>
+                </div>
+
+                <div class="grid md:grid-cols-3 gap-8 relative z-10">
+                    <div>
+                        <h3 class="text-lg font-bold text-white mb-2">Integrated Navigation</h3>
+                        <p class="text-gray-400 text-sm font-light">Your invitation features one-click Google Maps integration. Guests can pull up exact venue coordinates and driving directions instantly.</p>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-bold text-white mb-2">Multi-Event Timelines</h3>
+                        <p class="text-gray-400 text-sm font-light">Hosting a reception and a ceremony? Clearly display distinct times, locations, and details for every phase of your celebration.</p>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-bold text-white mb-2">Zero-Friction Sharing</h3>
+                        <p class="text-gray-400 text-sm font-light">No apps to download. Generate your secure URL and share it instantly via WhatsApp, iMessage, or email with anyone in the world.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </main>
 
-    <div id="footer-placeholder"></div>
-    <script type="module" src="/scripts.js"></script>
+    <footer class="border-t border-white/5 bg-black/50 backdrop-blur-md relative z-10 mt-auto">
+        <div class="container mx-auto px-6 py-10">
+            <div class="md:flex md:justify-between md:items-center">
+                <div class="mb-6 md:mb-0">
+                    <a href="/" class="text-2xl font-extrabold tracking-tight text-white flex items-center gap-2 opacity-80 hover:opacity-100 transition-opacity">
+                        <img src="/web-app-manifest-192x192.png" alt="Axilwood Logo" class="w-6 h-6 drop-shadow-md">
+                        Axilwood
+                    </a>
+                    <p class="mt-2 text-sm text-gray-500 font-light max-w-xs">Elevating industries through intelligent digital architecture.</p>
+                </div>
+                <div class="flex flex-wrap gap-6 text-sm font-medium">
+                    <a href="/about.html" class="text-gray-500 hover:text-white transition-colors">About Us</a>
+                    <a href="/privacy.html" class="text-gray-500 hover:text-white transition-colors">Privacy & Terms</a>
+                    <a href="/support.html" class="text-gray-500 hover:text-white transition-colors">Support</a>
+                </div>
+            </div>
+            <hr class="border-white/5 my-8">
+            <div class="text-center text-sm text-gray-600 font-light">
+                © 2026 Axilwood | A venture by Arjun Sudharsan
+            </div>
+        </div>
+    </footer>
+
+    <script type="module">
+        import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm';
+
+        const supabaseUrl = 'https://wqlwurobvkzjixkoivxf.supabase.co'; 
+        const supabaseKey = 'sb_publishable_I4rCqO3kdJLN-U8fgLoskA_AchQwKVr'; 
+        const supabase = createClient(supabaseUrl, supabaseKey);
+
+        const ADMIN_EMAIL = "axilwoodpvtltd@gmail.com";
+
+        // Tab Switching Logic
+        window.switchFeatureTab = (tabName) => {
+            const timberTab = document.getElementById('timber-features');
+            const weddingTab = document.getElementById('wedding-features');
+            const btnTimber = document.getElementById('btn-tab-timber');
+            const btnWedding = document.getElementById('btn-tab-wedding');
+
+            if(tabName === 'timber') {
+                timberTab.classList.remove('hidden');
+                weddingTab.classList.add('hidden');
+                
+                btnTimber.className = "px-6 py-3 rounded-xl text-sm font-bold tracking-wide transition-all bg-emerald-500/20 text-emerald-400 border border-emerald-500/50 shadow-[0_0_15px_rgba(16,185,129,0.2)]";
+                btnWedding.className = "px-6 py-3 rounded-xl text-sm font-bold tracking-wide transition-all bg-white/5 text-gray-400 border border-white/10 hover:text-white";
+            } else {
+                weddingTab.classList.remove('hidden');
+                timberTab.classList.add('hidden');
+                
+                btnWedding.className = "px-6 py-3 rounded-xl text-sm font-bold tracking-wide transition-all bg-indigo-500/20 text-indigo-400 border border-indigo-500/50 shadow-[0_0_15px_rgba(99,102,241,0.2)]";
+                btnTimber.className = "px-6 py-3 rounded-xl text-sm font-bold tracking-wide transition-all bg-white/5 text-gray-400 border border-white/10 hover:text-white";
+            }
+        };
+
+        // DOM Elements for Auth
+        const authBtn = document.getElementById('auth-btn');
+        const authBtnText = document.getElementById('auth-btn-text');
+        const mobileAuthBtn = document.getElementById('mobile-auth-btn');
+        const mobileAuthText = document.getElementById('mobile-auth-text');
+        const godModeBtn = document.getElementById('god-mode-btn');
+        const mobileGodModeBtn = document.getElementById('mobile-god-mode');
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const googleIcon = document.getElementById('google-icon');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        async function setupAuth() {
+            const { data: { session } } = await supabase.auth.getSession();
+
+            if (session) {
+                if(googleIcon) googleIcon.style.display = 'none';
+
+                if(session.user.email === ADMIN_EMAIL) {
+                    godModeBtn.classList.remove('hidden');
+                    godModeBtn.classList.add('flex');
+                    mobileGodModeBtn.classList.remove('hidden');
+                    mobileGodModeBtn.classList.add('block');
+                    
+                    authBtnText.innerText = 'Log Out';
+                    mobileAuthText.innerText = 'Log Out';
+                    const logoutAction = async () => {
+                        await supabase.auth.signOut();
+                        window.location.reload();
+                    };
+                    authBtn.onclick = logoutAction;
+                    mobileAuthBtn.onclick = logoutAction;
+                } else {
+                    authBtnText.innerText = 'Dashboard';
+                    mobileAuthText.innerText = 'Go to Dashboard';
+                    const gotoDashboard = () => window.location.href = '/Invitations';
+                    authBtn.onclick = gotoDashboard;
+                    mobileAuthBtn.onclick = gotoDashboard;
+                }
+            } else {
+                const loginAction = async () => {
+                    await supabase.auth.signInWithOAuth({
+                        provider: 'google',
+                        options: { redirectTo: window.location.origin + '/' }
+                    });
+                };
+                authBtn.onclick = loginAction;
+                mobileAuthBtn.onclick = loginAction;
+            }
+        }
+
+        setupAuth();
+    </script>
+    <style>
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
 </body>
 </html>
