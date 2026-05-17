@@ -269,7 +269,7 @@
                 return new Date(dateString).toLocaleString('en-US', options);
             };
 
-            document.getElementById('main-date').innerText = formatDate(data.main_wedding_date);
+            document.getElementById('main-date').innerText = formatDate(mainEvent.date);
             document.getElementById('main-venue').innerText = mainEvent.venue;
 
             if (mainEvent.mapsLink) {
