@@ -1,13 +1,12 @@
 {
-  "versionCode": 7,
-  "versionName": "1.2.2",
+  "versionCode": 8,
+  "versionName": "1.2.3",
   "url": "https://github.com/Axilwood/axilwood-website/releases/download/music-latest/AxilwoodMusic.apk",
   "changelog": [
-    "Support: opens Razorpay Payment Page (₹29 / ₹49 / ₹99 / Other) — no UPI or phone in the app",
-    "Google sign-in: Credential Manager → Supabase ID token when available; Custom Tab OAuth fallback",
-    "Paste a YouTube/Spotify playlist → creates an in-app playlist with the same name",
-    "Downloaded songs auto-appear in that playlist (Playlists tab)",
-    "Sound presets: Axilwood, Bass+, Clarity, Warm, Flat"
+    "Fix: imported playlists show songs as they finish downloading (MediaStore URI match)",
+    "Playlist rows resolve by media id when external vs external_primary URIs differ",
+    "Downloads re-read playlist target before marking done (no race wipe)",
+    "Support / Google sign-in from 1.2.2 unchanged"
   ],
   "mandatory": false
 }
