@@ -1,11 +1,12 @@
 {
-  "versionCode": 6,
-  "versionName": "1.2.1",
+  "versionCode": 7,
+  "versionName": "1.2.2",
   "url": "https://github.com/Axilwood/axilwood-website/releases/download/music-latest/AxilwoodMusic.apk",
   "changelog": [
+    "Support: opens Razorpay Payment Page (₹29 / ₹49 / ₹99 / Other) — no UPI or phone in the app",
+    "Google sign-in: Credential Manager → Supabase ID token when available; Custom Tab OAuth fallback",
     "Paste a YouTube/Spotify playlist → creates an in-app playlist with the same name",
     "Downloaded songs auto-appear in that playlist (Playlists tab)",
-    "Spotify albums become named playlists; single tracks stay singles",
     "Sound presets: Axilwood, Bass+, Clarity, Warm, Flat"
   ],
   "mandatory": false
