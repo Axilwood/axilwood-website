@@ -79,12 +79,15 @@
         </div>
 
         <div class="flex justify-center mb-16">
-            <div class="glass-panel p-1.5 rounded-2xl inline-flex space-x-2">
+            <div class="glass-panel p-1.5 rounded-2xl inline-flex flex-wrap justify-center gap-2">
                 <button onclick="window.switchFeatureTab('timber')" id="btn-tab-timber" class="px-6 py-3 rounded-xl text-sm font-bold tracking-wide transition-all bg-emerald-500/20 text-emerald-400 border border-emerald-500/50 shadow-[0_0_15px_rgba(16,185,129,0.2)]">
                     Timber App
                 </button>
                 <button onclick="window.switchFeatureTab('wedding')" id="btn-tab-wedding" class="px-6 py-3 rounded-xl text-sm font-bold tracking-wide transition-all bg-white/5 text-gray-400 border border-white/10 hover:text-white">
                     Wedding SaaS
+                </button>
+                <button onclick="window.switchFeatureTab('music')" id="btn-tab-music" class="px-6 py-3 rounded-xl text-sm font-bold tracking-wide transition-all bg-white/5 text-gray-400 border border-white/10 hover:text-white">
+                    Music App
                 </button>
             </div>
         </div>
@@ -178,6 +181,57 @@
             </div>
         </div>
 
+        <div id="music-features" class="hidden animate-[fadeIn_0.5s_ease-out]">
+            <div class="grid md:grid-cols-2 gap-8 mb-12">
+                <div class="glass-panel p-8 rounded-[2rem] border border-white/5 hover:border-fuchsia-500/30 transition-colors">
+                    <div class="w-12 h-12 rounded-xl bg-fuchsia-500/10 flex items-center justify-center mb-6 border border-fuchsia-500/20">
+                        <svg class="w-6 h-6 text-fuchsia-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path></svg>
+                    </div>
+                    <h3 class="text-2xl font-bold text-white mb-3">Playlist Import</h3>
+                    <p class="text-gray-400 font-light leading-relaxed">Paste a YouTube or Spotify playlist and Axilwood Music creates a matching in-app playlist, then downloads every track into it automatically.</p>
+                </div>
+                <div class="glass-panel p-8 rounded-[2rem] border border-white/5 hover:border-fuchsia-500/30 transition-colors">
+                    <div class="w-12 h-12 rounded-xl bg-fuchsia-500/10 flex items-center justify-center mb-6 border border-fuchsia-500/20">
+                        <svg class="w-6 h-6 text-fuchsia-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3"></path></svg>
+                    </div>
+                    <h3 class="text-2xl font-bold text-white mb-3">Sound Presets</h3>
+                    <p class="text-gray-400 font-light leading-relaxed">Tuned presets — Axilwood, Bass+, Clarity, Warm, and Flat — shape offline playback with punchy low end and clear mids without leaving the liquid-glass UI.</p>
+                </div>
+            </div>
+
+            <div class="relative glass-panel rounded-[2rem] p-8 md:p-12 overflow-hidden border border-fuchsia-500/30 shadow-[0_0_40px_rgba(217,70,239,0.1)]">
+                <div class="absolute top-0 right-0 w-full h-1 bg-gradient-to-r from-fuchsia-500 to-violet-500"></div>
+                <div class="absolute -bottom-24 -right-24 w-64 h-64 bg-fuchsia-600/20 rounded-full blur-[80px]"></div>
+
+                <div class="text-center mb-10 relative z-10">
+                    <h2 class="text-3xl font-bold text-white">Built for Offline Listening</h2>
+                    <p class="mt-4 text-gray-400 max-w-2xl mx-auto font-light">Your library stays on the device. Sign in with Google when you want cloud restore across phones.</p>
+                </div>
+
+                <div class="grid md:grid-cols-3 gap-8 relative z-10">
+                    <div>
+                        <h3 class="text-lg font-bold text-white mb-2">Offline Library</h3>
+                        <p class="text-gray-400 text-sm font-light">Every download lives as an MP3 on your phone — browse songs, albums of playlists, and keep listening without data.</p>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-bold text-white mb-2">Google Restore</h3>
+                        <p class="text-gray-400 text-sm font-light">Optional Google sign-in syncs your saved links to the cloud so a new device can re-queue your collection in one tap.</p>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-bold text-white mb-2">One-Tap Sideload</h3>
+                        <p class="text-gray-400 text-sm font-light">Free Android APK — install once, then in-app updates pull the latest build from axilwood.com automatically.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-12">
+                <a href="https://github.com/Axilwood/axilwood-website/releases/download/music-latest/AxilwoodMusic.apk" download="AxilwoodMusic.apk" class="inline-flex items-center justify-center h-14 px-8 bg-gradient-to-r from-fuchsia-600 to-violet-600 hover:from-fuchsia-500 hover:to-violet-500 text-white font-bold rounded-xl shadow-[0_0_20px_rgba(192,38,211,0.3)] transition-all hover:-translate-y-1">
+                    Download App
+                </a>
+                <p class="mt-3 text-xs text-gray-500 font-light">Android APK · free sideload</p>
+            </div>
+        </div>
+
     </main>
 
     <footer class="border-t border-white/5 bg-black/50 backdrop-blur-md relative z-10 mt-auto">
@@ -214,24 +268,26 @@
 
         // Tab Switching Logic
         window.switchFeatureTab = (tabName) => {
-            const timberTab = document.getElementById('timber-features');
-            const weddingTab = document.getElementById('wedding-features');
-            const btnTimber = document.getElementById('btn-tab-timber');
-            const btnWedding = document.getElementById('btn-tab-wedding');
-
-            if(tabName === 'timber') {
-                timberTab.classList.remove('hidden');
-                weddingTab.classList.add('hidden');
-                
-                btnTimber.className = "px-6 py-3 rounded-xl text-sm font-bold tracking-wide transition-all bg-emerald-500/20 text-emerald-400 border border-emerald-500/50 shadow-[0_0_15px_rgba(16,185,129,0.2)]";
-                btnWedding.className = "px-6 py-3 rounded-xl text-sm font-bold tracking-wide transition-all bg-white/5 text-gray-400 border border-white/10 hover:text-white";
-            } else {
-                weddingTab.classList.remove('hidden');
-                timberTab.classList.add('hidden');
-                
-                btnWedding.className = "px-6 py-3 rounded-xl text-sm font-bold tracking-wide transition-all bg-indigo-500/20 text-indigo-400 border border-indigo-500/50 shadow-[0_0_15px_rgba(99,102,241,0.2)]";
-                btnTimber.className = "px-6 py-3 rounded-xl text-sm font-bold tracking-wide transition-all bg-white/5 text-gray-400 border border-white/10 hover:text-white";
-            }
+            const tabs = {
+                timber: document.getElementById('timber-features'),
+                wedding: document.getElementById('wedding-features'),
+                music: document.getElementById('music-features')
+            };
+            const btns = {
+                timber: document.getElementById('btn-tab-timber'),
+                wedding: document.getElementById('btn-tab-wedding'),
+                music: document.getElementById('btn-tab-music')
+            };
+            const active = {
+                timber: "px-6 py-3 rounded-xl text-sm font-bold tracking-wide transition-all bg-emerald-500/20 text-emerald-400 border border-emerald-500/50 shadow-[0_0_15px_rgba(16,185,129,0.2)]",
+                wedding: "px-6 py-3 rounded-xl text-sm font-bold tracking-wide transition-all bg-indigo-500/20 text-indigo-400 border border-indigo-500/50 shadow-[0_0_15px_rgba(99,102,241,0.2)]",
+                music: "px-6 py-3 rounded-xl text-sm font-bold tracking-wide transition-all bg-fuchsia-500/20 text-fuchsia-400 border border-fuchsia-500/50 shadow-[0_0_15px_rgba(217,70,239,0.2)]"
+            };
+            const idle = "px-6 py-3 rounded-xl text-sm font-bold tracking-wide transition-all bg-white/5 text-gray-400 border border-white/10 hover:text-white";
+            Object.keys(tabs).forEach(k => {
+                tabs[k].classList.toggle('hidden', k !== tabName);
+                btns[k].className = k === tabName ? active[k] : idle;
+            });
         };
 
         // DOM Elements for Auth

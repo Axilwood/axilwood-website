@@ -82,6 +82,10 @@
                 <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path></svg>
                 Wedding SaaS
             </button>
+            <button onclick="switchTab('music')" id="nav-music" class="w-full flex items-center px-4 py-3 rounded-xl text-sm font-medium transition-all hover:bg-white/5 text-gray-400 hover:text-gray-200">
+                <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3"></path></svg>
+                Music App
+            </button>
             <button onclick="switchTab('broadcast')" id="nav-broadcast" class="w-full flex items-center px-4 py-3 rounded-xl text-sm font-medium transition-all hover:bg-white/5 text-gray-400 hover:text-gray-200">
                 <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5.882V19.24a1.76 1.76 0 01-3.417.592l-2.147-6.15M18 13a3 3 0 100-6M5.436 13.683A4.001 4.001 0 017 6h1.832c4.1 0 7.625-1.234 9.168-3v14c-1.543-1.766-5.067-3-9.168-3H7a3.988 3.988 0 01-1.564-.317z"></path></svg>
                 Global Broadcast
@@ -105,7 +109,7 @@
             <div id="tab-overview" class="tab-content block">
                 <h2 class="text-3xl font-bold text-white mb-8">Ecosystem Overview</h2>
                 
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+                <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6 mb-12">
                     <div class="glass-panel p-6 rounded-2xl stat-card">
                         <p class="text-sm font-semibold text-gray-400 uppercase tracking-widest mb-1">Total Verified Users</p>
                         <p class="text-4xl font-black text-white" id="stat-users">--</p>
@@ -122,6 +126,11 @@
                         <p class="text-sm font-semibold text-amber-400/80 uppercase tracking-widest mb-1">Weddings Managed</p>
                         <p class="text-4xl font-black text-white" id="stat-weddings">--</p>
                         <p class="text-xs text-gray-500 mt-2">Total SaaS invitations created</p>
+                    </div>
+                    <div class="glass-panel p-6 rounded-2xl stat-card border-fuchsia-500/20">
+                        <p class="text-sm font-semibold text-fuchsia-400/80 uppercase tracking-widest mb-1">Music Version</p>
+                        <p class="text-4xl font-black text-white" id="stat-music-version">--</p>
+                        <p class="text-xs text-gray-500 mt-2" id="stat-music-links">Cloud links · loading</p>
                     </div>
                 </div>
 
@@ -167,6 +176,34 @@
                 
                 <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6" id="weddings-grid">
                     <p class="text-gray-500">Loading invitations...</p>
+                </div>
+            </div>
+
+            <div id="tab-music" class="tab-content hidden">
+                <div class="flex justify-between items-end mb-8">
+                    <div>
+                        <h2 class="text-3xl font-bold text-white mb-2">Music App</h2>
+                        <p class="text-gray-400">Sideload release status and cloud link counts for Axilwood Music.</p>
+                    </div>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                    <div class="glass-panel p-6 rounded-2xl border border-fuchsia-500/20">
+                        <p class="text-xs font-bold text-fuchsia-400 uppercase tracking-widest mb-2">Published Build</p>
+                        <p class="text-3xl font-black text-white" id="music-detail-version">--</p>
+                        <p class="text-sm text-gray-400 mt-2" id="music-detail-code">versionCode —</p>
+                        <a id="music-download-link" href="https://github.com/Axilwood/axilwood-website/releases/download/music-latest/AxilwoodMusic.apk" class="inline-flex mt-4 text-sm font-semibold text-fuchsia-400 hover:text-fuchsia-300">Download current APK →</a>
+                    </div>
+                    <div class="glass-panel p-6 rounded-2xl border border-white/10">
+                        <p class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-2">Music Cloud Links</p>
+                        <p class="text-3xl font-black text-white" id="music-detail-links">—</p>
+                        <p class="text-xs text-gray-500 mt-2" id="music-links-note">Counts use the publishable key; RLS may hide rows without a service role.</p>
+                    </div>
+                </div>
+                <div class="glass-panel p-6 rounded-2xl border border-white/5">
+                    <p class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-3">Changelog</p>
+                    <ul id="music-changelog" class="space-y-2 text-sm text-gray-300 list-disc list-inside font-light">
+                        <li>Loading…</li>
+                    </ul>
                 </div>
             </div>
 
@@ -216,16 +253,22 @@
         const APP_URL = 'https://fjxxupbblzhqwgiqutug.supabase.co';
         const APP_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZqeHh1cGJibHpocXdnaXF1dHVnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTEyMTc5NDgsImV4cCI6MjA2Njc5Mzk0OH0.1DwvnPDVoqnTm168EhkNDB8FfZqD_IwxuVb0gh9MsVs';
 
-        // 3. FIREBASE BROADCAST
+        // 3. MUSIC APP SUPABASE
+        const MUSIC_URL = 'https://admbcfzxuyyztdlotclh.supabase.co';
+        const MUSIC_KEY = 'sb_publishable_iFu9yM-jusX3vErAOpGQ0A_XEjR6Ob0';
+
+        // 4. FIREBASE BROADCAST
         const FIREBASE_FUNCTION_URL = "https://asia-south1-axilwoodapp-v2.cloudfunctions.net/godModeBroadcast"; 
         const GOD_MODE_SECRET = "axilwood_admin_secure_2026"; 
 
-        // Initialize Both Clients
+        // Initialize Clients
         const supabaseWedding = createClient(WEDDING_URL, WEDDING_KEY);
         const supabaseApp = createClient(APP_URL, APP_KEY);
+        const supabaseMusic = createClient(MUSIC_URL, MUSIC_KEY);
 
         window.supabaseApp = supabaseApp;
         window.supabaseWedding = supabaseWedding;
+        window.supabaseMusic = supabaseMusic;
 
         // --- CORE SECURITY GATE ---
         async function authenticateAdmin() {
@@ -283,6 +326,43 @@
                 document.getElementById('stat-users').innerText = userCount || 0;
                 document.getElementById('stat-ads').innerText = activeAds || 0;
                 document.getElementById('stat-weddings').innerText = totalWeddings || 0;
+
+                // Music: version.json + optional links count
+                try {
+                    const vRes = await fetch('/app/version.json', { cache: 'no-store' });
+                    if (vRes.ok) {
+                        const v = await vRes.json();
+                        document.getElementById('stat-music-version').innerText = v.versionName || '—';
+                        document.getElementById('music-detail-version').innerText = v.versionName || '—';
+                        document.getElementById('music-detail-code').innerText = 'versionCode ' + (v.versionCode ?? '—');
+                        if (v.url) {
+                            const a = document.getElementById('music-download-link');
+                            a.href = v.url;
+                        }
+                        const ul = document.getElementById('music-changelog');
+                        const notes = Array.isArray(v.changelog) ? v.changelog : (v.changelog ? [v.changelog] : []);
+                        ul.innerHTML = notes.length ? notes.map(n => `<li>${n}</li>`).join('') : '<li>No changelog</li>';
+                    } else {
+                        document.getElementById('stat-music-version').innerText = '—';
+                    }
+                } catch (e) {
+                    document.getElementById('stat-music-version').innerText = '—';
+                }
+                try {
+                    const { count: musicLinks, error: musicErr } = await supabaseMusic.from('links').select('*', { count: 'exact', head: true });
+                    if (musicErr) {
+                        document.getElementById('stat-music-links').innerText = 'Cloud links · — (need service role)';
+                        document.getElementById('music-detail-links').innerText = '—';
+                        document.getElementById('music-links-note').innerText = 'Publishable key cannot count all rows under RLS. Service role would unlock full stats.';
+                    } else {
+                        const n = musicLinks ?? 0;
+                        document.getElementById('stat-music-links').innerText = 'Cloud links · ' + n;
+                        document.getElementById('music-detail-links').innerText = String(n);
+                    }
+                } catch (e) {
+                    document.getElementById('stat-music-links').innerText = 'Cloud links · —';
+                    document.getElementById('music-detail-links').innerText = '—';
+                }
 
                 // 2. Recent Transactions
                 const { data: transactions } = await supabaseApp.from('transactions').select('*').order('created_at', { ascending: false }).limit(5);

@@ -79,12 +79,15 @@
         </div>
 
         <div class="flex justify-center mb-16">
-            <div class="glass-panel p-1.5 rounded-2xl inline-flex space-x-2">
+            <div class="glass-panel p-1.5 rounded-2xl inline-flex flex-wrap justify-center gap-2">
                 <button onclick="window.switchHowTab('timber')" id="btn-tab-timber" class="px-6 py-3 rounded-xl text-sm font-bold tracking-wide transition-all bg-emerald-500/20 text-emerald-400 border border-emerald-500/50 shadow-[0_0_15px_rgba(16,185,129,0.2)]">
                     Timber App
                 </button>
                 <button onclick="window.switchHowTab('wedding')" id="btn-tab-wedding" class="px-6 py-3 rounded-xl text-sm font-bold tracking-wide transition-all bg-white/5 text-gray-400 border border-white/10 hover:text-white">
                     Wedding SaaS
+                </button>
+                <button onclick="window.switchHowTab('music')" id="btn-tab-music" class="px-6 py-3 rounded-xl text-sm font-bold tracking-wide transition-all bg-white/5 text-gray-400 border border-white/10 hover:text-white">
+                    Music App
                 </button>
             </div>
         </div>
@@ -183,6 +186,42 @@
             </div>
         </div>
 
+        <div id="music-how" class="hidden animate-[fadeIn_0.5s_ease-out]">
+            <div class="grid md:grid-cols-3 gap-6">
+                <div class="glass-panel p-8 rounded-3xl border border-white/5 relative overflow-hidden group hover:border-fuchsia-500/30 transition-colors">
+                    <div class="absolute -top-10 -right-10 text-9xl font-black text-fuchsia-500/5 pointer-events-none group-hover:text-fuchsia-500/10 transition-colors">1</div>
+                    <div class="w-14 h-14 rounded-full bg-fuchsia-500/10 flex items-center justify-center mb-6 border border-fuchsia-500/30">
+                        <svg class="w-7 h-7 text-fuchsia-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"></path></svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-2 relative z-10">Paste a Link or Playlist</h3>
+                    <p class="text-gray-400 text-sm font-light leading-relaxed relative z-10">Share a YouTube video, YouTube playlist, or Spotify playlist/album into the app. Playlists keep their name and queue every track automatically.</p>
+                </div>
+                <div class="glass-panel p-8 rounded-3xl border border-white/5 relative overflow-hidden group hover:border-fuchsia-500/30 transition-colors">
+                    <div class="absolute -top-10 -right-10 text-9xl font-black text-fuchsia-500/5 pointer-events-none group-hover:text-fuchsia-500/10 transition-colors">2</div>
+                    <div class="w-14 h-14 rounded-full bg-fuchsia-500/10 flex items-center justify-center mb-6 border border-fuchsia-500/30">
+                        <svg class="w-7 h-7 text-fuchsia-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-2 relative z-10">Download as MP3</h3>
+                    <p class="text-gray-400 text-sm font-light leading-relaxed relative z-10">Each song saves to your phone as high-quality audio. Progress shows in-app while the queue works through playlist tracks in the background.</p>
+                </div>
+                <div class="glass-panel p-8 rounded-3xl border border-white/5 relative overflow-hidden group hover:border-violet-500/30 transition-colors">
+                    <div class="absolute -top-10 -right-10 text-9xl font-black text-violet-500/5 pointer-events-none group-hover:text-violet-500/10 transition-colors">3</div>
+                    <div class="w-14 h-14 rounded-full bg-violet-500/10 flex items-center justify-center mb-6 border border-violet-500/30">
+                        <svg class="w-7 h-7 text-violet-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-2 relative z-10">Play Offline</h3>
+                    <p class="text-gray-400 text-sm font-light leading-relaxed relative z-10">Open your library or the matching playlist and listen with sound presets for bass and clarity — no stream, no ads, no signal needed.</p>
+                </div>
+            </div>
+            
+            <div class="text-center mt-12">
+                <a href="https://github.com/Axilwood/axilwood-website/releases/download/music-latest/AxilwoodMusic.apk" download="AxilwoodMusic.apk" class="inline-flex items-center justify-center h-14 px-8 bg-gradient-to-r from-fuchsia-600 to-violet-600 hover:from-fuchsia-500 hover:to-violet-500 text-white font-bold rounded-xl shadow-[0_0_20px_rgba(192,38,211,0.3)] transition-all hover:shadow-[0_0_30px_rgba(192,38,211,0.5)] hover:-translate-y-1">
+                    Download Axilwood Music
+                </a>
+                <p class="mt-3 text-xs text-gray-500 font-light">Android APK · free sideload</p>
+            </div>
+        </div>
+
     </main>
 
     <footer class="border-t border-white/5 bg-black/50 backdrop-blur-md relative z-10 mt-auto">
@@ -219,24 +258,26 @@
 
         // Tab Switching Logic
         window.switchHowTab = (tabName) => {
-            const timberTab = document.getElementById('timber-how');
-            const weddingTab = document.getElementById('wedding-how');
-            const btnTimber = document.getElementById('btn-tab-timber');
-            const btnWedding = document.getElementById('btn-tab-wedding');
-
-            if(tabName === 'timber') {
-                timberTab.classList.remove('hidden');
-                weddingTab.classList.add('hidden');
-                
-                btnTimber.className = "px-6 py-3 rounded-xl text-sm font-bold tracking-wide transition-all bg-emerald-500/20 text-emerald-400 border border-emerald-500/50 shadow-[0_0_15px_rgba(16,185,129,0.2)]";
-                btnWedding.className = "px-6 py-3 rounded-xl text-sm font-bold tracking-wide transition-all bg-white/5 text-gray-400 border border-white/10 hover:text-white";
-            } else {
-                weddingTab.classList.remove('hidden');
-                timberTab.classList.add('hidden');
-                
-                btnWedding.className = "px-6 py-3 rounded-xl text-sm font-bold tracking-wide transition-all bg-indigo-500/20 text-indigo-400 border border-indigo-500/50 shadow-[0_0_15px_rgba(99,102,241,0.2)]";
-                btnTimber.className = "px-6 py-3 rounded-xl text-sm font-bold tracking-wide transition-all bg-white/5 text-gray-400 border border-white/10 hover:text-white";
-            }
+            const tabs = {
+                timber: document.getElementById('timber-how'),
+                wedding: document.getElementById('wedding-how'),
+                music: document.getElementById('music-how')
+            };
+            const btns = {
+                timber: document.getElementById('btn-tab-timber'),
+                wedding: document.getElementById('btn-tab-wedding'),
+                music: document.getElementById('btn-tab-music')
+            };
+            const active = {
+                timber: "px-6 py-3 rounded-xl text-sm font-bold tracking-wide transition-all bg-emerald-500/20 text-emerald-400 border border-emerald-500/50 shadow-[0_0_15px_rgba(16,185,129,0.2)]",
+                wedding: "px-6 py-3 rounded-xl text-sm font-bold tracking-wide transition-all bg-indigo-500/20 text-indigo-400 border border-indigo-500/50 shadow-[0_0_15px_rgba(99,102,241,0.2)]",
+                music: "px-6 py-3 rounded-xl text-sm font-bold tracking-wide transition-all bg-fuchsia-500/20 text-fuchsia-400 border border-fuchsia-500/50 shadow-[0_0_15px_rgba(217,70,239,0.2)]"
+            };
+            const idle = "px-6 py-3 rounded-xl text-sm font-bold tracking-wide transition-all bg-white/5 text-gray-400 border border-white/10 hover:text-white";
+            Object.keys(tabs).forEach(k => {
+                tabs[k].classList.toggle('hidden', k !== tabName);
+                btns[k].className = k === tabName ? active[k] : idle;
+            });
         };
 
         const authBtn = document.getElementById('auth-btn');
