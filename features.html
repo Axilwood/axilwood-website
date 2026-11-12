@@ -35,6 +35,7 @@
                 <a href="/features.html" class="text-sm font-medium text-white transition-colors">Features</a>
                 <a href="/about.html" class="text-sm font-medium text-gray-400 hover:text-white transition-colors">About</a>
                 <a href="/support.html" class="text-sm font-medium text-gray-400 hover:text-white transition-colors">Support</a>
+                <a href="/videos" class="text-sm font-medium text-gray-400 hover:text-white transition-colors">Videos</a>
             </div>
 
             <div class="hidden md:flex space-x-4 items-center">
@@ -58,6 +59,7 @@
                 <a href="/features.html" class="text-lg font-medium text-white">Features</a>
                 <a href="/about.html" class="text-lg font-medium text-gray-300 hover:text-white">About</a>
                 <a href="/support.html" class="text-lg font-medium text-gray-300 hover:text-white">Support</a>
+                <a href="/videos" class="text-lg font-medium text-gray-300 hover:text-white">Videos</a>
                 <hr class="border-white/10 my-4">
                 <a href="/admin-cmd-99x.html" id="mobile-god-mode" class="hidden text-sm font-bold uppercase tracking-widest text-indigo-400 py-2">Command Center</a>
                 <button id="mobile-auth-btn" class="text-left text-base font-semibold text-white bg-white/10 border border-white/10 py-4 px-4 rounded-xl flex items-center justify-center mt-2 shadow-lg">
@@ -88,6 +90,9 @@
                 </button>
                 <button onclick="window.switchFeatureTab('music')" id="btn-tab-music" class="px-6 py-3 rounded-xl text-sm font-bold tracking-wide transition-all bg-white/5 text-gray-400 border border-white/10 hover:text-white">
                     Music App
+                </button>
+                <button onclick="window.switchFeatureTab('videos')" id="btn-tab-videos" class="px-6 py-3 rounded-xl text-sm font-bold tracking-wide transition-all bg-white/5 text-gray-400 border border-white/10 hover:text-white">
+                    Videos
                 </button>
             </div>
         </div>
@@ -232,6 +237,24 @@
             </div>
         </div>
 
+        <div id="videos-features" class="hidden animate-[fadeIn_0.5s_ease-out]">
+            <div class="relative glass-panel rounded-[2rem] p-8 md:p-12 overflow-hidden border border-sky-500/30 shadow-[0_0_40px_rgba(14,165,233,0.1)]">
+                <div class="absolute top-0 right-0 w-full h-1 bg-gradient-to-r from-sky-500 to-cyan-500"></div>
+                <div class="absolute -bottom-24 -right-24 w-64 h-64 bg-sky-600/20 rounded-full blur-[80px]"></div>
+
+                <div class="text-center relative z-10 max-w-2xl mx-auto">
+                    <div class="w-12 h-12 rounded-xl bg-sky-500/10 flex items-center justify-center mb-6 border border-sky-500/20 mx-auto">
+                        <svg class="w-6 h-6 text-sky-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg>
+                    </div>
+                    <h2 class="text-3xl font-bold text-white">Axilwood Videos</h2>
+                    <p class="mt-4 text-gray-400 font-light">Axilwood Videos: a lightweight Android video player that lets you save videos for offline viewing.</p>
+                    <a href="/videos" class="inline-flex items-center justify-center h-14 px-8 mt-8 bg-gradient-to-r from-sky-600 to-cyan-600 hover:from-sky-500 hover:to-cyan-500 text-white font-bold rounded-xl shadow-[0_0_20px_rgba(2,132,199,0.3)] transition-all hover:-translate-y-1">
+                        Learn more
+                    </a>
+                </div>
+            </div>
+        </div>
+
     </main>
 
     <footer class="border-t border-white/5 bg-black/50 backdrop-blur-md relative z-10 mt-auto">
@@ -271,17 +294,20 @@
             const tabs = {
                 timber: document.getElementById('timber-features'),
                 wedding: document.getElementById('wedding-features'),
-                music: document.getElementById('music-features')
+                music: document.getElementById('music-features'),
+                videos: document.getElementById('videos-features')
             };
             const btns = {
                 timber: document.getElementById('btn-tab-timber'),
                 wedding: document.getElementById('btn-tab-wedding'),
-                music: document.getElementById('btn-tab-music')
+                music: document.getElementById('btn-tab-music'),
+                videos: document.getElementById('btn-tab-videos')
             };
             const active = {
                 timber: "px-6 py-3 rounded-xl text-sm font-bold tracking-wide transition-all bg-emerald-500/20 text-emerald-400 border border-emerald-500/50 shadow-[0_0_15px_rgba(16,185,129,0.2)]",
                 wedding: "px-6 py-3 rounded-xl text-sm font-bold tracking-wide transition-all bg-indigo-500/20 text-indigo-400 border border-indigo-500/50 shadow-[0_0_15px_rgba(99,102,241,0.2)]",
-                music: "px-6 py-3 rounded-xl text-sm font-bold tracking-wide transition-all bg-fuchsia-500/20 text-fuchsia-400 border border-fuchsia-500/50 shadow-[0_0_15px_rgba(217,70,239,0.2)]"
+                music: "px-6 py-3 rounded-xl text-sm font-bold tracking-wide transition-all bg-fuchsia-500/20 text-fuchsia-400 border border-fuchsia-500/50 shadow-[0_0_15px_rgba(217,70,239,0.2)]",
+                videos: "px-6 py-3 rounded-xl text-sm font-bold tracking-wide transition-all bg-sky-500/20 text-sky-400 border border-sky-500/50 shadow-[0_0_15px_rgba(14,165,233,0.2)]"
             };
             const idle = "px-6 py-3 rounded-xl text-sm font-bold tracking-wide transition-all bg-white/5 text-gray-400 border border-white/10 hover:text-white";
             Object.keys(tabs).forEach(k => {

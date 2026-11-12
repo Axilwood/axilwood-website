@@ -1,5 +1,17 @@
 {
   "cleanUrls": true,
+  "redirects": [
+    {
+      "source": "/videos",
+      "destination": "https://axilwood-videos.vercel.app/",
+      "permanent": false
+    },
+    {
+      "source": "/videos/",
+      "destination": "https://axilwood-videos.vercel.app/",
+      "permanent": false
+    }
+  ],
   "rewrites": [
     {
       "source": "/Invitations/weddings/:slug",
