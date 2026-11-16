@@ -14,8 +14,40 @@
   ],
   "rewrites": [
     {
+      "source": "/apps/axilwood-videos/:path*",
+      "destination": "https://axilwood-videos.vercel.app/apps/axilwood-videos/:path*"
+    },
+    {
       "source": "/Invitations/weddings/:slug",
       "destination": "/Invitations/weddings/viewer"
+    }
+  ],
+  "headers": [
+    {
+      "source": "/apps/axilwood-videos/update.json",
+      "headers": [
+        {
+          "key": "Content-Type",
+          "value": "application/json; charset=utf-8"
+        },
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=60, s-maxage=60"
+        }
+      ]
+    },
+    {
+      "source": "/apps/axilwood-videos/(.*)\\.apk",
+      "headers": [
+        {
+          "key": "Content-Type",
+          "value": "application/vnd.android.package-archive"
+        },
+        {
+          "key": "Content-Disposition",
+          "value": "attachment"
+        }
+      ]
     }
   ]
 }
