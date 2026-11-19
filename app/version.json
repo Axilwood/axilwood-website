@@ -1,12 +1,14 @@
 {
-  "versionCode": 8,
-  "versionName": "1.2.3",
-  "url": "https://github.com/Axilwood/axilwood-website/releases/download/music-latest/AxilwoodMusic.apk",
+  "versionCode": 14,
+  "versionName": "1.6.1",
+  "url": "https://axilwood.com/apps/axilwood-music/AxilwoodMusic-1.6.1.apk",
   "changelog": [
-    "Fix: imported playlists show songs as they finish downloading (MediaStore URI match)",
-    "Playlist rows resolve by media id when external vs external_primary URIs differ",
-    "Downloads re-read playlist target before marking done (no race wipe)",
-    "Support / Google sign-in from 1.2.2 unchanged"
+    "Playlists download several songs at once, and you can choose where new songs are saved.",
+    "The Phone tab keeps real music and hides ringtones, voice notes, call recordings, and screen recordings.",
+    "Mixes and Play for 10 to 45 minutes, with Next that keeps going until the time is up.",
+    "Smooth sound so full volume does not clip.",
+    "Drag to reorder the queue. Songs you already have are skipped.",
+    "The app can download and install a new version."
   ],
   "mandatory": false
 }
